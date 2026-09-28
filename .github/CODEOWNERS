@@ -1,0 +1,7 @@
+# The guard rails: changes here wait for the maintainer's review, so no automation (or
+# contributor) can loosen its own checks, the release build or what Clotr may access.
+/.github/                         @BilliamBaSH
+/tools/package.js                 @BilliamBaSH
+/tests/rules.test.js              @BilliamBaSH
+/ai-privacy-guard/manifest.json   @BilliamBaSH
+/ai-privacy-guard/ai-sites.json   @BilliamBaSH

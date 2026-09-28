@@ -1,0 +1,50 @@
+# On a version tag (v0.9.47 …): test, build the Chrome and Firefox zips, prove the build is
+# reproducible, and create a DRAFT GitHub release with the zips and SHA256SUMS.txt.
+# Nothing is published until a maintainer reviews the draft and presses Publish.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+# Least privilege: read-only by default; only the release job may write (to create the draft).
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      # Actions pinned to exact commits (a moved tag can't change what runs); the tag is in the comment.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: The tag matches the extension's version
+        run: |
+          version="v$(node -p "require('./ai-privacy-guard/manifest.json').version")"
+          test "$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME but manifest says $version"; exit 1; }
+      - name: Build (Chrome, Brave, Edge and Firefox)
+        run: |
+          npm run package
+          npm run package -- --firefox
+      - name: Reproducible - a second build must be byte-identical
+        run: |
+          node tools/package.js --out "$RUNNER_TEMP/again"
+          node tools/package.js --firefox --out "$RUNNER_TEMP/again"
+          diff <(sort dist/SHA256SUMS.txt) <(sort "$RUNNER_TEMP/again/SHA256SUMS.txt")
+      - name: Draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip dist/SHA256SUMS.txt --draft \
+            --title "Clotr $GITHUB_REF_NAME" \
+            --notes "Install: unzip, then Load unpacked in chrome://extensions (Developer mode), or use the store listing. Verify: \`sha256sum -c SHA256SUMS.txt\`, or rebuild from this tag with \`npm ci && npm run package\` and compare."

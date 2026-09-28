@@ -1,0 +1,77 @@
+{
+  "updated": "2026-09-25",
+  "sites": {
+    "https://chatgpt.com/": {
+      "finalHost": "chatgpt.com",
+      "editor": "textarea"
+    },
+    "https://claude.ai/": {
+      "finalHost": "claude.ai",
+      "editor": "none"
+    },
+    "https://gemini.google.com/": {
+      "finalHost": "gemini.google.com",
+      "editor": "quill"
+    },
+    "https://aistudio.google.com/": {
+      "finalHost": "aistudio.google.com",
+      "editor": "textarea"
+    },
+    "https://notebooklm.google.com/": {
+      "finalHost": "accounts.google.com",
+      "editor": "none"
+    },
+    "https://copilot.microsoft.com/": {
+      "finalHost": "copilot.microsoft.com",
+      "editor": "textarea"
+    },
+    "https://www.perplexity.ai/": {
+      "finalHost": "www.perplexity.ai",
+      "editor": "lexical"
+    },
+    "https://chat.deepseek.com/": {
+      "finalHost": "chat.deepseek.com",
+      "editor": "none"
+    },
+    "https://chat.mistral.ai/": {
+      "finalHost": "chat.mistral.ai",
+      "editor": "prosemirror"
+    },
+    "https://grok.com/": {
+      "finalHost": "grok.com",
+      "editor": "textarea"
+    },
+    "https://www.meta.ai/": {
+      "finalHost": "www.meta.ai",
+      "editor": "none"
+    },
+    "https://poe.com/": {
+      "finalHost": "poe.com",
+      "editor": "none"
+    },
+    "https://huggingface.co/chat/": {
+      "finalHost": "huggingface.co",
+      "editor": "textarea"
+    },
+    "https://chat.qwen.ai/": {
+      "finalHost": "chat.qwen.ai",
+      "editor": "textarea"
+    },
+    "https://www.kimi.com/": {
+      "finalHost": "www.kimi.com",
+      "editor": "lexical"
+    },
+    "https://pi.ai/": {
+      "finalHost": "pi.ai",
+      "editor": "none"
+    },
+    "https://character.ai/": {
+      "finalHost": "character.ai",
+      "editor": "none"
+    },
+    "https://arena.ai/": {
+      "finalHost": "arena.ai",
+      "editor": "textarea"
+    }
+  }
+}

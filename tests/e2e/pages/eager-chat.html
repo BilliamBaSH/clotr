@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- Stand-in for a chat app that handles Enter with its own window-level capture listener,
+     registered by the page's script (so before a content script injected at document_idle).
+     Clotr must still get the first word: it starts at document_start (M8). -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Eager chat (Clotr test page)</title>
+<script>
+  window.__sent = [];
+  window.addEventListener("keydown", (e) => {
+    const box = document.getElementById("msg");
+    if (e.key !== "Enter" || e.shiftKey || e.target !== box || !box.value.trim()) return;
+    e.preventDefault();
+    window.__sent.push(box.value);
+    box.value = "";
+  }, true);
+</script>
+</head>
+<body>
+  <textarea id="msg" rows="3" cols="60"></textarea>
+  <button id="send" aria-label="Send message">Send</button>
+  <script>
+    document.getElementById("send").addEventListener("click", () => {
+      const box = document.getElementById("msg");
+      if (!box.value.trim()) return;
+      window.__sent.push(box.value);
+      box.value = "";
+    });
+  </script>
+</body>
+</html>

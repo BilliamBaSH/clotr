@@ -1,0 +1,32 @@
+name: Bug
+description: Something in Clotr doesn't work (the chat misbehaves, a button does nothing, the dashboard is wrong…).
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps
+      placeholder: "1. Open chatgpt.com  2. Paste the test key AKIA4HPQ7XZ2R6TWLJ3N  3. …"
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: "Brave 1.95 on Windows 11"
+  - type: input
+    id: version
+    attributes:
+      label: Clotr version
+      placeholder: "0.9.17-alpha"
+  - type: textarea
+    id: log
+    attributes:
+      label: Console lines starting with [Clotr] (optional)
+      description: DevTools → Console → filter "[Clotr]". Check they contain no real personal data before pasting.
+      render: text

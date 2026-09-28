@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- Stand-in for a Perplexity-style page: a Lexical-like editor. Like Lexical, it keeps
+     its own text model, reconciles every edit into it on input, and only learns about
+     the selection from the async selectionchange event. An edit made in the same tick as
+     a new selection is therefore applied at the old one (the bug seen on perplexity.ai). -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Perplexity (Clotr test page)</title></head>
+<body>
+  <div id="ask-input" contenteditable="true" role="textbox" aria-label="Ask anything"
+       style="border:1px solid #999;min-height:60px;width:480px;padding:6px;white-space:pre-wrap"></div>
+  <button id="send" aria-label="Submit">Send</button>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("ask-input");
+    let model = "";
+    let known = { start: 0, end: 0 }; // the selection as last reported by selectionchange
+
+    function offsetOf(node, offset) {
+      const r = document.createRange();
+      r.selectNodeContents(box);
+      r.setEnd(node, offset);
+      return r.toString().length;
+    }
+    document.addEventListener("selectionchange", () => {
+      const sel = getSelection();
+      if (!sel.rangeCount || !box.contains(sel.anchorNode)) return;
+      const r = sel.getRangeAt(0);
+      known = { start: offsetOf(r.startContainer, r.startOffset), end: offsetOf(r.endContainer, r.endOffset) };
+    });
+
+    function render(caret) {
+      box.textContent = model;
+      const node = box.firstChild || box;
+      const sel = getSelection();
+      sel.removeAllRanges();
+      const r = document.createRange();
+      r.setStart(node, Math.min(caret, node === box ? 0 : node.length));
+      sel.addRange(r);
+    }
+
+    // The browser edits the DOM natively; the editor then reconciles its own model using
+    // the selection it last knew about and re-renders, overwriting the DOM.
+    box.addEventListener("input", (e) => {
+      if (e.inputType === "insertText") {
+        const data = e.data || "";
+        const { start, end } = known;
+        model = model.slice(0, start) + data + model.slice(end);
+        render(start + data.length);
+      } else {
+        model = box.textContent;
+      }
+    });
+
+    function send() {
+      if (!model.trim()) return;
+      window.__sent.push(model);
+      model = "";
+      render(0);
+    }
+    document.getElementById("send").addEventListener("click", send);
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+  </script>
+</body>
+</html>

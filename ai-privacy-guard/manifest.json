@@ -1,0 +1,115 @@
+{
+  "manifest_version": 3,
+  "name": "Clotr AI Privacy Guard",
+  "version": "0.9.90",
+  "version_name": "0.9.90-alpha",
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "icons/icon-on-16.png",
+    "32": "icons/icon-on-32.png",
+    "48": "icons/icon-on-48.png",
+    "128": "icons/icon-on-128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "declarativeContent",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://aistudio.google.com/*",
+    "https://notebooklm.google.com/*",
+    "https://notebook.google.com/*",
+    "https://copilot.microsoft.com/*",
+    "https://copilot.com/*",
+    "https://www.copilot.com/*",
+    "https://www.perplexity.ai/*",
+    "https://perplexity.ai/*",
+    "https://chat.deepseek.com/*",
+    "https://chat.mistral.ai/*",
+    "https://grok.com/*",
+    "https://www.meta.ai/*",
+    "https://poe.com/*",
+    "https://huggingface.co/chat/*",
+    "https://chat.qwen.ai/*",
+    "https://www.kimi.com/*",
+    "https://pi.ai/*",
+    "https://character.ai/*",
+    "https://arena.ai/*",
+    "https://lmarena.ai/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Clotr AI Privacy Guard",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-off-16.png",
+      "32": "icons/icon-off-32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://aistudio.google.com/*",
+        "https://notebooklm.google.com/*",
+        "https://notebook.google.com/*",
+        "https://copilot.microsoft.com/*",
+        "https://copilot.com/*",
+        "https://www.copilot.com/*",
+        "https://www.perplexity.ai/*",
+        "https://perplexity.ai/*",
+        "https://chat.deepseek.com/*",
+        "https://chat.mistral.ai/*",
+        "https://grok.com/*",
+        "https://www.meta.ai/*",
+        "https://poe.com/*",
+        "https://huggingface.co/chat/*",
+        "https://chat.qwen.ai/*",
+        "https://www.kimi.com/*",
+        "https://pi.ai/*",
+        "https://character.ai/*",
+        "https://arena.ai/*",
+        "https://lmarena.ai/*"
+      ],
+      "js": [
+        "patterns.js",
+        "detector.js",
+        "attachments.js",
+        "ui-styles.js",
+        "editor.js",
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "focus-notice": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "Jump to Clotr's warning (Esc goes back to your message)"
+    }
+  },
+  "storage": {
+    "managed_schema": "managed_schema.json"
+  },
+  "default_locale": "en"
+}

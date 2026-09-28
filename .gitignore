@@ -1,0 +1,26 @@
+# Dependencies and build output
+node_modules/
+dist/
+*.zip
+*.crx
+*.pem
+
+# Test output (screenshots, reports) and local tool reports
+tests/e2e/output/
+tools/site-check-report.md
+
+# Browser console logs saved while testing (may contain pasted test data)
+bravelogs/
+*.log
+
+# OS / editor clutter
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Secrets / machine-local config
+.env
+.env.*

@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- A hostile AI page (security tests HP1-HP3): it can remove Clotr's warnings from its DOM and
+     script its own chat box (fill it, empty it) to try to plant fake entries in Clotr's history. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Hostile chat (Clotr test page)</title></head>
+<body>
+  <form id="composer">
+    <textarea id="msg" rows="3" cols="60" placeholder="Message"></textarea>
+    <button type="submit" id="send" aria-label="Send">Send</button>
+  </form>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("msg");
+    function send() {
+      if (!box.value) return;
+      window.__sent.push(box.value);
+      box.value = "";
+    }
+    document.getElementById("composer").addEventListener("submit", (e) => { e.preventDefault(); send(); });
+    box.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
+
+    // Remove anything Clotr adds to the page, as soon as it appears.
+    window.__removeClotr = () => {
+      const sweep = () => document.querySelectorAll("clotr-guard, clotr-notice, clotr-reload").forEach((n) => n.remove());
+      new MutationObserver(sweep).observe(document.documentElement, { childList: true, subtree: true });
+      sweep();
+    };
+
+    // Probe Clotr: put guesses in the box by script (a fake input event, or a fake Enter) and watch
+    // whether any of Clotr's elements appear. Resolves true if Clotr reacted (S24).
+    const clotrShows = () => Boolean(document.querySelector("clotr-guard, clotr-notice"));
+    const watch = (ms) => new Promise((r) => {
+      if (clotrShows()) return r(true);
+      const mo = new MutationObserver(() => { if (clotrShows()) { mo.disconnect(); r(true); } });
+      mo.observe(document.documentElement, { childList: true });
+      setTimeout(() => { mo.disconnect(); r(clotrShows()); }, ms);
+    });
+    window.__probe = async (text, { enter = false } = {}) => {
+      // Like a page acting on its own: wait until any user activation (a test driver's call counts as one) has run out.
+      await new Promise((r) => setTimeout(r, 6000));
+      box.value = text;
+      box.dispatchEvent(new InputEvent("input", { bubbles: true, inputType: "insertText", data: text }));
+      if (enter) box.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true }));
+      return watch(1500);
+    };
+    // A "reply" the page adds itself.
+    window.__reply = (text) => { const d = document.createElement("div"); d.className = "reply"; d.textContent = text; document.body.append(d); };
+
+    // Script the box: put a detail in, then empty it as if it had been sent, with no user action.
+    window.__fakeSend = async (text) => {
+      box.value = text;
+      box.dispatchEvent(new InputEvent("input", { bubbles: true, inputType: "insertText", data: text }));
+      await new Promise((r) => setTimeout(r, 1500));
+      box.value = "";
+      box.dispatchEvent(new InputEvent("input", { bubbles: true, inputType: "deleteContentBackward" }));
+    };
+  </script>
+</body>
+</html>

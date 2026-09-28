@@ -1,0 +1,2017 @@
+{
+  "extDescription": {
+    "message": "Te avisa antes de enviar contraseñas, claves o datos personales a chats de IA. Todo se comprueba en tu ordenador."
+  },
+  "type_private_key": {
+    "message": "Clave privada"
+  },
+  "type_aws_access_key": {
+    "message": "Clave de acceso de AWS"
+  },
+  "type_github_token": {
+    "message": "Token de GitHub"
+  },
+  "type_stripe_secret_key": {
+    "message": "Clave secreta de Stripe"
+  },
+  "type_anthropic_key": {
+    "message": "Clave de API de Anthropic"
+  },
+  "type_openai_key": {
+    "message": "Clave de API de OpenAI"
+  },
+  "type_google_api_key": {
+    "message": "Clave de API de Google"
+  },
+  "type_slack_token": {
+    "message": "Token de Slack"
+  },
+  "type_crypto_secret": {
+    "message": "Semilla o clave de monedero de criptomonedas"
+  },
+  "type_service_token": {
+    "message": "Token de acceso a un servicio"
+  },
+  "type_connection_string": {
+    "message": "Cadena de conexión a base de datos o servicio"
+  },
+  "type_jwt": {
+    "message": "Token de sesión (JWT)"
+  },
+  "type_internal_ip": {
+    "message": "Dirección IP interna"
+  },
+  "type_internal_host": {
+    "message": "Nombre de servidor interno"
+  },
+  "type_password": {
+    "message": "Contraseña o secreto"
+  },
+  "type_us_ssn": {
+    "message": "Número de la Seguridad Social de EE. UU."
+  },
+  "type_credit_card": {
+    "message": "Número de tarjeta de crédito"
+  },
+  "type_stripe_publishable_key": {
+    "message": "Clave publicable de Stripe"
+  },
+  "type_street_address": {
+    "message": "Dirección postal"
+  },
+  "type_bank_account": {
+    "message": "Cuenta bancaria o número de ruta"
+  },
+  "type_national_id": {
+    "message": "Número de documento de identidad"
+  },
+  "type_medical_record": {
+    "message": "Número de historia clínica"
+  },
+  "type_public_ip": {
+    "message": "Tu dirección IP"
+  },
+  "type_medicare_id": {
+    "message": "Número de Medicare"
+  },
+  "type_passport": {
+    "message": "Número de pasaporte"
+  },
+  "type_drivers_license": {
+    "message": "Número de permiso de conducir"
+  },
+  "type_insurance_id": {
+    "message": "Número de afiliado del seguro"
+  },
+  "type_date_of_birth": {
+    "message": "Fecha de nacimiento"
+  },
+  "type_phone_number": {
+    "message": "Número de teléfono"
+  },
+  "type_my_name": {
+    "message": "Tu nombre"
+  },
+  "type_family_name": {
+    "message": "Nombre de un familiar"
+  },
+  "type_employer": {
+    "message": "Tu empresa"
+  },
+  "type_my_id": {
+    "message": "Tu número de cuenta o identificación"
+  },
+  "type_watch_list": {
+    "message": "Elemento de tu lista de vigilancia"
+  },
+  "type_email": {
+    "message": "Dirección de correo electrónico"
+  },
+  "otherAccountId": {
+    "message": "Número de cuenta o identificación"
+  },
+  "sev_high": {
+    "message": "alto"
+  },
+  "sev_medium": {
+    "message": "medio"
+  },
+  "sev_low": {
+    "message": "bajo"
+  },
+  "coverIt": {
+    "message": "Ocultarlo"
+  },
+  "leaveIt": {
+    "message": "Dejarlo"
+  },
+  "ok": {
+    "message": "Vale"
+  },
+  "moreChoices": {
+    "message": "Más opciones"
+  },
+  "choiceAllowOne": {
+    "message": "Dejarlo, y no avisarme más de este"
+  },
+  "choiceAllowMany": {
+    "message": "Dejarlos, y no avisarme más de estos"
+  },
+  "choiceLogKinds": {
+    "message": "Dejarlo, y dejar de avisarme de: $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "choiceProtectOne": {
+    "message": "Ocultarlo, y vigilarlo siempre, se escriba como se escriba"
+  },
+  "choiceProtectMany": {
+    "message": "Ocultarlos, y vigilarlos siempre, se escriban como se escriban"
+  },
+  "backToMessage": {
+    "message": "Volver a mi mensaje (Esc)"
+  },
+  "dialogTitle": {
+    "message": "⚠️ Esto parece privado"
+  },
+  "dialogLead": {
+    "message": "Si lo envías, el servicio de IA verá:"
+  },
+  "dialogNote": {
+    "message": "Clotr lo comprobó en tu ordenador. Todavía no se ha enviado nada. «Ocultarlo» lo cambia por una etiqueta como $p1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "enterCovers": {
+    "message": "Intro: ocultarlo"
+  },
+  "keyboardHint": {
+    "message": "Teclado: Alt+Mayús+C salta aquí, Intro elige, Esc vuelve a tu mensaje."
+  },
+  "noticeTitle": {
+    "message": "⚠️ Atención"
+  },
+  "noticeContains": {
+    "message": "Tu mensaje contiene "
+  },
+  "noticeShared": {
+    "message": ". Lo verá esta IA si lo envías."
+  },
+  "noticeSharedBulk": {
+    "message": " Lo verá esta IA si lo envías."
+  },
+  "noticeFileHint": {
+    "message": "Para mantenerlo en privado, quita el archivo antes de enviar."
+  },
+  "noticeUpdated": {
+    "message": "Clotr se acaba de actualizar. Recarga esta página para que se guarden tus decisiones."
+  },
+  "why": {
+    "message": "¿Por qué veo esto?"
+  },
+  "reportFalseAlarm": {
+    "message": "¿Error? Avisar de una falsa alarma"
+  },
+  "whyFound": {
+    "message": "Clotr encontró lo que parece: $p1$. ",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "whyFoundFile": {
+    "message": "Clotr encontró lo que parece: $p1$, en el archivo «$p2$». ",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "whyBody": {
+    "message": "Lo que envías a un servicio de IA puede guardarse en sus servidores, leerlo su personal o usarse para entrenarlo. Todavía no ha salido nada de tu ordenador. Tú decides: ocultarlo, dejarlo o elegir cómo lo trata Clotr a partir de ahora (Más opciones)."
+  },
+  "bulkFile": {
+    "message": "El archivo «$p1$» que adjuntaste ($p2$) contiene $p3$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      }
+    }
+  },
+  "linesOne": {
+    "message": "1 línea"
+  },
+  "linesMany": {
+    "message": "$p1$ líneas",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "bulkPaste": {
+    "message": "Texto pegado largo: $p1$ líneas, con $p2$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "bulkMessage": {
+    "message": "Este mensaje tiene $p1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "tipNew": {
+    "message": "Nuevo: "
+  },
+  "tipHow": {
+    "message": "¿Cómo debe tratar Clotr este tipo de dato ($p2$) a partir de ahora?",
+    "placeholders": {
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "tipWarn": {
+    "message": "Avisarme"
+  },
+  "tipLog": {
+    "message": "Solo contarlo"
+  },
+  "tipBlock": {
+    "message": "Preguntar antes de enviar"
+  },
+  "tipWarnDone": {
+    "message": "Hecho: Clotr seguirá avisándote de este tipo de dato ($p2$).",
+    "placeholders": {
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "tipLogDone": {
+    "message": "Hecho: Clotr solo contará este tipo de dato ($p2$), sin avisos. Puedes cambiarlo cuando quieras en Ajustes.",
+    "placeholders": {
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "tipBlockDone": {
+    "message": "Hecho: Clotr preguntará antes de enviar este tipo de dato ($p2$). Puedes cambiarlo cuando quieras en Ajustes.",
+    "placeholders": {
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "tipYours": {
+    "message": "¿Este dato ($p1$) es tuyo?",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "tipMine": {
+    "message": "Vigilarlo siempre"
+  },
+  "tipShare": {
+    "message": "Se puede compartir"
+  },
+  "tipMineDone": {
+    "message": "Guardado en tu caja fuerte: Clotr vigilará siempre este dato ($p1$), se escriba como se escriba.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "tipShareDone": {
+    "message": "Guardado: este dato ($p1$) se puede compartir; Clotr solo lo contará.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "coverFailTitle": {
+    "message": "⚠️ Clotr no pudo ocultarlo aquí"
+  },
+  "coverFailText": {
+    "message": "Este cuadro de chat no aceptó el cambio de Clotr, así que tu mensaje todavía contiene: $p1$. Bórralo a mano antes de enviar.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "coverFailOk": {
+    "message": "Vale, lo borro yo"
+  },
+  "offerVaultTitle": {
+    "message": "💡 ¿Vigilar esto siempre?"
+  },
+  "offerVaultOne": {
+    "message": "Quitaste $p1$ antes de enviar. ¿Lo añado a tu caja fuerte para que Clotr lo detecte siempre, se escriba como se escriba? Solo se guarda una huella.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "offerVaultMany": {
+    "message": "Quitaste $p1$ antes de enviar. ¿Los añado a tu caja fuerte para que Clotr los detecte siempre, se escriban como se escriban? Solo se guardan huellas.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "offerVaultYes": {
+    "message": "Añadir a mi caja fuerte"
+  },
+  "noThanks": {
+    "message": "No, gracias"
+  },
+  "relaxTitle": {
+    "message": "💡 ¿Avisarte menos de este tipo de dato ($p1$)?",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "relaxText": {
+    "message": "Has dejado este tipo de dato ($p1$) $p2$ veces últimamente. ¿Pasarlo a «Solo contar»? Se sigue contando en tu historial, pero sin avisos. Puedes volver a cambiarlo en Ajustes.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "keepWarning": {
+    "message": "Seguir avisando"
+  },
+  "justSentTitle": {
+    "message": "⚠️ Acabas de enviarlo a esta IA"
+  },
+  "justSentText": {
+    "message": "Tu mensaje incluía $p1$. Si fue un error, borra el mensaje en el chat. Clotr puede preguntarte antes la próxima vez.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "askFirstNextTime": {
+    "message": "Preguntarme antes la próxima vez"
+  },
+  "replyTitle": {
+    "message": "ℹ️ La respuesta de la IA menciona: $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "replyText": {
+    "message": "No lo escribiste aquí, así que esta IA puede tenerlo de un chat anterior o de su memoria. Puedes borrar chats antiguos y desactivar su memoria en los ajustes de la IA."
+  },
+  "reloadTitle": {
+    "message": "🔄 Clotr se actualizó"
+  },
+  "reloadLead": {
+    "message": "Para seguir protegiéndote en esta página, Clotr necesita que se recargue."
+  },
+  "reloadDraft": {
+    "message": "Recargar puede borrar el mensaje que estás escribiendo, así que Clotr lo copia antes: vuelve a pegarlo con Ctrl+V."
+  },
+  "reloadNote": {
+    "message": "Hasta entonces Clotr sigue avisándote aquí, pero no puede guardar tus decisiones."
+  },
+  "reloadCopy": {
+    "message": "Copiar mi mensaje y recargar"
+  },
+  "reloadPage": {
+    "message": "Recargar esta página"
+  },
+  "later": {
+    "message": "Más tarde"
+  },
+  "reloadCopyFailed": {
+    "message": "Clotr no pudo copiar tu mensaje. Cópialo tú primero (selecciónalo y pulsa Ctrl+C) y luego recarga."
+  },
+  "reloadAnyway": {
+    "message": "Recargar de todos modos"
+  },
+  "popup_localOnly": {
+    "message": "Solo en este equipo"
+  },
+  "popup_gotIt": {
+    "message": "Entendido"
+  },
+  "popup_overview": {
+    "message": "Resumen"
+  },
+  "popup_activity": {
+    "message": "Actividad"
+  },
+  "popup_settings": {
+    "message": "Ajustes"
+  },
+  "popup_showing": {
+    "message": "Mostrando"
+  },
+  "popup_sameAsEverywhere": {
+    "message": "Igual que en todas partes"
+  },
+  "popup_stricterHereAskBeforeSending": {
+    "message": "Más estricto aquí: preguntar antes de enviar cualquier cosa"
+  },
+  "popup_quieterHereJustCount": {
+    "message": "Más discreto aquí: solo contar"
+  },
+  "popup_seeTheFullReport": {
+    "message": "Ver el informe completo"
+  },
+  "popup_7Days": {
+    "message": "7 días"
+  },
+  "popup_30Days": {
+    "message": "30 días"
+  },
+  "popup_openFullReport": {
+    "message": "Abrir el informe completo"
+  },
+  "popup_nothingFoundYet": {
+    "message": "Todavía no se ha encontrado nada."
+  },
+  "popup_tryItPaste": {
+    "message": "Pruébalo: pega"
+  },
+  "popup_intoAProtectedAiChat": {
+    "message": "en un chat de IA protegido."
+  },
+  "popup_nothingInThisPeriodOlder": {
+    "message": "Nada en este periodo. El historial anterior está en Actividad y más abajo."
+  },
+  "popup_leaksStopped": {
+    "message": "fugas evitadas"
+  },
+  "popup_foundPerDay": {
+    "message": "Encontrado por día"
+  },
+  "popup_byAiTool": {
+    "message": "Por herramienta de IA"
+  },
+  "popup_byKindOfData": {
+    "message": "Por tipo de dato"
+  },
+  "popup_whereYourDetailsWent": {
+    "message": "Adónde fueron tus datos"
+  },
+  "popup_openTheFullMap": {
+    "message": "Abrir el mapa completo"
+  },
+  "popup_whatEachAiToolHas": {
+    "message": "Lo que ha visto cada herramienta de IA"
+  },
+  "popup_differentPersonalDetailsYouSent": {
+    "message": "Datos personales distintos que enviaste de todos modos, en todo tu historial. Clotr los cuenta sin guardar nunca los datos."
+  },
+  "popup_noPersonalDetailsSentNothing": {
+    "message": "No se ha enviado ningún dato personal. No hay nada con qué hacer un perfil."
+  },
+  "popup_when": {
+    "message": "Cuándo"
+  },
+  "popup_what": {
+    "message": "Qué"
+  },
+  "popup_whatYouChose": {
+    "message": "Lo que elegiste"
+  },
+  "popup_nothingFoundYet2": {
+    "message": "Todavía no se ha encontrado nada."
+  },
+  "popup_managedByYourOrganization": {
+    "message": "Gestionado por tu organización."
+  },
+  "popup_managedDetail": {
+    "message": "Los ajustes de Clotr en este equipo los fija tu equipo de informática. Sigue revisando solo chats de IA, en este equipo, y no informa de nada a nadie."
+  },
+  "popup_settingsAreLocked": {
+    "message": "Los ajustes están bloqueados"
+  },
+  "popup_someoneWhoSetClotrUp": {
+    "message": "Quien configuró Clotr para ti añadió un PIN para que los ajustes no se cambien por error. Clotr te sigue protegiendo igual."
+  },
+  "popup_pin": {
+    "message": "PIN"
+  },
+  "popup_unlock": {
+    "message": "Desbloquear"
+  },
+  "popup_aiToolsYouAdded": {
+    "message": "Herramientas de IA que añadiste"
+  },
+  "popup_noneYetWhenAPage": {
+    "message": "Ninguna todavía. Cuando una página parece un chat de IA, el icono muestra un punto ámbar. Abre esta ventana allí para añadirla."
+  },
+  "popup_builtInTools": {
+    "message": "Herramientas de IA incluidas"
+  },
+  "popup_howClotrResponds": {
+    "message": "Cómo responde Clotr"
+  },
+  "popup_warn": {
+    "message": "Avisar"
+  },
+  "popup_warnMeans": {
+    "message": "una nota en la esquina, el envío no se detiene"
+  },
+  "popup_askBeforeSending": {
+    "message": "Preguntar antes de enviar"
+  },
+  "popup_askMeans": {
+    "message": "tú decides antes de que salga"
+  },
+  "popup_justCount": {
+    "message": "Solo contar"
+  },
+  "popup_countMeans": {
+    "message": "sin interrupciones, sigue apareciendo en tu historial."
+  },
+  "popup_yourVault": {
+    "message": "Tu caja fuerte"
+  },
+  "popup_yourNameFamilyAddressesPhones": {
+    "message": "Tu nombre, tu familia, direcciones, teléfonos, correos, empresa y formatos de documentos: Clotr los vigila se escriban como se escriban, y solo guarda un código cifrado, nunca los datos."
+  },
+  "popup_openYourVault": {
+    "message": "Abrir tu caja fuerte"
+  },
+  "popup_moreOptions": {
+    "message": "Más opciones"
+  },
+  "popup_showAdvancedOptions": {
+    "message": "Mostrar opciones avanzadas"
+  },
+  "popup_settingsForEachKindOf": {
+    "message": "Ajustes para cada tipo de dato, más estricto o más discreto en una herramienta de IA, y la lista de herramientas de IA incluidas."
+  },
+  "popup_someAdvancedSettingsAreIn": {
+    "message": "Hay ajustes avanzados en uso."
+  },
+  "popup_showFirstTimeTipsAgain": {
+    "message": "Volver a mostrar los consejos de la primera vez"
+  },
+  "popup_helpingSomeoneSetThisUp": {
+    "message": "¿Lo configuras para otra persona?"
+  },
+  "popup_forAParentAChild": {
+    "message": "Para un padre o una madre, un hijo o cualquiera que prefiera no ver opciones técnicas: avisos más grandes, un ajuste más estricto para los datos personales y un PIN para que los ajustes no se cambien por error."
+  },
+  "popup_largerWarnings": {
+    "message": "Avisos más grandes"
+  },
+  "popup_askBeforeSendingPersonalDetails": {
+    "message": "Preguntar antes de enviar datos personales"
+  },
+  "popup_pinToLockTheseSettings": {
+    "message": "PIN para bloquear estos ajustes (de 4 a 8 cifras)"
+  },
+  "popup_lockSettings": {
+    "message": "Bloquear ajustes"
+  },
+  "popup_removeThePin": {
+    "message": "Quitar el PIN"
+  },
+  "popup_thePinStopsAccidentalChanges": {
+    "message": "El PIN evita cambios por error. No es un bloqueo de seguridad: quien pueda quitar Clotr del navegador puede restablecerlo."
+  },
+  "popup_history": {
+    "message": "Historial"
+  },
+  "popup_clotrRemembersTheKindOf": {
+    "message": "Clotr recuerda el tipo de dato, el sitio, la hora y lo que elegiste: nunca el dato en sí. Solo en este equipo, durante el último año salvo que lo cambies en el informe completo."
+  },
+  "popup_seeExactlyWhatSStored": {
+    "message": "Ver exactamente qué se guarda"
+  },
+  "popup_clearHistory": {
+    "message": "Borrar el historial"
+  },
+  "popup_howClotrRespondsOnThis": {
+    "message": "Cómo responde Clotr en esta herramienta de IA"
+  },
+  "popup_thisWeek": {
+    "message": "Esta semana"
+  },
+  "popup_timeRange": {
+    "message": "Periodo"
+  },
+  "popup_foundPerDaySplitBy": {
+    "message": "Encontrado por día, según lo que elegiste"
+  },
+  "popup_mapOfTheAiServices": {
+    "message": "Mapa de los servicios de IA a los que fueron tus datos"
+  },
+  "popup_detectionAndHistoryNeverLeave": {
+    "message": "La detección y el historial nunca salen de este navegador"
+  },
+  "pp_vName": {
+    "message": "Nombre"
+  },
+  "pp_vFamily": {
+    "message": "Familia"
+  },
+  "pp_vWork": {
+    "message": "Trabajo"
+  },
+  "pp_vAddresses": {
+    "message": "Direcciones"
+  },
+  "pp_vPhones": {
+    "message": "Teléfonos"
+  },
+  "pp_vEmails": {
+    "message": "Correos"
+  },
+  "pp_vIdFormats": {
+    "message": "Formatos de documento"
+  },
+  "pp_vWatchWords": {
+    "message": "Palabras vigiladas"
+  },
+  "pp_gCredentials": {
+    "message": "Contraseñas, claves y servidores"
+  },
+  "pp_gPersonal": {
+    "message": "Datos personales"
+  },
+  "pp_gCustom": {
+    "message": "Tu lista de vigilancia"
+  },
+  "pp_covered": {
+    "message": "Ocultado"
+  },
+  "pp_sent": {
+    "message": "Enviado"
+  },
+  "pp_justCounted": {
+    "message": "Solo contado"
+  },
+  "pp_allTools": {
+    "message": "Todas las herramientas de IA"
+  },
+  "pp_coverage": {
+    "message": "Clotr funciona en $p1$ y $p2$ chats de IA más. ¿Usas otro? Abre esta ventana allí.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "pp_coverageShort": {
+    "message": "Clotr funciona en sitios de chat de IA. ¿Usas otro? Abre esta ventana allí."
+  },
+  "pp_noPage": {
+    "message": "No hay ninguna página web en esta pestaña."
+  },
+  "pp_resume": {
+    "message": "Reanudar"
+  },
+  "pp_pause": {
+    "message": "Pausar"
+  },
+  "pp_orgKeepsOn": {
+    "message": "Tu organización mantiene Clotr activado"
+  },
+  "pp_lockedTab": {
+    "message": "Los ajustes están bloqueados (pestaña Ajustes)"
+  },
+  "pp_builtInSite": {
+    "message": "Sitio de IA incluido"
+  },
+  "pp_addedSite": {
+    "message": "Sitio de IA que añadiste"
+  },
+  "pp_willProtect": {
+    "message": "Protegerá: $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_protectSite": {
+    "message": "Proteger este sitio"
+  },
+  "pp_spotted": {
+    "message": "Parece un chat de IA, todavía sin proteger"
+  },
+  "pp_found": {
+    "message": "Se encontró: $p1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_override": {
+    "message": "Es una herramienta de IA, protégela"
+  },
+  "pp_notAi": {
+    "message": "No es una herramienta de IA. Clotr no actúa aquí."
+  },
+  "pp_quietDays": {
+    "message": "$p1$ días tranquilos.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_heroOne": {
+    "message": "fuga evitada en los últimos $p1$ días",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_heroMany": {
+    "message": "fugas evitadas en los últimos $p1$ días",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_heroSub": {
+    "message": "encontrados: $p1$ · enviados: $p2$ · solo contados: $p3$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      }
+    }
+  },
+  "pp_fewer": {
+    "message": "menos que la semana pasada ($p1$)",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_more": {
+    "message": "más que la semana pasada ($p1$)",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_same": {
+    "message": "lo mismo que la semana pasada"
+  },
+  "pp_digest": {
+    "message": "Esta semana: encontrados, $p1$; ocultados, $p2$; enviados de todos modos, $p3$. Es $p4$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      },
+      "p4": {
+        "content": "$4"
+      }
+    }
+  },
+  "pp_todo": {
+    "message": "Por hacer: se envió $p1$ a $p2$. $p3$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      }
+    }
+  },
+  "pp_nothingRisky": {
+    "message": "Esta semana no salió nada de alto riesgo."
+  },
+  "pp_riskyOne": {
+    "message": "En este periodo enviaste de todos modos 1 dato de alto riesgo."
+  },
+  "pp_riskyMany": {
+    "message": "En este periodo enviaste de todos modos $p1$ datos de alto riesgo.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_repeat": {
+    "message": "Clotr encontró el mismo dato ($p1$) $p2$ veces. Si es una contraseña o clave real, cámbiala.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "pp_daySummary": {
+    "message": "$p1$ — ocultados: $p2$, enviados: $p3$, solo contados: $p4$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      },
+      "p4": {
+        "content": "$4"
+      }
+    }
+  },
+  "pp_nFound": {
+    "message": "encontrados: $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_sameItem": {
+    "message": "Clotr encontró este mismo dato $p1$ veces",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_changePin": {
+    "message": "Cambiar el PIN"
+  },
+  "pp_pinDigits": {
+    "message": "Usa de 4 a 8 cifras."
+  },
+  "pp_locked": {
+    "message": "Ajustes bloqueados. Clotr pedirá el PIN la próxima vez."
+  },
+  "pp_pinRemoved": {
+    "message": "PIN quitado: los ajustes vuelven a estar abiertos."
+  },
+  "pp_tooMany": {
+    "message": "Demasiados intentos: espera medio minuto."
+  },
+  "pp_wrongPin": {
+    "message": "Ese PIN no coincide."
+  },
+  "pp_remove": {
+    "message": "Quitar"
+  },
+  "pp_wider": {
+    "message": "Todas las páginas de este sitio: más de lo que necesita una herramienta de IA. Quítalo y protege solo la página de la IA."
+  },
+  "pp_whatDoes": {
+    "message": "Lo que hace Clotr cuando encuentra: $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_defaultSuffix": {
+    "message": " (predeterminado)"
+  },
+  "pp_responseFor": {
+    "message": "Respuesta para $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_defaultWarn": {
+    "message": "Predeterminado (avisar)"
+  },
+  "pp_custom": {
+    "message": "Personalizado"
+  },
+  "pp_responseForAll": {
+    "message": "Respuesta para todo: $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_chooseEach": {
+    "message": "Elegir para cada uno ($p1$)",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_other": {
+    "message": "Otros"
+  },
+  "pp_vaultEmpty": {
+    "message": "Vacía. Añade tus datos para que Clotr sepa qué es tuyo y lo proteja."
+  },
+  "pp_clearAgain": {
+    "message": "Vuelve a hacer clic para borrar todo el historial"
+  },
+  "pp_updatedFrom": {
+    "message": "Actualizado a la v$p1$ (desde la v$p2$)",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "pp_updated": {
+    "message": "Actualizado a la v$p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_tipsAgain": {
+    "message": "Los consejos se volverán a mostrar"
+  },
+  "hc_notRunning": {
+    "message": "Clotr todavía no está activo en esta pestaña. Recarga la página para activarlo."
+  },
+  "hc_paused": {
+    "message": "En pausa en este sitio"
+  },
+  "hc_uiRemoved": {
+    "message": "Esta página quitó los avisos de Clotr, así que Clotr no puede avisarte aquí. En esta página nunca se retienen mensajes."
+  },
+  "hc_editFailed": {
+    "message": "Clotr no pudo editar el cuadro de chat aquí la última vez. Borra a mano los datos señalados antes de enviar."
+  },
+  "hc_watching": {
+    "message": "Protegiendo este sitio: vigilando el cuadro de chat ✓"
+  },
+  "hc_noBox": {
+    "message": "Protegiendo este sitio: todavía no hay cuadro de chat en esta página"
+  },
+  "pp_sigAddress": {
+    "message": "palabras de IA en la dirección"
+  },
+  "pp_sigTitle": {
+    "message": "palabras de IA en el título de la página"
+  },
+  "pp_sigBox": {
+    "message": "un cuadro de mensaje como el de un chat"
+  },
+  "pp_sigSend": {
+    "message": "un botón de enviar"
+  },
+  "vault_whatShouldIProtect": {
+    "message": "¿Qué debo proteger?"
+  },
+  "vault_fingerprintsOnly": {
+    "message": "Solo huellas"
+  },
+  "vault_clotrChecksWhatYouType": {
+    "message": "Clotr revisa lo que escribes en chats de IA como ChatGPT, Claude y Gemini, y te avisa antes de que salga una contraseña, una clave o un dato personal. Tú decides: quitarlo o enviarlo igualmente."
+  },
+  "vault_onlyOnAiChats": {
+    "message": "Solo en chats de IA."
+  },
+  "vault_fact1": {
+    "message": "Nunca funciona en tu correo, tu banco ni en ningún otro sitio web."
+  },
+  "vault_nothingLeavesThisComputer": {
+    "message": "Nada sale de este equipo."
+  },
+  "vault_fact2": {
+    "message": "Clotr no tiene servidores y nunca se conecta a internet."
+  },
+  "vault_itNeverSavesWhatYou": {
+    "message": "Nunca guarda lo que escribes."
+  },
+  "vault_fact3": {
+    "message": "Guarda una nota breve de lo que encontró, como «Número de teléfono · chatgpt.com · ocultado», que puedes ver en su botón de la barra de herramientas."
+  },
+  "vault_itOnlyWarns": {
+    "message": "Solo avisa."
+  },
+  "vault_fact4": {
+    "message": "De entrada, aparece una nota en la esquina y tu mensaje lo envías tú."
+  },
+  "vault_pinClotr": {
+    "message": "Fija Clotr"
+  },
+  "vault_pinIntro": {
+    "message": "Los navegadores ocultan las extensiones nuevas. Para ver el contador de Clotr y abrir su panel, haz clic en la"
+  },
+  "vault_puzzlePiece": {
+    "message": "pieza de puzle"
+  },
+  "vault_pinMiddle": {
+    "message": "de la barra de herramientas del navegador y luego en la"
+  },
+  "vault_pin": {
+    "message": "chincheta"
+  },
+  "vault_pinEnd": {
+    "message": "junto a Clotr."
+  },
+  "vault_tryIt": {
+    "message": "Pruébalo"
+  },
+  "vault_tryLabel": {
+    "message": "Pega esta clave inventada o escribe un número de teléfono:"
+  },
+  "vault_thisPracticeBoxStaysOn": {
+    "message": "Este cuadro de prueba no sale de tu equipo. En un chat de IA real, el aviso aparece en la esquina superior derecha."
+  },
+  "vault_optionalTellClotrWhatTo": {
+    "message": "Opcional: dile a Clotr qué proteger"
+  },
+  "vault_addLater": {
+    "message": "Añade tus datos abajo y Clotr los reconocerá se escriban como se escriban. O vuelve más tarde desde el botón de Clotr en la barra de herramientas → Ajustes →"
+  },
+  "vault_openYourVault": {
+    "message": "Abrir tu caja fuerte"
+  },
+  "vault_skipForNow": {
+    "message": "Ahora no"
+  },
+  "vault_yourVaultIsLocked": {
+    "message": "Tu caja fuerte está bloqueada."
+  },
+  "vault_lockedDetail": {
+    "message": "Quien configuró Clotr para ti añadió un PIN para que no se cambie por error. Para cambiarla: botón de Clotr en la barra de herramientas → Ajustes → escribe el PIN y vuelve a abrir la caja fuerte. Clotr sigue protegiendo todo lo que ya contiene."
+  },
+  "vault_leadStart": {
+    "message": "Cuéntale a Clotr sobre ti y vigilará estos datos en los chats de IA, se escriban como se escriban. Guarda una"
+  },
+  "vault_oneWayFingerprint": {
+    "message": "huella de un solo sentido"
+  },
+  "vault_leadEnd": {
+    "message": "de cada dato, nunca el dato: quien abriera el almacenamiento de esta extensión no encontraría nada legible. Unos dos minutos. Un dato por línea; puedes saltarte cualquiera."
+  },
+  "vault_yourName": {
+    "message": "Tu nombre"
+  },
+  "vault_firstAndLastMaidenName": {
+    "message": "Nombre y apellidos, apodos. Hasta 4 palabras por línea."
+  },
+  "vault_familyMembers": {
+    "message": "Familiares"
+  },
+  "vault_kidsPartnerParentsTheNames": {
+    "message": "Hijos, pareja, padres: los nombres que mencionarías al pedir consejo."
+  },
+  "vault_whereYouWork": {
+    "message": "Dónde trabajas"
+  },
+  "vault_employerSchoolOrYourOwn": {
+    "message": "Empresa, centro de estudios o tu propio negocio."
+  },
+  "vault_addresses": {
+    "message": "Direcciones"
+  },
+  "vault_homeWorkMailingStAnd": {
+    "message": "Casa, trabajo, correo postal. «C/» y «Calle», «5» y «cinco» coinciden."
+  },
+  "vault_phoneNumbers": {
+    "message": "Números de teléfono"
+  },
+  "vault_anyFormatDigitsAreWhat": {
+    "message": "Cualquier formato; lo que cuenta son las cifras."
+  },
+  "vault_emailAddresses": {
+    "message": "Direcciones de correo electrónico"
+  },
+  "vault_accountIdNumbers": {
+    "message": "Números de cuenta y de documentos"
+  },
+  "vault_idHint": {
+    "message": "Escribe tu número, como AB-123456: Clotr guarda su formato y un código cifrado (nunca el número), así detecta cualquier documento con ese formato y sabe cuál es el tuyo. Los números cortos se pueden adivinar a partir del código si alguien tiene acceso completo a este equipo; para guardar solo el formato, escríbelo con # para una cifra y @ para una letra, como AB-######."
+  },
+  "vault_anythingElseToWatchFor": {
+    "message": "Cualquier otra cosa que vigilar"
+  },
+  "vault_watchHint": {
+    "message": "Nombres de clientes, nombres en clave de proyectos, términos internos o un formato como EMP-#####."
+  },
+  "vault_saveToMyVault": {
+    "message": "Guardar en mi caja fuerte"
+  },
+  "vault_inYourVault": {
+    "message": "En tu caja fuerte"
+  },
+  "vault_listIntro": {
+    "message": "Los datos aparecen ocultos porque solo se guardan sus huellas."
+  },
+  "vault_watch": {
+    "message": "Vigilar"
+  },
+  "vault_watchMeans": {
+    "message": "avisar siempre, aunque ese tipo esté en «Solo contar»."
+  },
+  "vault_okToShare": {
+    "message": "Se puede compartir"
+  },
+  "vault_shareMeans": {
+    "message": "no avisar nunca de este dato (se sigue contando en tu historial)."
+  },
+  "vault_nothingYet": {
+    "message": "Nada todavía."
+  },
+  "vault_savedAsOneWayFingerprints": {
+    "message": "Guardado como huellas de un solo sentido en este dispositivo"
+  },
+  "vault_janeDoe10Janie": {
+    "message": "María García\nMari"
+  },
+  "vault_emma10LiamDoe": {
+    "message": "Lucía\nDiego García"
+  },
+  "vault_initech": {
+    "message": "Acme S.L."
+  },
+  "vault_123OakStreet10Po": {
+    "message": "Calle Mayor 5\nApartado de correos 55"
+  },
+  "vault_janeDoeGmailCom": {
+    "message": "maria.garcia@gmail.com"
+  },
+  "vault_ab12345610Mem": {
+    "message": "12345678Z\nMEM-#########"
+  },
+  "vault_projectFalcon10Emp": {
+    "message": "Proyecto Halcón\nEMP-#####"
+  },
+  "vt_cName": {
+    "message": "Tu nombre"
+  },
+  "vt_cFamily": {
+    "message": "Familiar"
+  },
+  "vt_cWork": {
+    "message": "Dónde trabajas"
+  },
+  "vt_cAddress": {
+    "message": "Dirección"
+  },
+  "vt_cPhone": {
+    "message": "Teléfono"
+  },
+  "vt_cEmail": {
+    "message": "Correo electrónico"
+  },
+  "vt_cIdFormat": {
+    "message": "Formato de cuenta o documento"
+  },
+  "vt_cWatch": {
+    "message": "Palabra vigilada"
+  },
+  "vt_cYourId": {
+    "message": "Tu número de documento"
+  },
+  "vt_errFormat": {
+    "message": "un formato necesita al menos 4 marcas # o @"
+  },
+  "vt_errWords": {
+    "message": "hasta 4 palabras por línea"
+  },
+  "vt_errShape": {
+    "message": "necesita al menos 4 letras o cifras, como AB-123456"
+  },
+  "vt_errAddress": {
+    "message": "no parece una dirección (tipo de vía + nombre + número, como «Calle Mayor 5», o número + calle + St/Ave/Rd…) ni un apartado de correos"
+  },
+  "vt_errEmail": {
+    "message": "no parece una dirección de correo electrónico"
+  },
+  "vt_errPhone": {
+    "message": "no parece un número de teléfono"
+  },
+  "vt_saveFailed": {
+    "message": "No se pudo guardar ahora. Vuelve a intentarlo."
+  },
+  "vt_savedOne": {
+    "message": "Se guardó 1 dato nuevo."
+  },
+  "vt_savedMany": {
+    "message": "Se guardaron $p1$ datos nuevos.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "vt_already": {
+    "message": "$p1$ ya estaban.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "vt_nothingToSave": {
+    "message": "No hay nada que guardar."
+  },
+  "vt_wordsHidden": {
+    "message": "$p1$ palabras (ocultas)",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "vt_wordHidden": {
+    "message": "1 palabra (oculta)"
+  },
+  "vt_hidden": {
+    "message": "Oculto"
+  },
+  "vt_modeLabel": {
+    "message": "$p1$: vigilar o se puede compartir",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "vt_learned": {
+    "message": " · aprendido"
+  },
+  "vt_added": {
+    "message": "añadido el $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "vt_nothingFound": {
+    "message": "No se encontró nada delicado."
+  },
+  "vt_welcome": {
+    "message": "Te damos la bienvenida a Clotr"
+  },
+  "vt_pinned": {
+    "message": "✓ Clotr está fijado. Su contador aparece en el escudo de tu barra de herramientas."
+  },
+  "dash_yourAiExposureReport": {
+    "message": "Tu informe de exposición a la IA"
+  },
+  "dash_onThisComputerOnly": {
+    "message": "Solo en este equipo"
+  },
+  "dash_everythingClotrNoticedInYour": {
+    "message": "Todo lo que Clotr detectó en tus chats de IA, según sus propios registros en este equipo. Nunca guardó lo que escribiste: solo qué tipo de dato era, dónde, cuándo y qué elegiste."
+  },
+  "dash_soFar": {
+    "message": "Hasta ahora"
+  },
+  "dash_whatEachAiServiceHas": {
+    "message": "Lo que se le ha contado de ti a cada servicio de IA"
+  },
+  "dash_differentPersonalDetailsYouSent": {
+    "message": "Datos personales distintos que enviaste (sin ocultar), contados una vez aunque salieran varias veces. Las claves y contraseñas aparecen en los momentos de más riesgo."
+  },
+  "dash_whereYourDetailsWent": {
+    "message": "Adónde fueron tus datos"
+  },
+  "dash_mapIntro": {
+    "message": "Tú en el centro, y cada servicio de IA que Clotr te vio usar."
+  },
+  "dash_solidOrange": {
+    "message": "Naranja continuo"
+  },
+  "dash_mapSent": {
+    "message": "lo que se envió (más grueso = más)."
+  },
+  "dash_dashedBlue": {
+    "message": "Azul discontinuo"
+  },
+  "dash_mapStopped": {
+    "message": "lo que Clotr detuvo. El anillo muestra el tipo de dato de más riesgo que recibió cada uno; el número indica cuántos salieron. Elige un servicio para ver los detalles."
+  },
+  "dash_showAsATable": {
+    "message": "Ver como tabla"
+  },
+  "dash_showAsATable2": {
+    "message": "Ver como tabla"
+  },
+  "dash_aiService": {
+    "message": "Servicio de IA"
+  },
+  "dash_sent": {
+    "message": "Enviados"
+  },
+  "dash_sent2": {
+    "message": "Enviados"
+  },
+  "dash_riskiestSent": {
+    "message": "Lo de más riesgo enviado"
+  },
+  "dash_stoppedByClotr": {
+    "message": "Detenidos por Clotr"
+  },
+  "dash_kindsSent": {
+    "message": "Tipos enviados"
+  },
+  "dash_theLast12Weeks": {
+    "message": "Las últimas 12 semanas"
+  },
+  "dash_weekOf": {
+    "message": "Semana del"
+  },
+  "dash_covered": {
+    "message": "Ocultados"
+  },
+  "dash_justCounted": {
+    "message": "Solo contados"
+  },
+  "dash_riskiestMoments": {
+    "message": "Los momentos de más riesgo"
+  },
+  "dash_highRiskThingsThatWere": {
+    "message": "Datos de alto riesgo que se enviaron de todos modos, del más reciente al más antiguo, y qué hacer ahora."
+  },
+  "dash_sentMoreThanOnce": {
+    "message": "Enviado más de una vez"
+  },
+  "dash_aSummaryYouCanShare": {
+    "message": "Un resumen que puedes compartir"
+  },
+  "dash_onlyCountsNeverDetailsSafe": {
+    "message": "Solo cifras, nunca detalles. Puedes hacerle una captura o pegarlo donde quieras."
+  },
+  "dash_copyTheSummary": {
+    "message": "Copiar el resumen"
+  },
+  "dash_yourData": {
+    "message": "Tus datos"
+  },
+  "dash_keepHistoryFor": {
+    "message": "Guardar el historial durante"
+  },
+  "dash_3Months": {
+    "message": "3 meses"
+  },
+  "dash_1Year": {
+    "message": "1 año"
+  },
+  "dash_2Years": {
+    "message": "2 años"
+  },
+  "dash_olderRecordsAreRemovedFor": {
+    "message": "Los registros más antiguos se borran definitivamente."
+  },
+  "dash_exportMyHistory": {
+    "message": "Exportar mi historial"
+  },
+  "dash_seeExactlyWhatSStored": {
+    "message": "Ver exactamente qué se guarda"
+  },
+  "dash_deleteMyHistory": {
+    "message": "Borrar mi historial"
+  },
+  "dash_mapOfTheAiServices": {
+    "message": "Mapa de los servicios de IA a los que fueron tus datos"
+  },
+  "dash_whatClotrFoundEachWeek": {
+    "message": "Lo que Clotr encontró cada semana"
+  },
+  "db_tool1": {
+    "message": "1 herramienta de IA"
+  },
+  "db_toolN": {
+    "message": "$p1$ herramientas de IA",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "db_foundTotal": {
+    "message": "encontrados en total"
+  },
+  "db_since": {
+    "message": "Desde el $p1$ · $p2$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "db_nothingYet": {
+    "message": "Nada todavía. Lo que encuentre Clotr aparecerá aquí a medida que uses chats de IA."
+  },
+  "db_siteDetails": {
+    "message": "$p1$: $p2$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "db_detail1": {
+    "message": "1 dato personal"
+  },
+  "db_detailN": {
+    "message": "$p1$ datos personales",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "db_noDetails": {
+    "message": "No se ha enviado ningún dato personal a un servicio de IA. 👍"
+  },
+  "db_mapDetails": {
+    "message": "$p1$ recibió: $p2$. Clotr detuvo: $p3$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      }
+    }
+  },
+  "db_nothing": {
+    "message": "nada"
+  },
+  "db_mapEmpty": {
+    "message": "Nada todavía: el mapa se irá llenando a medida que Clotr detecte cosas en tus chats de IA."
+  },
+  "db_weekLabel": {
+    "message": "Semana del $p1$ — ocultados: $p2$, enviados: $p3$, solo contados: $p4$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      },
+      "p4": {
+        "content": "$4"
+      }
+    }
+  },
+  "db_sentTo": {
+    "message": "$p1$ enviado a $p2$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "db_whatToDo": {
+    "message": "Qué hacer ahora: $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "db_noRisky": {
+    "message": "No se ha enviado ningún dato de alto riesgo. 👍"
+  },
+  "db_repeat": {
+    "message": "El mismo dato ($p1$) se envió $p2$ veces, a $p3$. Si es tuyo, añádelo a tu caja fuerte para que Clotr lo vigile siempre.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      }
+    }
+  },
+  "db_noRepeats": {
+    "message": "No se envió nada más de una vez."
+  },
+  "db_private1": {
+    "message": "1 dato privado"
+  },
+  "db_privateN": {
+    "message": "$p1$ datos privados",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "db_card": {
+    "message": "Clotr detectó $p1$ camino de $p2$ (ocultados: $p3$; enviados de todos modos: $p4$). Comprobado en mi propio equipo; nunca salió nada de él.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      },
+      "p4": {
+        "content": "$4"
+      }
+    }
+  },
+  "db_cardTitle": {
+    "message": "🛡️ Mi privacidad en la IA, hasta ahora"
+  },
+  "db_copied": {
+    "message": "Copiado."
+  },
+  "db_copyFailed": {
+    "message": "No se pudo copiar; selecciona el texto."
+  },
+  "db_downloadAgain": {
+    "message": "Descargar de nuevo"
+  },
+  "db_exported1": {
+    "message": "Se exportó 1 registro."
+  },
+  "db_exportedN": {
+    "message": "Se exportaron $p1$ registros.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "db_keeping": {
+    "message": "Se guardará el historial durante $p1$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "db_deleteAgain": {
+    "message": "Vuelve a hacer clic para borrar todo el historial"
+  },
+  "db_deleted": {
+    "message": "Historial borrado. Tus ajustes y tu caja fuerte se conservan."
+  },
+  "ad_crypto": {
+    "message": "Pasa tus fondos a un monedero nuevo: una semilla o clave no se puede cambiar, solo abandonar."
+  },
+  "ad_key": {
+    "message": "Desactívala y crea una nueva (o cambia la contraseña) ahora: una vez enviada, trátala como pública."
+  },
+  "ad_card": {
+    "message": "Revisa tus movimientos y, si tienes dudas, pide una tarjeta nueva a tu banco."
+  },
+  "ad_bank": {
+    "message": "Avisa a tu banco si no querías compartirla y vigila si hay movimientos extraños."
+  },
+  "ad_id": {
+    "message": "Vigila posibles robos de identidad; si te preocupa, consulta con la entidad que emitió el documento."
+  },
+  "ad_other": {
+    "message": "Borra ese chat en el servicio de IA si puedes, y desactiva el uso de tus chats para entrenarlo."
+  },
+  "rk_high": {
+    "message": "Alto"
+  },
+  "rk_medium": {
+    "message": "Medio"
+  },
+  "rk_low": {
+    "message": "Bajo"
+  },
+  "rk_none": {
+    "message": "Nada enviado"
+  },
+  "mp_describe": {
+    "message": "$p1$ — enviados: $p2$ (lo de más riesgo: $p3$); detenidos por Clotr: $p4$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      },
+      "p4": {
+        "content": "$4"
+      }
+    }
+  },
+  "mp_sub": {
+    "message": "enviados: $p1$ · detenidos: $p2$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "st_whatClotrStores": {
+    "message": "Qué guarda Clotr"
+  },
+  "st_onThisComputerOnly": {
+    "message": "Solo en este equipo"
+  },
+  "st_everythingClotrKeepsIsBelow": {
+    "message": "Todo lo que guarda Clotr está aquí abajo, leído directamente de su almacenamiento en este navegador. No se envía nada a ninguna parte. Nunca guarda lo que escribiste: solo qué tipo de dato encontró, dónde y cuándo, y qué elegiste."
+  },
+  "st_yourSettings": {
+    "message": "Tus ajustes"
+  },
+  "st_yourVault": {
+    "message": "Tu caja fuerte"
+  },
+  "st_t14": {
+    "message": "Cada dato es una huella de un solo sentido (o, para números de documentos, solo un formato como"
+  },
+  "st_t1": {
+    "message": "). Los datos que escribiste no se guardan."
+  },
+  "st_kind": {
+    "message": "Tipo"
+  },
+  "st_setting": {
+    "message": "Ajuste"
+  },
+  "st_storedAs": {
+    "message": "Guardado como"
+  },
+  "st_added": {
+    "message": "Añadido"
+  },
+  "st_history": {
+    "message": "Historial"
+  },
+  "st_when": {
+    "message": "Cuándo"
+  },
+  "st_aiTool": {
+    "message": "Herramienta de IA"
+  },
+  "st_whatKind": {
+    "message": "Qué tipo"
+  },
+  "st_outcome": {
+    "message": "Resultado"
+  },
+  "st_fingerprint": {
+    "message": "Huella"
+  },
+  "st_otherBookkeeping": {
+    "message": "Otros registros internos"
+  },
+  "st_showTheRawData": {
+    "message": "Ver los datos en bruto"
+  },
+  "st_theExactRecordsAsA": {
+    "message": "Los registros exactos, tal como los vería un desarrollador. El secreto de las huellas está oculto."
+  },
+  "st_whatClotrCanReach": {
+    "message": "A qué puede acceder Clotr"
+  },
+  "st_nothingOutsideYourBrowser": {
+    "message": "A nada fuera de tu navegador."
+  },
+  "st_t2": {
+    "message": "Clotr no tiene servidor y no hace ninguna conexión. Tu navegador impone esta regla en las páginas propias de Clotr (leída en directo de la copia instalada):"
+  },
+  "st_t3": {
+    "message": "significa que estas páginas solo pueden cargar archivos de Clotr: ningún sitio web, ningún servidor. La parte que vigila los cuadros de chat de IA funciona dentro de esas páginas; no contiene código que envíe nada, y una comprobación automática rechaza el programa si alguna vez se añade."
+  },
+  "st_whatClotrIsAllowedTo": {
+    "message": "Qué puede hacer Clotr y por qué"
+  },
+  "st_checkItYourself": {
+    "message": "Compruébalo tú"
+  },
+  "st_t15": {
+    "message": "Abre"
+  },
+  "st_t4": {
+    "message": "(o"
+  },
+  "st_t5": {
+    "message": "), activa el modo de desarrollador y, en Clotr, haz clic en"
+  },
+  "st_serviceWorker": {
+    "message": "service worker"
+  },
+  "st_t6": {
+    "message": ". En la ventana que se abre, la pestaña"
+  },
+  "st_network": {
+    "message": "Red"
+  },
+  "st_t7": {
+    "message": "sigue vacía mientras usas chats de IA."
+  },
+  "st_t16": {
+    "message": "Cada zip publicado se puede volver a generar a partir del código publicado con"
+  },
+  "st_t8": {
+    "message": ": el resultado es idéntico byte a byte, así que su suma de comprobación coincide con la del archivo"
+  },
+  "st_knownLimits": {
+    "message": "Límites conocidos"
+  },
+  "st_shortDetailsCanBeGuessed": {
+    "message": "Los datos cortos se pueden adivinar a partir de sus huellas"
+  },
+  "st_t9": {
+    "message": "si alguien puede abrir el perfil de este navegador en este equipo: no hay tantos números de teléfono posibles, así que una persona decidida podría probarlos todos. Las huellas protegen tus datos de una lectura casual, no de alguien con acceso total a tu equipo."
+  },
+  "st_aiSitesMayKeepYour": {
+    "message": "Los sitios de IA pueden guardar en este navegador el mensaje que aún no has enviado."
+  },
+  "st_t10": {
+    "message": "Algunos (como ChatGPT) guardan lo que escribes para que siga ahí tras recargar; no se envía nada hasta que pulsas Enviar. Al ocultarlo también se sustituye la copia guardada."
+  },
+  "st_clotrOnlyReadsText": {
+    "message": "Clotr solo lee texto."
+  },
+  "st_t11": {
+    "message": "Revisa lo que escribes y los archivos de texto, PDF, Word, Excel y PowerPoint que adjuntas, pero no imágenes, capturas de pantalla ni voz. Si tu caja fuerte tiene datos, también lee la respuesta de la IA durante 90 segundos después de enviar, solo para notar tus propios datos; no se guarda nada de la respuesta."
+  },
+  "st_clotrOnlyWorksOnAi": {
+    "message": "Clotr solo funciona en los sitios de chat de IA"
+  },
+  "st_t12": {
+    "message": "que conoce o que añadiste, y solo en este navegador."
+  },
+  "st_itCanMissThingsAnd": {
+    "message": "Puede pasar cosas por alto y a veces avisar de texto normal."
+  },
+  "st_t13": {
+    "message": "Es una red de seguridad, no una garantía."
+  },
+  "sj_changed": {
+    "message": "Cambiado respecto al valor predeterminado (avisar)"
+  },
+  "sj_nothingChanged": {
+    "message": "Nada: todo avisa"
+  },
+  "sj_siteModes": {
+    "message": "Más estricto o más discreto en una herramienta de IA"
+  },
+  "sj_stricter": {
+    "message": "más estricto"
+  },
+  "sj_quieter": {
+    "message": "más discreto"
+  },
+  "sj_none": {
+    "message": "Ninguno"
+  },
+  "sj_noneYet": {
+    "message": "Ninguno todavía"
+  },
+  "sj_nowhere": {
+    "message": "En ningún sitio"
+  },
+  "sj_pausedOn": {
+    "message": "En pausa en"
+  },
+  "sj_advanced": {
+    "message": "Opciones avanzadas visibles"
+  },
+  "sj_yes": {
+    "message": "Sí"
+  },
+  "sj_no": {
+    "message": "No"
+  },
+  "sj_seeSettings": {
+    "message": "Consulta Ajustes → Herramientas de IA que añadiste"
+  },
+  "sj_item1": {
+    "message": "1 dato."
+  },
+  "sj_itemN": {
+    "message": "$p1$ datos.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "sj_empty": {
+    "message": "Vacía."
+  },
+  "sj_noRecords": {
+    "message": "Todavía no hay registros."
+  },
+  "sj_salt": {
+    "message": "Secreto de las huellas"
+  },
+  "sj_saltWhat": {
+    "message": "Un número aleatorio creado en este equipo para que las huellas no se puedan comparar entre equipos (oculto aquí)"
+  },
+  "sj_notYet": {
+    "message": "Todavía no se ha creado"
+  },
+  "sj_kept": {
+    "message": "Veces que dejaste un aviso (últimos 14 días)"
+  },
+  "sj_tips": {
+    "message": "Consejos de la primera vez ya mostrados para"
+  },
+  "sj_lastUpdate": {
+    "message": "Última actualización"
+  },
+  "sj_pStorage": {
+    "message": "Guarda tus ajustes, las huellas de tu caja fuerte y el historial en este equipo."
+  },
+  "sj_pActiveTab": {
+    "message": "Cuando haces clic en el botón de Clotr, le deja mirar esa pestaña para saber si es un chat de IA. Nada más."
+  },
+  "sj_pScripting": {
+    "message": "Activa Clotr en los sitios de chat de IA que añades tú, solo después de que des permiso para cada uno."
+  },
+  "sj_pDeclarative": {
+    "message": "Permite al navegador mostrar el punto ámbar en páginas que parecen un chat de IA, sin que Clotr las lea."
+  },
+  "sj_pAlarms": {
+    "message": "Actualiza el contador del día después de medianoche y borra el historial antiguo según lo previsto."
+  },
+  "sj_pOther": {
+    "message": "Lo usan funciones propias de Clotr en este equipo."
+  },
+  "sj_aiSitesN": {
+    "message": "$p1$ sitios de chat de IA",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "sj_aiSitesWhy": {
+    "message": "Lee lo que escribes en los cuadros de chat de estos sitios de chat de IA para avisarte antes de enviar: $p1$. Nunca en ningún otro sitio.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "sj_youAdd": {
+    "message": "Sitios que añades"
+  },
+  "sj_youAddWhy": {
+    "message": "Solo cuando haces clic en Proteger este sitio en una herramienta de IA que Clotr aún no conoce, y solo después de que el navegador te lo pregunte."
+  },
+  "bulkFiles": {
+    "message": "$p1$ archivos que adjuntaste ($p2$) contienen $p3$.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      },
+      "p3": {
+        "content": "$3"
+      }
+    }
+  },
+  "whyFoundFiles": {
+    "message": "Clotr encontró lo que parece: $p1$, en los archivos $p2$. ",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      },
+      "p2": {
+        "content": "$2"
+      }
+    }
+  },
+  "noticeFilesHint": {
+    "message": "Para mantenerlos en privado, quita esos archivos antes de enviar."
+  },
+  "andMore": {
+    "message": "y $p1$ más",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "mp_you": {
+    "message": "Tú"
+  },
+  "whyScam": {
+    "message": "Ningún banco, empresa ni servicio técnico de verdad te pedirá nunca que compartas esto. "
+  },
+  "vault_onlyThisBrowser": {
+    "message": "Solo en este navegador."
+  },
+  "vault_fact5": {
+    "message": "No ve las apps de IA de tu ordenador o móvil (como la app de ChatGPT) ni la IA integrada en otros programas; úsalas con el mismo cuidado."
+  }
+}

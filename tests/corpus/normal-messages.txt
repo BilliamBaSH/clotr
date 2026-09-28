@@ -1,0 +1,679 @@
+# Normal messages people send to AI tools. None contains personal data or a secret,
+# so every detection here is a false alarm. Messages are separated by lines of "---".
+# Heavy on things that look like numbers on purpose: versions, hashes, prices, times,
+# measurements, scores, code, logs, math, dates and IDs. Budget: ≤ 1 false alarm per 50.
+---
+Can you help me write a polite email declining a meeting invite for next Tuesday?
+---
+What's the difference between a Roth IRA and a traditional IRA?
+---
+Explain quantum entanglement like I'm 10 years old.
+---
+My sourdough starter smells like nail polish remover. Is it dead?
+---
+Give me a 3-day itinerary for Lisbon on a budget of about 600 euros.
+---
+Rewrite this to sound more professional: "hey guys, the report is gonna be late, sorry"
+---
+How many calories are in 2 cups of cooked brown rice?
+---
+What is 17% of 2,450?
+---
+Solve for x: 3x + 7 = 22
+---
+Convert 72 degrees Fahrenheit to Celsius.
+---
+I ran 5.2 miles in 48:30. What's my pace per mile?
+---
+The recipe calls for 250 g of flour and 175 ml of milk. How do I scale it to 12 servings instead of 8?
+---
+Which is better for a 1500 sq ft house, a 3 ton or a 3.5 ton AC unit?
+---
+Summarize the plot of Pride and Prejudice in 5 bullet points.
+---
+Write a haiku about autumn leaves.
+---
+What year did the Berlin Wall fall, and why?
+---
+My flight leaves at 6:45 AM and the airport is 40 minutes away. What time should I leave home?
+---
+I'm getting "TypeError: Cannot read properties of undefined (reading 'map')" in React. What does it mean?
+---
+Why does `git push` say "Updates were rejected because the tip of your current branch is behind"?
+---
+Explain the difference between let, const and var in JavaScript.
+---
+What does HTTP status 429 mean and how should my client handle it?
+---
+```python
+def fib(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+print(fib(30))
+```
+Why is this faster than the recursive version?
+---
+Here's my SQL: SELECT customer_id, SUM(amount) FROM orders WHERE created_at >= '2024-01-01' GROUP BY customer_id HAVING SUM(amount) > 1000; how do I add a rank column?
+---
+docker run -p 8080:80 -v /data:/var/lib/data nginx:1.25.3 fails with "port is already allocated". What now?
+---
+npm ERR! code ERESOLVE
+npm ERR! ERESOLVE unable to resolve dependency tree
+npm ERR! peer react@"^17.0.2" from react-dom@17.0.2
+How do I fix this?
+---
+What's new in Python 3.12 compared to 3.11?
+---
+My build fails on node v20.11.1 but works on v18.19.0. Where do I start?
+---
+Commit 3f9a2c1e broke the tests. How do I find which change caused it with git bisect?
+---
+The API returned request id 7c9e6679-7425-40de-944b-e07fc1f90ae7 with a 500 error. What should I include in a bug report?
+---
+What does this regex do? ^[A-Z]{2}\d{2}[A-Z0-9]{4}$
+---
+Explain big O notation with an example of O(n log n).
+---
+How do I center a div with CSS grid?
+---
+Write a bash one-liner that counts lines in all .py files under src/.
+---
+kubectl get pods shows CrashLoopBackOff with exit code 137. What does 137 mean?
+---
+Is 0.1 + 0.2 === 0.3 in JavaScript? Why not?
+---
+The server log says: 2024-03-14T09:26:53.589Z ERROR worker-3 timeout after 30000ms (attempt 4/5)
+Why would it time out only under load?
+---
+What's the time complexity of Python's dict lookup?
+---
+How do I convert a Unix timestamp like 1710408413 to a readable date in JavaScript?
+---
+My Raspberry Pi 4 shows 192 MB free out of 3.8 GB. Is that a problem?
+---
+What does chmod 755 do?
+---
+Our sprint velocity was 34, 29, 41 and 37 points. What's a realistic forecast for the next sprint?
+---
+Make a table comparing the iPhone 15, Pixel 8 and Galaxy S24 on battery, camera and price.
+---
+How long does it take light from the Sun to reach Earth? About 8 minutes 20 seconds?
+---
+Write a birthday message for my coworker who loves hiking.
+---
+My kid's school starts at 8:15 and ends at 2:50. How many hours is that per week?
+---
+What are good houseplants for a room with a north-facing window?
+---
+Translate "where is the train station?" into Spanish, French and German.
+---
+Explain how compound interest works if I invest $5,000 at 7% for 20 years.
+---
+Our Q3 revenue was $1.2M, up 14% from $1.05M. Write a short summary for the team newsletter.
+---
+Draft a LinkedIn post announcing our new product launch on October 3rd.
+---
+What's the capital of Australia? Everyone says Sydney.
+---
+Plan a weekly workout: 3 days strength, 2 days cardio, 30 to 45 minutes each.
+---
+How do I remove a red wine stain from a cotton shirt?
+---
+I scored 1340 on the SAT. Is that good enough for state universities?
+---
+The Lakers won 112-108 last night. Who had the most points?
+---
+Recommend 5 sci-fi books similar to The Expanse.
+---
+What's the difference between 1080p and 4K for a 55 inch TV at 8 feet?
+---
+Make a grocery list for a week of vegetarian dinners for 4 people.
+---
+How much paint do I need for a 12 x 14 ft room with 8 ft ceilings?
+---
+My car shows code P0420. What does it mean and is it urgent?
+---
+Can you explain what a 401(k) employer match of 50% up to 6% means?
+---
+I need a cover letter for a junior data analyst role. Focus on Excel, SQL and Tableau.
+---
+Why does my bread come out dense? I use 500 g flour, 350 g water, 10 g salt, 7 g yeast.
+---
+What's a good way to learn guitar chords as a 40 year old beginner?
+---
+How many ounces are in 1.5 liters?
+---
+Is it normal for a 3 month old puppy to sleep 18 hours a day?
+---
+Explain the Monty Hall problem and why switching wins 2/3 of the time.
+---
+Summarize this meeting: we agreed to ship v2.4 on the 15th, Maria owns QA, and the budget stays at 40k.
+---
+Please review my essay introduction and tell me if the thesis is clear.
+---
+What are the main causes of World War I?
+---
+Write a limerick about a cat who hates Mondays.
+---
+Help me split a $186.40 dinner bill between 5 people with an 18% tip.
+---
+What's the difference between weather and climate?
+---
+How do vaccines train the immune system?
+---
+Give me 10 names for a coffee shop with a book theme.
+---
+I have 3 eggs, spinach, feta and half an onion. What can I cook?
+---
+How far is the Moon? Around 384,400 km?
+---
+Explain the rules of chess castling.
+---
+My electricity bill jumped from 94 to 161 dollars. What could cause that in winter?
+---
+Which is healthier: 2% milk or oat milk?
+---
+Write a short story opening set on a space station orbiting Jupiter.
+---
+Compare AWS, Azure and Google Cloud for a small startup.
+---
+What is the Pythagorean theorem? Show 3-4-5 as an example.
+---
+Help me write a thank-you note to my neighbors for watering my plants.
+---
+Why do cats knead blankets?
+---
+Our office moved to the 4th floor, room 412. Write a friendly announcement for the team.
+---
+How do I calculate the area of a circle with radius 7.5 cm?
+---
+Explain the difference between TCP and UDP.
+---
+What's a good stretching routine after sitting for 8 hours?
+---
+Give me a study schedule for the next 6 weeks before my biology final on May 20.
+---
+Help me understand this Excel formula: =VLOOKUP(A2, Sheet2!$A$2:$D$500, 4, FALSE)
+---
+My laptop fan runs at 100% with Chrome using 2.3 GB of RAM. Tips?
+---
+How many steps is 10 km?
+---
+Explain inflation and why the Fed raises rates.
+---
+What should I pack for a 10-day trip to Japan in April?
+---
+Rewrite this bullet for my resume: "did sales stuff and increased numbers"
+---
+Write unit tests for a function that checks if a string is a palindrome.
+---
+In Go, why does `for i := range 10` work in 1.22 but not 1.21?
+---
+The CSV has columns id,date,amount,category. Write pandas code to get monthly totals per category.
+---
+Explain what a JWT is and when not to use one.
+---
+What is the time zone difference between New York and Tokyo?
+---
+Why is the sky blue?
+---
+My tomato plants have yellow leaves at the bottom. What's wrong?
+---
+Estimate how long it takes to read a 320 page book at 250 words per minute.
+---
+How do I politely ask my manager for a raise?
+---
+Explain the plot twist in The Sixth Sense without spoiling too much.
+---
+Suggest a name for my Dungeons & Dragons half-elf ranger.
+---
+What's the best way to store fresh herbs?
+---
+The error says "ORA-00942: table or view does not exist". What do I check?
+---
+Here is a stack trace:
+  at Object.<anonymous> (/app/src/index.js:42:13)
+  at Module._compile (node:internal/modules/cjs/loader:1256:14)
+  at node:internal/main/run_main_module:23:47
+What is line 42 doing wrong?
+---
+The package.json says "version": "3.14.2" but npm view shows 3.15.0. How do I upgrade safely?
+---
+What's the SHA-256 of an empty string? I remember e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.
+---
+Write a regex that matches US ZIP codes like 12345 or 12345-6789.
+---
+How do I format 1234567.891 as "1,234,567.89" in Python?
+---
+Explain matrix multiplication with a 2x2 example.
+---
+Calculate the monthly payment on a $300,000 mortgage at 6.5% over 30 years.
+---
+Why is my Wi-Fi only 45 Mbps when I pay for 300?
+---
+What's the boiling point of water at 5,000 feet?
+---
+Help me plan a 7-course tasting menu for a dinner party.
+---
+List the planets in order and one fun fact about each.
+---
+What's the difference between affect and effect?
+---
+My son is 12 and wants a phone. What rules have worked for other parents?
+---
+Suggest 3 board games for 2 players that take under 30 minutes.
+---
+How do I tell if an egg is still fresh?
+---
+Explain the difference between a virus and a bacterium.
+---
+What does the error "Segmentation fault (core dumped)" mean in C?
+---
+Can you optimize this loop?
+for (int i = 0; i < 1000000; i++) { total += arr[i] * 2; }
+---
+How do I set up a Python virtual environment on Windows 11?
+---
+Write a function that returns the nth prime number.
+---
+What's the difference between RAID 1 and RAID 5?
+---
+Our API rate limit is 1000 requests per 15 minutes. How many per second is that on average?
+---
+The build number is 20240314.3 and the artifact is app-release-2.8.0-rc1.apk. Write release notes.
+---
+Explain CORS and why my fetch to localhost:3000 from localhost:5173 fails.
+---
+IPv6 address 2001:db8::1 — what does the :: mean?
+---
+My GPU is an RTX 3060 with 12 GB. Can I run a 13B model locally?
+---
+What's the square root of 144, and how do I estimate square roots in my head?
+---
+In chess notation, what does 1. e4 e5 2. Nf3 Nc6 3. Bb5 mean?
+---
+How many tablespoons are in 3/4 cup?
+---
+What's the population of Canada, roughly 40 million?
+---
+Explain the 4-7-8 breathing technique.
+---
+Is a 2019 Honda Civic with 85,000 miles a good buy at $17,500?
+---
+Help me write an out-of-office reply for December 23 to January 2.
+---
+What were the main results of the 1969 Apollo 11 mission?
+---
+Write a SQL query to find duplicate emails in a users table.
+---
+How do I check which process is using port 5432 on Linux?
+---
+Give me a morning routine that takes 20 minutes.
+---
+Why do onions make you cry?
+---
+Create a budget template with categories for rent, food, transport and savings.
+---
+What's the difference between a crocodile and an alligator?
+---
+Explain photosynthesis in two sentences.
+---
+We need 3 volunteers for Saturday 9 to 12 at the food bank. Write a sign-up message.
+---
+How do I write a for loop in Rust that goes from 10 down to 1?
+---
+What's the formula for the volume of a cylinder? Radius 4, height 10.
+---
+My blood pressure reading was 128 over 82. Is that normal for a 45 year old?
+---
+What's the best way to learn touch typing? I'm at 35 words per minute.
+---
+Make a packing checklist for a newborn's first trip to grandma's house.
+---
+Why did my sourdough rise 50% in 4 hours at 78 F but only 20% at 68 F?
+---
+The model number on my dishwasher is SHXM4AY55N. How do I reset it?
+---
+Tracking says my package is at the sorting facility since 3 days. Normal?
+---
+What's the lifespan of a lithium battery at 500 charge cycles?
+---
+Explain the Fibonacci sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55.
+---
+My test scores were 78, 85, 92, 88 and 95. What's my average and standard deviation?
+---
+Write CSS for a button that grows 5% on hover with a 200ms transition.
+---
+What does "idempotent" mean for HTTP methods?
+---
+The flight is AA 1234 from ORD to LAX, departing 14:05, arriving 16:40. How long is it?
+---
+My train ticket number is on the email, but which platform does the 7:52 to Boston usually use?
+---
+How much water should a 70 kg adult drink per day?
+---
+The invoice total is $2,340.00 with 8.25% sales tax included. What's the pre-tax amount?
+---
+Which is bigger, 2^10 or 10^3?
+---
+Explain the difference between git merge and git rebase with a diagram.
+---
+I'm writing a fantasy novel. Help me design a magic system with 3 rules.
+---
+Brainstorm 10 blog post ideas about remote work productivity.
+---
+The meeting is at 3pm PST. What time is that in London?
+---
+What's the difference between a latte and a flat white?
+---
+Why does ice float?
+---
+Give me a 5-minute icebreaker for a team of 12 people.
+---
+Explain how a bill becomes law in the United States.
+---
+Can you check my math? 45 * 23 = 1035
+---
+What is the order of operations for 8 / 2 * (2 + 2)?
+---
+Help me name variables in this function; right now they're a, b, c, and tmp2.
+---
+Write a Python script to rename files like IMG_0001.jpg to 2024-03-14_001.jpg.
+---
+Explain what 0.0.0.0 means when a server listens on it.
+---
+What are the lyrics structure of a typical pop song (verse, chorus, bridge)?
+---
+Our team has 7 people across 4 time zones. Suggest a meeting schedule.
+---
+Write a thank-you email to a customer who ordered 250 units.
+---
+My score in Wordle today was 3/6. Explain the best starting words.
+---
+Explain the difference between mean, median and mode using 2, 3, 3, 5, 7, 10.
+---
+What does a 720 credit score mean when applying for a car loan?
+---
+How do I compute a 95% confidence interval with n = 40, mean 12.3, sd 2.1?
+---
+Recommend a 2-week beginner running plan to reach 5 km.
+---
+Write the lyrics for a silly song about a dog named Biscuit.
+---
+The Wi-Fi password field keeps rejecting my input; what characters are usually not allowed?
+---
+Explain what "password hashing with salt" means in simple words.
+---
+My app shows "Your session expired, please log in again" every 15 minutes. Where do I look?
+---
+In our docs, the example config uses API_KEY=your-key-here. How should real keys be stored?
+---
+What's a good password manager for a family of 4?
+---
+Explain two-factor authentication to my grandmother.
+---
+Why does curl -H "Authorization: Bearer $TOKEN" https://api.example.com return 401 when the token works in Postman?
+---
+In my Express app I read the key with api-key: process.env.OPENAI_KEY and it's undefined in production. Why?
+---
+Should the test pass: expected 200 got 200, or is my assertion wrong?
+---
+My config has headers = {"Authorization": f"Bearer {api_key}"} and password: os.environ["DB_PASSWORD"]. Is that the right pattern?
+---
+Set pass: true in the pytest config and use x-api-key: ${API_KEY} in the request header. Does that look right?
+---
+Use a combination of letters and numbers for your password, and a password manager like 1Password or Bitwarden. What is a good passcode length, 6 digits?
+---
+Go to the login / signup page and click next. The login form has username / password fields.
+---
+Double check the triple A batteries, 3 pack. The combination 1-2-3 is easiest to remember.
+---
+My phone code is broken and the building code requires 2 exits. Password reset emails take 5 minutes.
+---
+pw 2 is the second practice worksheet. Set the pin mode to 13 on the arduino; the card code snippet on line 42 fails.
+---
+Send it by email to the team at google. Email marketing at hubspot works well.
+---
+I was born in nineteen ninety and moved in two thousand five. Call me double quick, it's five minutes.
+---
+My zip code is 45402 and the area code is 937. I got error code 1234 and status code 404.
+---
+I like five hundred piece puzzles and triple chocolate cake. It cost five hundred dollars and took two thousand hours.
+---
+What's the best pizza dough recipe? I need 500 grams of flour and double the yeast. Convert five hundred fifty five dollars to euros.
+---
+Explain the difference between a PIN and a password for a 10 year old. The login screen says password must be 8 characters with a number.
+---
+The security question was easy, what should my answer be? My mother's maiden name is a common security question, is that safe?
+---
+The combination lock came with a card that says 00-00-00 to reset. My gate code keeps changing every month, is that normal?
+---
+What does RFC 2119 say about MUST and SHOULD? Call triple A, their number is on the card. The passcode is on the sticky note.
+---
+The CVV is the 3 digit number on the back. Is the security code the same as the PIN? The security code 2FA app shows 6 digits.
+---
+Remote access code expired after 10 minutes. AnyDesk is a remote desktop app, version 8.0.9; my remote desktop resolution is 1920 1080.
+---
+What are backup codes and where do I keep them? My recovery key is lost, how do I get a new one? Should I turn on two factor codes for email?
+---
+Code that handles passwords: password = request.form['password']; if password == confirm_password: return True; hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt()); user.set_password(new_password)
+---
+login: POST /api/v1/login / returns 200. Backup codes table: id, user_id, code_hash, used_at. Recovery key rotation every 90 days via cron 0 3 * * *. The passcode length must be >= 6; cvv field maxlength=4.
+---
+My flight UA 1234 leaves at 6:45 am from gate B12, seat 23C. What should I pack for 3 days in Denver?
+---
+Our wifi router model is TP-Link AX1500, firmware 1.0.3. Why does it drop every 20 minutes?
+---
+Can you convert 350 degrees Fahrenheit to Celsius and 2 1/2 cups of flour to grams?
+---
+The recipe says bake for 45-50 minutes at 180C. My oven only goes to 170, what do I do?
+---
+I scored 1420 on the SAT and 32 on the ACT. Which colleges should I apply to?
+---
+My kid's school starts at 8:15 and ends at 3:05. How do I plan a 45 minute commute?
+---
+Tracking number 1Z999AA10123456784 says delivered but nothing is here, what should I do?
+---
+The invoice total is $1,249.99 with tax 8.25%. What was the pre-tax amount?
+---
+My doctor appointment is on March 14 at 2:30 pm. What questions should I ask about blood pressure 140/90?
+---
+I take 10 mg of lisinopril once a day. Is it OK to take ibuprofen 200 mg?
+---
+Order #445-2231987 from Amazon arrived damaged. Write a complaint email for me.
+---
+My car's VIN starts with 1HGCM, it's a 2008 Honda Accord with 145,000 miles. Is it worth fixing the transmission?
+---
+The error says ERR_CONNECTION_RESET on port 8080. How do I fix it on Windows 11 build 22631?
+---
+I need to call my bank. What should I say to dispute a $45 charge from March 3?
+---
+Room 1204 at the Hilton was booked for 3 nights, checkout at 11. Can I ask for late checkout?
+---
+My grandson's birthday party is on Saturday at 2 pm, he turns 7. Gift ideas under $30?
+---
+The meeting ID is 845 2931 7710 on Zoom. How do I join from my phone?
+---
+I walked 12,456 steps today and burned 520 calories. Is that enough for weight loss?
+---
+Our HOA fee went from $250 to $310 a month. Write a polite letter asking why.
+---
+My electricity bill was 1,250 kWh this month. How can I cut it by 20 percent?
+---
+Explain what a 401(k) is and whether I should put 6% in if my employer matches 50%.
+---
+I owe $4,500 on a card at 24.99% APR. How long to pay it off at $200 a month?
+---
+The train leaves platform 9 at 17:42 and arrives at 19:05. How long is the trip?
+---
+What's the difference between a 15 year and 30 year mortgage at 6.5% on $300,000?
+---
+My blood sugar was 145 this morning before breakfast. Is that high?
+---
+Help me write a thank you note to nurse Maria on floor 4 for her kindness.
+---
+The package weighs 2.3 kg and is 40 x 30 x 20 cm. Which shipping option is cheapest?
+---
+My phone says storage 118 GB of 128 GB used. What can I delete safely?
+---
+Chapter 12, question 4: solve 3x + 7 = 22 and show the steps.
+---
+My password manager generated a 20 character password. Is that strong enough for my bank?
+---
+Our team code review is at 10 am; PR 2231 has 14 comments. How do I respond politely?
+---
+The thermostat is set to 68 at night and 72 during the day. Is that efficient?
+---
+My pension is $1,850 a month and social security is $2,100. How should I budget?
+---
+Call me back later, I'm driving. Also, the dentist moved my cleaning to the 22nd.
+---
+The lottery numbers were 4 11 23 38 45 and 12. What are the odds of winning?
+---
+I have 3 prescriptions: 20 mg, 40 mg and 81 mg aspirin. Can they be taken together?
+---
+Please summarize this: revenue grew 12% to $4.2M in Q3, costs rose 8%, margin 23%.
+---
+My apartment is unit 5B on the 3rd floor. The landlord hasn't fixed the heat for 2 weeks.
+---
+We're at mile marker 142 on I-75 and the car is overheating. What should we do?
+---
+The printer shows error code E-05 and the paper tray is full. How do I reset it?
+---
+Help me plan a 7 day trip to Italy in May with 2 kids ages 8 and 11.
+---
+The tax form asks for line 11 adjusted gross income. Where do I find it on my W-2?
+---
+I need a packing list for a cruise that leaves on June 3 and returns June 10.
+---
+My WiFi password is saved on my old laptop. How do I find it on Windows?
+---
+Remind me what the security question on my account usually asks about.
+---
+Our new PIN pad at the store keeps beeping. How do I tell the manager?
+---
+The combination of flour, water and salt makes a simple dough. How long do I knead it?
+---
+Is 98.9 degrees a fever for an 80 year old?
+---
+Grandma's recipe card says 1 1/4 cups sugar and 2 sticks butter for 24 cookies.
+---
+My insurance deductible is $1,500 and I've paid $900 so far this year. What's left?
+---
+The gym membership is $39.99 a month with a $49 sign-up fee. Worth it for 2 visits a week?
+---
+I got a text saying my package is held, code 482913, click the link. Is this a scam?
+---
+A caller said he was from Microsoft and asked me to install AnyDesk. Should I?
+---
+Someone emailed me saying my account will close unless I confirm my password. Is it real?
+---
+My son says his school login doesn't work. Who should he contact?
+---
+We moved to a new house last month. How do I update my address with the post office?
+---
+What's a good passcode for a 5 year old's tablet, and how do I set parental controls?
+---
+The DMV appointment is at 9:40 and I need 2 proofs of residency. What counts?
+---
+My medicare card came in the mail. Should I keep it in my wallet?
+---
+Can you explain the difference between a routing number and an account number?
+---
+docker run -p 8080:80 -e NODE_ENV=production -v /data:/app/data myapp:1.4.2 fails with exit code 137, why?
+---
+kubectl get pods -n prod shows CrashLoopBackOff for api-7f9c8d6b5-x2k4p after 12 restarts.
+---
+My SQL is SELECT * FROM orders WHERE created_at > '2024-03-01' AND total > 100 ORDER BY id DESC LIMIT 50. It's slow.
+---
+TypeError: Cannot read properties of undefined (reading 'map') at UserList (UserList.jsx:42:18)
+---
+git log shows commit 3f9a2c1 by me on 2024-05-12; how do I revert it without losing 8e7d6b5?
+---
+The CI job fails at step 4 of 9: npm ERR! code ERESOLVE unable to resolve dependency tree react@18.2.0
+---
+nginx returns 502 Bad Gateway; upstream is 127.0.0.1:3000 and the logs say connect() failed (111).
+---
+Our Redis uses 2.3 GB of 4 GB; maxmemory-policy allkeys-lru. Should I raise it?
+---
+The Python script throws KeyError: 'user_id' on line 88 when the JSON has 1,024 records.
+---
+How do I set password complexity rules in Django: min length 12, at least 1 digit and 1 symbol?
+---
+Our OAuth flow redirects to /callback?code=... and then fails with invalid_grant. What's wrong?
+---
+The login endpoint returns 401 when the token is expired; how should the frontend refresh it?
+---
+The JWT has exp 1735689600 and iat 1735603200; is a 24 hour expiry reasonable?
+---
+My regex ^\d{3}-\d{2}-\d{4}$ is supposed to validate SSN format; is it right?
+---
+The API rate limit is 1000 requests per 15 minutes per IP; we get 429 after about 600.
+---
+Terraform plan wants to destroy aws_instance.web[0]; how do I keep it and change the AMI?
+---
+The unit test expects 200 but got 500 on POST /api/users with body {"name": "test"}.
+---
+Our Postgres connection pool is 20; with 50 workers we see too many connections. Fix?
+---
+How do I hash passwords with argon2 in Node, and what memory cost should I use?
+---
+The cron job 0 2 * * * runs twice on the 1st of the month. Why?
+---
+Explain the difference between session cookies and JWTs for authentication.
+---
+The backup codes feature should generate 10 codes of 8 characters; how do I store them safely?
+---
+Our remote access VPN uses port 1194 UDP; clients time out after 60 seconds.
+---
+In the Android app, versionCode 42 and versionName 3.1.4 fail to upload to Play Console.
+---
+The CSV import fails on row 3,412 where the phone column has 937-555-01 (too short).
+---
+Performance: p95 latency went from 120 ms to 480 ms after deploy 2024.05.12-3.
+---
+How do I rotate the API key without downtime if clients cache it for 24 hours?
+---
+Explain what a recovery key is in BitLocker and where Windows stores it.
+---
+someone phoned at noon
+---
+I have 2 cats and 3 dogs
+---
+I work at google dot com
+---
+the invoice was $4,250,000
+---
+sixty seven people from Ohio
+---
+meet me on 2026-09-23 at 10:30
+---
+my password is incorrect, how do I reset it?
+---
+reset your password: click the link
+---
+a 5 star place to eat
+---
+it's a 5 minutes drive from here
+---
+I walked down Main Street
+---
+the meeting is 3/14/2026
+---
+my birthday is coming up soon
+---
+I have 2 accounts at the bank
+---
+the license is MIT
+---
+I want to go for a walk at 5 to 6
+---
+we won 2 to 1 and ate for free
+---
+the score went from +3 to +7
+---
+version 10.2.3 and build 10.0.19041.1
+---
+the local news and internal memo

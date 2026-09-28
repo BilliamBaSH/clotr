@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your AI exposure report</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dash-page">
+  <header class="top">
+    <img src="icons/icon-on-32.png" alt="" width="24" height="24">
+    <h1 data-i18n="dash_yourAiExposureReport">Your AI exposure report</h1>
+    <span class="chip" data-i18n="dash_onThisComputerOnly">On this computer only</span>
+  </header>
+  <p class="lead" data-i18n="dash_everythingClotrNoticedInYour">Everything Clotr noticed in your AI chats, from its own records on this computer. It never kept what you
+    typed: only what kind of thing it was, where, when, and what you chose.</p>
+
+  <section aria-labelledby="h-totals">
+    <h2 id="h-totals" data-i18n="dash_soFar">So far</h2>
+    <div id="totals" class="totals"></div>
+    <p id="since" class="muted"></p>
+  </section>
+
+  <section aria-labelledby="h-exposure">
+    <h2 id="h-exposure" data-i18n="dash_whatEachAiServiceHas">What each AI service has been told about you</h2>
+    <p class="muted" data-i18n="dash_differentPersonalDetailsYouSent">Different personal details you sent (not hidden), counted once each, however often they went.
+      Keys and passwords are listed under riskiest moments instead.</p>
+    <div id="exposure" class="exposure"></div>
+  </section>
+
+  <section aria-labelledby="h-map">
+    <h2 id="h-map" data-i18n="dash_whereYourDetailsWent">Where your details went</h2>
+    <p class="muted"><span data-i18n="dash_mapIntro">You in the middle, and every AI service Clotr saw you use.</span>
+      <span class="key-sent" data-i18n="dash_solidOrange">Solid orange</span>: <span data-i18n="dash_mapSent">what was sent (thicker = more).</span>
+      <span class="key-stopped" data-i18n="dash_dashedBlue">Dashed blue</span>: <span data-i18n="dash_mapStopped">what Clotr stopped. The ring shows the riskiest kind each one got; the number is how many went. Choose a service for details.</span></p>
+    <svg id="map" class="map" viewBox="0 0 720 400" role="group" aria-label="Map of the AI services your details went to" data-i18n-aria-label="dash_mapOfTheAiServices"></svg>
+    <p id="map-details" class="map-details" role="status"></p>
+    <details class="table-view">
+      <summary data-i18n="dash_showAsATable">Show as a table</summary>
+      <table class="events" id="map-table"><thead><tr><th scope="col" data-i18n="dash_aiService">AI service</th><th scope="col" data-i18n="dash_sent">Sent</th><th scope="col" data-i18n="dash_riskiestSent">Riskiest sent</th><th scope="col" data-i18n="dash_stoppedByClotr">Stopped by Clotr</th><th scope="col" data-i18n="dash_kindsSent">Kinds sent</th></tr></thead><tbody></tbody></table>
+    </details>
+  </section>
+
+  <section aria-labelledby="h-weeks">
+    <h2 id="h-weeks" data-i18n="dash_theLast12Weeks">The last 12 weeks</h2>
+    <div id="legend" class="legend"></div>
+    <svg id="weeks" class="weeks" viewBox="0 0 720 200" role="group" aria-label="What Clotr found each week" data-i18n-aria-label="dash_whatClotrFoundEachWeek"></svg>
+    <details class="table-view">
+      <summary data-i18n="dash_showAsATable2">Show as a table</summary>
+      <table class="events" id="weeks-table"><thead><tr><th scope="col" data-i18n="dash_weekOf">Week of</th><th scope="col" data-i18n="dash_covered">Hidden</th><th scope="col" data-i18n="dash_sent2">Sent</th><th scope="col" data-i18n="dash_justCounted">Just counted</th></tr></thead><tbody></tbody></table>
+    </details>
+  </section>
+
+  <section aria-labelledby="h-risky">
+    <h2 id="h-risky" data-i18n="dash_riskiestMoments">Riskiest moments</h2>
+    <p class="muted" data-i18n="dash_highRiskThingsThatWere">High-risk things that were sent anyway, newest first, and what to do about them now.</p>
+    <div id="risky" class="risky"></div>
+  </section>
+
+  <section aria-labelledby="h-repeats">
+    <h2 id="h-repeats" data-i18n="dash_sentMoreThanOnce">Sent more than once</h2>
+    <div id="repeats"></div>
+  </section>
+
+  <section aria-labelledby="h-share">
+    <h2 id="h-share" data-i18n="dash_aSummaryYouCanShare">A summary you can share</h2>
+    <p class="muted" data-i18n="dash_onlyCountsNeverDetailsSafe">Only counts, never details. Safe to screenshot or paste anywhere.</p>
+    <div id="card" class="card"></div>
+    <button id="copy-card" class="btn" type="button" data-i18n="dash_copyTheSummary">Copy the summary</button>
+    <span id="copy-msg" class="muted" role="status"></span>
+  </section>
+
+  <section aria-labelledby="h-data">
+    <h2 id="h-data" data-i18n="dash_yourData">Your data</h2>
+    <p>
+      <label for="keep-days" data-i18n="dash_keepHistoryFor">Keep history for</label>
+      <select id="keep-days">
+        <option value="90" data-i18n="dash_3Months">3 months</option>
+        <option value="365" data-i18n="dash_1Year">1 year</option>
+        <option value="730" data-i18n="dash_2Years">2 years</option>
+      </select>
+      <span class="muted" data-i18n="dash_olderRecordsAreRemovedFor">Older records are removed for good.</span>
+    </p>
+    <p class="actions-row">
+      <button id="export" class="btn" type="button" data-i18n="dash_exportMyHistory">Export my history</button>
+      <a id="open-stored" class="btn" href="stored.html" data-i18n="dash_seeExactlyWhatSStored">See exactly what's stored</a>
+      <button id="delete-history" class="btn danger" type="button" data-i18n="dash_deleteMyHistory">Delete my history</button>
+    </p>
+    <p id="data-msg" class="muted" role="status"></p>
+  </section>
+
+  <script src="page-i18n.js"></script>
+  <script src="patterns.js"></script>
+  <script src="insights.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

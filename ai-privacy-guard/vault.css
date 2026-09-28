@@ -1,0 +1,131 @@
+/* "What should I protect?" page. Builds on popup.css tokens. */
+body.vault-page {
+  max-width: 640px;
+  width: auto;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+.vault-page .top h1 {
+  font-size: 20px;
+}
+.lead {
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin: 8px 0 18px;
+}
+.field {
+  margin-bottom: 14px;
+}
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.field .hint {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0 0 4px;
+}
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--axis);
+}
+.field textarea:focus {
+  outline: 2px solid var(--series-1);
+  outline-offset: 1px;
+}
+.save-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 6px 0 24px;
+}
+.save-row .muted {
+  margin: 0;
+}
+.vault-page .list .cat {
+  font-size: 11px;
+  color: var(--muted);
+  display: block;
+}
+.vault-page code {
+  white-space: nowrap;
+}
+
+/* First-install welcome (vault.html?welcome=1) */
+#welcome h2 {
+  font-size: 16px;
+  margin: 22px 0 8px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+}
+#welcome label code {
+  display: inline-block;
+  font-size: 13px;
+  margin-top: 2px;
+  user-select: all;
+}
+.facts {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.facts li {
+  margin: 4px 0;
+}
+.facts b {
+  color: var(--ink);
+}
+.try-result:empty {
+  display: none;
+}
+.try-result {
+  margin: 8px 0 4px;
+}
+.try-result > p {
+  margin: 0;
+  color: var(--ink-2);
+}
+.try-notice {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--ring);
+  border-left: 5px solid #e8a200;
+}
+.try-notice b {
+  display: block;
+  margin-bottom: 2px;
+}
+.try-notice p {
+  margin: 0 0 8px;
+  color: var(--ink-2);
+}
+.vault-page .btn:focus-visible {
+  outline: 2px solid var(--series-1);
+  outline-offset: 2px;
+}
+.pin-step {
+  margin: 0 0 8px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.pin-step.done {
+  color: var(--good-ink);
+  font-weight: 600;
+}
+.try-notice .btn.primary {
+  background: #b3261e;
+} /* same red as the real warning (white text 6.5:1) */

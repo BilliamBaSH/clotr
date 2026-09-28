@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- A neutral, unbranded AI chat for store/README screenshots (npm run test:e2e -- --store).
+     It deliberately imitates no real product. Same shape as the other look-alike pages:
+     a textarea composer and a send button. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AI Assistant</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; background: #f6f7f9; color: #1d2330; height: 100vh; display: flex; flex-direction: column; }
+    header { padding: 14px 24px; border-bottom: 1px solid #e3e6eb; background: #fff; font-weight: 600; display: flex; gap: 10px; align-items: center; }
+    header .logo { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(135deg, #7b8cff, #45c4b0); }
+    main { flex: 1; overflow: auto; padding: 28px 0; }
+    .col { max-width: 760px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 16px; }
+    .msg { padding: 12px 16px; border-radius: 14px; max-width: 85%; }
+    .me { align-self: flex-end; background: #dfe7ff; }
+    .ai { align-self: flex-start; background: #fff; border: 1px solid #e3e6eb; }
+    footer { padding: 16px 24px 28px; }
+    .composer { max-width: 760px; margin: 0 auto; display: flex; gap: 10px; background: #fff; border: 1px solid #d5d9e0; border-radius: 16px; padding: 10px 10px 10px 16px; box-shadow: 0 2px 10px rgba(20, 30, 60, .06); }
+    textarea { flex: 1; border: 0; outline: 0; resize: none; font: inherit; min-height: 56px; background: transparent; color: inherit; }
+    #send { align-self: flex-end; border: 0; border-radius: 12px; background: #1d2330; color: #fff; padding: 9px 16px; font: inherit; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header><span class="logo" aria-hidden="true"></span>AI Assistant</header>
+  <main><div class="col" id="log">
+    <div class="msg me">Can you help me write a message to my landlord about the broken heater?</div>
+    <div class="msg ai">Of course. Tell me what happened and how to reach you, and I'll draft a short, polite note.</div>
+  </div></main>
+  <footer><div class="composer">
+    <textarea id="prompt" aria-label="Message AI Assistant" placeholder="Message AI Assistant"></textarea>
+    <button id="send" aria-label="Send message">Send</button>
+  </div></footer>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("prompt");
+    function send() {
+      if (!box.value.trim()) return;
+      window.__sent.push(box.value);
+      box.value = "";
+    }
+    document.getElementById("send").addEventListener("click", send);
+    box.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
+  </script>
+</body>
+</html>

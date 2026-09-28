@@ -1,0 +1,29 @@
+<!doctype html>
+<!-- Stand-in for a ChatGPT-style page: <textarea> prompt + send button inside a form. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>ChatGPT (Clotr test page)</title></head>
+<body>
+  <form id="composer">
+    <textarea id="prompt-textarea" placeholder="Ask anything" rows="4" cols="60"></textarea>
+    <input type="file" id="attach" multiple aria-label="Attach a file">
+    <button type="submit" data-testid="send-button" aria-label="Send prompt">Send</button>
+  </form>
+  <script>
+    window.__sent = [];
+    // The AI "answers": a reply appears in the page, as on a real chat site (reply checks RP1-RP4).
+    window.__reply = (text) => { const d = document.createElement("div"); d.className = "reply"; d.textContent = text; document.body.append(d); };
+    const box = document.getElementById("prompt-textarea");
+    function send() {
+      if (!box.value) return;
+      // Some sites ignore an Enter pressed too soon (Gemini did, M8). Tests set this to model it.
+      if (window.__ignoreNextSend) { window.__ignoreNextSend = false; return; }
+      window.__sent.push(box.value);
+      box.value = "";
+    }
+    document.getElementById("composer").addEventListener("submit", (e) => { e.preventDefault(); send(); });
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+  </script>
+</body>
+</html>

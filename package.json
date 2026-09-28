@@ -1,0 +1,27 @@
+{
+  "name": "clotr-ai-privacy-guard",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "description": "Dev tooling for the Clotr AI Privacy Guard extension (the extension itself is in ai-privacy-guard/ and has no dependencies).",
+  "scripts": {
+    "test": "node --test tests/patterns.test.js tests/rules.test.js tests/sites.test.js tests/package.test.js tests/attachments.test.js",
+    "test:e2e": "node tests/e2e/run.js",
+    "test:firefox": "node tests/e2e/firefox.js",
+    "test:stress": "node tests/e2e/run.js --stress --only STS",
+    "format": "prettier --write .",
+    "lint": "prettier --check . && eslint .",
+    "icons": "node tools/make-icons.js",
+    "check": "npm test && npm run lint && npm run test:e2e",
+    "sites": "node tools/sync-sites.js",
+    "package": "node tools/package.js",
+    "site-check": "node tools/site-check.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "axe-core": "^4.13.0",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "prettier": "3.9.9",
+    "puppeteer-core": "^25.12.0"
+  }
+}

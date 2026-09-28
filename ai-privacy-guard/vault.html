@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clotr: What should I protect?</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="vault.css">
+</head>
+<body class="vault-page">
+  <header class="top">
+    <img src="icons/icon-on-32.png" alt="" width="24" height="24">
+    <h1 id="page-title" data-i18n="vault_whatShouldIProtect">What should I protect?</h1>
+    <span class="chip" title="Saved as one-way fingerprints on this device" data-i18n-title="vault_savedAsOneWayFingerprints" data-i18n="vault_fingerprintsOnly">Fingerprints only</span>
+  </header>
+
+  <!-- Shown on first install (vault.html?welcome=1). -->
+  <section id="welcome" hidden>
+    <p class="lead" data-i18n="vault_clotrChecksWhatYouType">Clotr checks what you type into AI chats like ChatGPT, Claude and Gemini, and warns you
+      before a password, a key or a personal detail goes out. You decide: remove it, or send it anyway.</p>
+    <ul class="facts">
+      <li><b data-i18n="vault_onlyOnAiChats">Only on AI chats.</b> <span data-i18n="vault_fact1">It never runs on your email, your bank or any other website.</span></li>
+      <li><b data-i18n="vault_nothingLeavesThisComputer">Nothing leaves this computer.</b> <span data-i18n="vault_fact2">Clotr has no servers and never connects to the internet.</span></li>
+      <li><b data-i18n="vault_itNeverSavesWhatYou">It never saves what you type.</b> <span data-i18n="vault_fact3">It keeps a short note of what it found, like “Phone number · chatgpt.com · hidden”, which you can see in its toolbar button.</span></li>
+      <li><b data-i18n="vault_itOnlyWarns">It only warns.</b> <span data-i18n="vault_fact4">Out of the box, a note appears in the corner and your message is yours to send.</span></li>
+      <li><b data-i18n="vault_onlyThisBrowser">Only in this browser.</b> <span data-i18n="vault_fact5">It can't see AI apps on your computer or phone (like the ChatGPT app), or AI built into other programs; use those with the same care.</span></li>
+    </ul>
+
+    <h2 data-i18n="vault_pinClotr">Pin Clotr</h2>
+    <p id="pin-step" class="pin-step" role="status"><span data-i18n="vault_pinIntro">Browsers hide new extensions. To see Clotr's count and open its dashboard: click the</span>
+      <b data-i18n="vault_puzzlePiece">puzzle piece</b> <span data-i18n="vault_pinMiddle">in your browser's toolbar, then the</span> <b data-i18n="vault_pin">pin</b> <span data-i18n="vault_pinEnd">next to Clotr.</span></p>
+
+    <h2 data-i18n="vault_tryIt">Try it</h2>
+    <div class="field">
+      <label for="try"><span data-i18n="vault_tryLabel">Paste this made-up key, or type a phone number:</span>
+        <code>AKIA4HPQ7XZ2R6TWLJ3N</code></label>
+      <textarea id="try" rows="2" autocomplete="off" spellcheck="false"></textarea>
+      <div id="try-result" class="try-result" role="status" aria-live="polite"></div>
+      <p class="hint" data-i18n="vault_thisPracticeBoxStaysOn">This practice box stays on your computer. On a real AI chat, the warning appears in the top-right corner.</p>
+    </div>
+
+    <h2 data-i18n="vault_optionalTellClotrWhatTo">Optional: tell Clotr what to protect</h2>
+    <p class="lead"><span data-i18n="vault_addLater">Add your own details below and Clotr will recognize them however they're written. Or come back later from Clotr's toolbar button → Settings →</span>
+      <b data-i18n="vault_openYourVault">Open your vault</b>.</p>
+    <p><button class="btn" type="button" id="skip" data-i18n="vault_skipForNow">Skip for now</button></p>
+  </section>
+
+  <section id="vault-locked" hidden>
+    <p class="lead"><b data-i18n="vault_yourVaultIsLocked">Your vault is locked.</b> <span data-i18n="vault_lockedDetail">Someone who set Clotr up for you added a PIN so it isn't changed by accident. To change it: Clotr's toolbar button → Settings → enter the PIN, then open the vault again. Clotr keeps protecting everything already in it.</span></p>
+  </section>
+
+  <p class="lead" id="vault-lead"><span data-i18n="vault_leadStart">Tell Clotr about you, and it will watch for these in AI chats, however they're written. It saves a</span>
+    <b data-i18n="vault_oneWayFingerprint">one-way fingerprint</b> <span data-i18n="vault_leadEnd">of each item, never the item itself: someone who opened this extension's storage would find nothing readable. About two minutes. One item per line; skip anything.</span></p>
+
+  <form id="vault-form">
+    <section class="field">
+      <label for="f-my_name" data-i18n="vault_yourName">Your name</label>
+      <p class="hint" data-i18n="vault_firstAndLastMaidenName">First and last, maiden name, nicknames. Up to 4 words per line.</p>
+      <textarea autocomplete="off" spellcheck="false" id="f-my_name" data-kind="word" data-type="my_name" rows="2" placeholder="Jane Doe&#10;Janie" data-i18n-placeholder="vault_janeDoe10Janie"></textarea>
+    </section>
+    <section class="field">
+      <label for="f-family_name" data-i18n="vault_familyMembers">Family members</label>
+      <p class="hint" data-i18n="vault_kidsPartnerParentsTheNames">Kids, partner, parents: the names you'd mention when asking for advice.</p>
+      <textarea autocomplete="off" spellcheck="false" id="f-family_name" data-kind="word" data-type="family_name" rows="2" placeholder="Emma&#10;Liam Doe" data-i18n-placeholder="vault_emma10LiamDoe"></textarea>
+    </section>
+    <section class="field">
+      <label for="f-employer" data-i18n="vault_whereYouWork">Where you work</label>
+      <p class="hint" data-i18n="vault_employerSchoolOrYourOwn">Employer, school, or your own business.</p>
+      <textarea autocomplete="off" spellcheck="false" id="f-employer" data-kind="word" data-type="employer" rows="1" placeholder="Initech" data-i18n-placeholder="vault_initech"></textarea>
+    </section>
+    <section class="field">
+      <label for="f-street_address" data-i18n="vault_addresses">Addresses</label>
+      <p class="hint" data-i18n="vault_homeWorkMailingStAnd">Home, work, mailing. "St" and "Street", "123" and "one twenty three" all match.</p>
+      <textarea autocomplete="off" spellcheck="false" id="f-street_address" data-kind="value" data-type="street_address" rows="2" placeholder="123 Oak Street&#10;PO Box 55" data-i18n-placeholder="vault_123OakStreet10Po"></textarea>
+    </section>
+    <section class="field">
+      <label for="f-phone_number" data-i18n="vault_phoneNumbers">Phone numbers</label>
+      <p class="hint" data-i18n="vault_anyFormatDigitsAreWhat">Any format; digits are what count.</p>
+      <textarea autocomplete="off" spellcheck="false" id="f-phone_number" data-kind="value" data-type="phone_number" rows="2" placeholder="(937) 555-5636"></textarea>
+    </section>
+    <section class="field">
+      <label for="f-email" data-i18n="vault_emailAddresses">Email addresses</label>
+      <textarea autocomplete="off" spellcheck="false" id="f-email" data-kind="value" data-type="email" rows="2" placeholder="jane.doe@gmail.com" data-i18n-placeholder="vault_janeDoeGmailCom"></textarea>
+    </section>
+    <section class="field">
+      <label for="f-my_id" data-i18n="vault_accountIdNumbers">Account &amp; ID numbers</label>
+      <p class="hint"><span data-i18n="vault_idHint">Type your number, like AB-123456: Clotr saves its format and a scrambled code of it (never the number), so it catches any ID in that format and knows which one is yours. Short numbers can be guessed from the code by someone with full access to this computer; to save only the format, type it with # for a digit and @ for a letter, like AB-######.</span></p>
+      <textarea autocomplete="off" spellcheck="false" id="f-my_id" data-kind="shape" data-type="my_id" rows="2" placeholder="AB-123456&#10;MEM-#########" data-i18n-placeholder="vault_ab12345610Mem"></textarea>
+    </section>
+    <section class="field">
+      <label for="f-watch_list" data-i18n="vault_anythingElseToWatchFor">Anything else to watch for</label>
+      <p class="hint"><span data-i18n="vault_watchHint">Client names, project codenames, internal terms, or a format like EMP-#####.</span></p>
+      <textarea autocomplete="off" spellcheck="false" id="f-watch_list" data-kind="word" data-type="watch_list" rows="2" placeholder="Project Falcon&#10;EMP-#####" data-i18n-placeholder="vault_projectFalcon10Emp"></textarea>
+    </section>
+    <div class="save-row">
+      <button class="btn primary" type="submit" id="save" data-i18n="vault_saveToMyVault">Save to my vault</button>
+      <p id="save-msg" class="muted" role="status"></p>
+    </div>
+  </form>
+
+  <h2 data-i18n="vault_inYourVault">In your vault</h2>
+  <p class="muted"><span data-i18n="vault_listIntro">Items show as hidden because only their fingerprints are kept.</span>
+    <b data-i18n="vault_watch">Watch</b> = <span data-i18n="vault_watchMeans">always warn, even if that type is set to "Just count".</span>
+    <b data-i18n="vault_okToShare">OK to share</b> = <span data-i18n="vault_shareMeans">never warn about this one (it's still counted in your history).</span></p>
+  <ul id="vault-list" class="list"></ul>
+  <p id="vault-empty" class="empty" data-i18n="vault_nothingYet">Nothing yet.</p>
+
+  <script src="page-i18n.js"></script>
+  <script src="patterns.js"></script>
+  <script src="detector.js"></script>
+  <script src="vault.js"></script>
+</body>
+</html>

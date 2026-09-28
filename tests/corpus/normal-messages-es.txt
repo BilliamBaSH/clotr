@@ -1,0 +1,218 @@
+# Mensajes normales en español que la gente envía a herramientas de IA. Ninguno contiene datos
+# personales ni secretos, así que cualquier detección aquí es una falsa alarma. Separados por "---".
+# Muchos números a propósito: versiones, precios, horas, medidas, fechas, resultados y códigos.
+# Presupuesto: como máximo 1 falsa alarma por cada 50 mensajes.
+---
+¿Me ayudas a escribir un correo para rechazar una reunión el martes que viene?
+---
+¿Cuál es la diferencia entre un plan de pensiones y un fondo indexado?
+---
+Tengo dos o tres dudas sobre la receta: ¿cuántos gramos de harina lleva, 250 o 300?
+---
+Explícame el teorema de Pitágoras con un ejemplo de 3, 4 y 5.
+---
+La reunión es a las 10:30 en la sala 4B, ¿cómo lo digo de forma más formal?
+---
+Todos los días camino cinco kilómetros, ¿cuántas calorías gasto más o menos?
+---
+Resume este artículo en tres puntos, por favor.
+---
+¿Qué significa el error 404 y cómo lo arreglo en Nginx?
+---
+Quiero aprender Python desde cero, ¿por dónde empiezo?
+---
+Mi hijo tiene ocho años y le cuesta leer, ¿qué libros me recomiendas?
+---
+Calcula el 21 % de 1.250 euros.
+---
+La versión 3.2.1 de la aplicación falla al abrir, ¿qué puede ser?
+---
+Escribe un poema corto sobre el mar y la luna.
+---
+¿Cómo se dice "nos vemos mañana" en inglés y en francés?
+---
+Tengo una entrevista de trabajo el lunes, ¿qué preguntas suelen hacer?
+---
+Traduce esto al inglés: "El pedido llegará entre el 3 y el 5 de octubre".
+---
+¿Cuántos días hay entre el 12 de marzo y el 30 de abril?
+---
+Ayúdame a organizar una fiesta para veinte personas con un presupuesto de 400 euros.
+---
+¿Es mejor pintar la calle de la casa de campo o dejar la piedra natural?
+---
+La calle está muy mojada hoy, ¿qué zapatos me pongo para correr?
+---
+Vivo cerca de una avenida con mucho tráfico, ¿cómo reduzco el ruido en casa?
+---
+Dame una lista de diez películas clásicas españolas.
+---
+Mi equipo ganó 3 a 1 el sábado, escribe una crónica divertida.
+---
+¿Qué es una clave primaria en una base de datos?
+---
+Olvidé la contraseña de mi correo, ¿cuáles son los pasos para recuperarla?
+---
+¿Por qué mi contraseña tiene que tener al menos ocho caracteres?
+---
+Explícame qué es un certificado SSL y por qué el candado es importante.
+---
+El paquete pesa 2,5 kg y mide 40 x 30 x 20 cm, ¿cuánto cuesta enviarlo?
+---
+Corrige la ortografía: "haber si vienes a las siete y media".
+---
+Quiero correr una maratón en seis meses, hazme un plan de entrenamiento.
+---
+¿Cuál es la capital de Australia y cuántos habitantes tiene?
+---
+Escribe una función en JavaScript que sume los números del 1 al 100.
+---
+¿Cómo configuro dos monitores en Windows 11?
+---
+Mi planta tiene hojas amarillas desde hace una semana, ¿qué le pasa?
+---
+Recomiéndame un plan de tres días en Madrid visitando la Plaza Mayor y el Retiro.
+---
+El vuelo IB 3456 sale a las 7:45, ¿con cuánta antelación tengo que estar en el aeropuerto?
+---
+¿Cuántas cucharadas son 100 mililitros?
+---
+Haz un resumen del capítulo 12 del libro.
+---
+Tengo 34 años y quiero cambiar de carrera, ¿es tarde para estudiar programación?
+---
+Explícame la regla de tres con un ejemplo: si 4 manzanas cuestan 2 euros, ¿cuánto cuestan 10?
+---
+¿Qué significa la señal de tráfico con un círculo rojo y un número 50?
+---
+Escribe un mensaje de cumpleaños para mi abuela que cumple noventa años.
+---
+¿Qué diferencia hay entre el IVA del 10 % y el del 21 %?
+---
+Mi portátil tiene 8 GB de RAM y 256 GB de disco, ¿me sirve para editar vídeo?
+---
+¿Cómo hago una tabla dinámica en Excel con los datos de 2023 y 2024?
+---
+El código de error del lavavajillas es E24, ¿qué significa?
+---
+Dame ideas de nombres para una cafetería en la calle principal del pueblo.
+---
+¿Cómo explico a mis alumnos de primero la suma con llevadas?
+---
+Pásame una receta de tortilla de patatas para cuatro personas.
+---
+¿Qué es la inflación y por qué suben los precios?
+---
+Escribe un correo al casero diciendo que la caldera no funciona desde el jueves.
+---
+¿Cuál es el mejor horario para dormir si trabajo de 22:00 a 6:00?
+---
+Ayúdame a entender la factura de la luz: 245 kWh a 0,15 euros el kWh.
+---
+¿Qué ejercicios puedo hacer en casa con una mancuerna de 5 kilos?
+---
+Hazme un examen de diez preguntas sobre la Segunda Guerra Mundial.
+---
+¿Cómo se calcula la letra del DNI? Solo quiero entender el algoritmo.
+---
+¿Es seguro guardar las contraseñas en el navegador?
+---
+Tengo cinco minutos para presentar mi proyecto, ¿cómo lo estructuro?
+---
+Mi perro de tres años come poco últimamente, ¿debería preocuparme?
+---
+Convierte 72 grados Fahrenheit a Celsius.
+---
+Nací en 1990 en Sevilla. El cumpleaños de la empresa es el 3 de julio.
+---
+Tengo treinta y cinco años y ahorré dos mil euros; cuesta quinientos euros y éramos veinte personas.
+---
+Nací en mil novecientos ochenta y dos, pero la casa es de mil ochocientos cincuenta.
+---
+El número de la seguridad social de España tiene 12 dígitos, ¿cómo se calcula? Mi contraseña es muy larga y difícil de recordar.
+---
+¿Dónde está el CVV de la tarjeta? El código postal es 28013 y el código de área es 91. ¿El código de seguridad es lo mismo que el PIN?
+---
+¿Qué son los códigos de respaldo y dónde los guardo? Perdí la clave de recuperación, ¿cómo pido otra?
+---
+Vivo en la calle de al lado hace 5 años y vivo en madrid desde 2010. Mándalo a la avenida principal en 2 horas; mi dirección es la misma que hace 2 años.
+---
+Mi vuelo IB 3456 sale a las 6:45 desde la puerta B12, asiento 23C. ¿Qué llevo para 3 días en Bilbao?
+---
+El router es un TP-Link AX1500 con firmware 1.0.3. ¿Por qué se corta cada 20 minutos?
+---
+¿Cuántos gramos son 2 tazas y media de harina? El horno está a 180 grados.
+---
+Saqué un 8,5 en matemáticas y un 7 en historia. ¿Qué carrera me recomiendas?
+---
+El colegio de mi hija empieza a las 8:15 y termina a las 15:05. ¿Cómo organizo el día?
+---
+El pedido número 445-2231987 llegó roto. Escríbeme una reclamación.
+---
+La factura es de 1.249,99 € con IVA del 21 %. ¿Cuánto es sin IVA?
+---
+Tengo cita con el médico el 14 de marzo a las 16:30. La tensión me dio 14/9, ¿es alta?
+---
+Tomo 10 mg de enalapril al día. ¿Puedo tomar ibuprofeno de 400?
+---
+El código de error es 0x80070005 en Windows 11. ¿Cómo lo arreglo?
+---
+Tengo que llamar al banco por un cargo de 45 € del 3 de marzo. ¿Qué les digo?
+---
+La habitación 1204 del hotel está reservada 3 noches. ¿Puedo pedir salida tardía?
+---
+El cumpleaños de mi nieto es el sábado a las 5, cumple 7 años. Ideas de regalo por menos de 30 €.
+---
+El ID de la reunión de Zoom es 845 2931 7710. ¿Cómo entro desde el móvil?
+---
+Hoy caminé 12.456 pasos y quemé 520 calorías. ¿Es suficiente?
+---
+La comunidad subió de 60 a 75 € al mes. Escribe una carta preguntando por qué.
+---
+Gasté 250 kWh este mes. ¿Cómo bajo la factura un 20 %?
+---
+Debo 4.500 € en la tarjeta al 24 % TAE. ¿Cuánto tardo pagando 200 € al mes?
+---
+El tren sale del andén 9 a las 17:42 y llega a las 19:05. ¿Cuánto dura el viaje?
+---
+¿Qué diferencia hay entre una hipoteca a 15 y a 30 años al 3,5 % sobre 200.000 €?
+---
+Esta mañana tenía el azúcar en 145 antes de desayunar. ¿Es alto?
+---
+Ayúdame a escribir una nota de agradecimiento a la enfermera María de la planta 4.
+---
+El paquete pesa 2,3 kg y mide 40 x 30 x 20 cm. ¿Qué envío es más barato?
+---
+El móvil dice 118 GB de 128 GB ocupados. ¿Qué puedo borrar?
+---
+Tema 12, ejercicio 4: resuelve 3x + 7 = 22 paso a paso.
+---
+El gestor de contraseñas me creó una de 20 caracteres. ¿Es segura para el banco?
+---
+El termostato está a 20 de noche y 22 de día. ¿Es eficiente?
+---
+Cobro una pensión de 1.250 € al mes. ¿Cómo me organizo?
+---
+Los números de la lotería fueron 4, 11, 23, 38, 45 y el 12. ¿Qué probabilidad hay?
+---
+Resume esto: los ingresos subieron un 12 % hasta 4,2 millones en el tercer trimestre.
+---
+Vivo en un tercero sin ascensor y el casero no arregla la calefacción desde hace 2 semanas.
+---
+Estamos en el kilómetro 142 de la A-4 y el coche se calienta. ¿Qué hacemos?
+---
+La impresora da el error E-05 y la bandeja está llena. ¿Cómo la reinicio?
+---
+Planifica un viaje de 7 días a Italia en mayo con 2 niños de 8 y 11 años.
+---
+Me llegó un SMS diciendo que mi paquete está retenido, código 482913, pulsa el enlace. ¿Es una estafa?
+---
+Un señor dijo ser de Microsoft y me pidió instalar AnyDesk. ¿Lo hago?
+---
+Me escribieron que cerrarán mi cuenta si no confirmo la contraseña. ¿Es real?
+---
+A mi hijo no le funciona el usuario del colegio. ¿A quién tiene que llamar?
+---
+Nos mudamos el mes pasado. ¿Cómo cambio la dirección en Correos?
+---
+¿Qué diferencia hay entre el IBAN y el número de cuenta?

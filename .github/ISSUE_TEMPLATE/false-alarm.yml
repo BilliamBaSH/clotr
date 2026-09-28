@@ -1,0 +1,33 @@
+name: False alarm
+description: Clotr warned about something that isn't sensitive.
+title: "False alarm: "
+labels: ["false alarm"]
+body:
+  - type: markdown
+    attributes:
+      value: "**Never paste a real password, key or personal detail here.** Describe its shape instead, or change the digits/letters so it keeps the same pattern."
+  - type: input
+    id: kind
+    attributes:
+      label: What Clotr said it found
+      placeholder: "Phone Number"
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: The text (made safe)
+      description: The part that triggered it, with anything real changed. For example "build 1c9e6679-7425-40de" or "my score was 3/6".
+    validations:
+      required: true
+  - type: input
+    id: site
+    attributes:
+      label: AI site (optional)
+      placeholder: "chatgpt.com"
+  - type: input
+    id: version
+    attributes:
+      label: Clotr version
+      description: brave://extensions or chrome://extensions → Clotr
+      placeholder: "0.9.17-alpha"

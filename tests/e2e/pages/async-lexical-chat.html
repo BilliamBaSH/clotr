@@ -1,0 +1,77 @@
+<!doctype html>
+<!-- Stand-in for a Kimi-style page: a Lexical-like editor that takes over every edit
+     (puts the old text back at once) and applies it a moment later, at the selection it
+     last learned from the async selectionchange event. Clotr's check right after the
+     edit sees the old text; the edit then lands at the old caret (seen on kimi.com, M2).
+     window.__rejectEdits = true makes it ignore edits entirely (a box Clotr can't edit). -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Kimi (Clotr test page)</title></head>
+<body>
+  <div id="msg" contenteditable="true" role="textbox" data-lexical-editor="true"
+       style="border:1px solid #999;min-height:60px;width:480px;padding:6px;white-space:pre-wrap"></div>
+  <button id="send" aria-label="Send">➤</button>
+  <script>
+    window.__sent = [];
+    window.__rejectEdits = false;
+    const box = document.getElementById("msg");
+    let model = "";
+    let known = { start: 0, end: 0 };
+
+    function offsetOf(node, offset) {
+      const r = document.createRange();
+      r.selectNodeContents(box);
+      r.setEnd(node, offset);
+      return r.toString().length;
+    }
+    document.addEventListener("selectionchange", () => {
+      const sel = getSelection();
+      if (!sel.rangeCount || !box.contains(sel.anchorNode)) return;
+      const r = sel.getRangeAt(0);
+      known = { start: offsetOf(r.startContainer, r.startOffset), end: offsetOf(r.endContainer, r.endOffset) };
+    });
+
+    function render(caret) {
+      box.textContent = model;
+      const node = box.firstChild || box;
+      const sel = getSelection();
+      sel.removeAllRanges();
+      const r = document.createRange();
+      r.setStart(node, Math.min(caret, node === box ? 0 : node.length));
+      sel.addRange(r);
+    }
+
+    // Every edit (typing, or a script's execCommand, which fires no beforeinput) is taken
+    // over like Kimi does: the old text is put back at once, and the edit is applied a
+    // moment later at the selection the editor knew when the edit happened.
+    box.addEventListener("input", (e) => {
+      if (!e.isTrusted) return;
+      const type = e.inputType;
+      const data = e.data ?? "";
+      const { start, end } = known;
+      render(start);
+      if (window.__rejectEdits) return;
+      setTimeout(() => {
+        if (type === "insertText" || type === "insertReplacementText") {
+          model = model.slice(0, start) + data + model.slice(end);
+          render(start + data.length);
+        } else if (type.startsWith("delete")) {
+          const from = start === end ? Math.max(0, start - 1) : start;
+          model = model.slice(0, from) + model.slice(end);
+          render(from);
+        }
+      }, 250); // slow enough that Clotr's scan (400 ms after an edit) can see the half-done state
+    });
+
+    function send() {
+      if (!model.trim()) return;
+      window.__sent.push(model);
+      model = "";
+      render(0);
+    }
+    document.getElementById("send").addEventListener("click", send);
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+name: Missed something
+description: Clotr didn't warn about something sensitive.
+title: "Missed: "
+labels: ["missed detection"]
+body:
+  - type: markdown
+    attributes:
+      value: "**Never paste the real value.** Describe how it was written: for example \"a phone number spelled out with 'oh' for zero\" or \"a key starting with sk-proj- followed by 40 characters\"."
+  - type: textarea
+    id: shape
+    attributes:
+      label: What was missed, and how it was written
+    validations:
+      required: true
+  - type: input
+    id: site
+    attributes:
+      label: AI site
+      placeholder: "gemini.google.com"
+  - type: input
+    id: version
+    attributes:
+      label: Clotr version
+      placeholder: "0.9.17-alpha"

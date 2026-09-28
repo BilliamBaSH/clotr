@@ -1,0 +1,40 @@
+{
+  "0.9": [
+    "In Spanish too: warnings, the popup, the welcome page and the full report follow your browser's language, and Spanish messages, ID numbers (DNI/NIE and social security number, CURP and RFC) and addresses are recognized. Names and addresses in your vault match with or without accents.",
+    "Your AI exposure report: a full page with what each AI service has been told about you, a map of where your details went, the riskiest moments with what to do, and export or delete your history.",
+    "A weekly summary at the top of the popup: this week against last, and the one thing to do now.",
+    "Attached PDFs and Word, Excel and PowerPoint files are checked too; several files at once get one warning.",
+    "Helping someone? Larger warnings, a stricter setting for personal details, and a PIN so settings aren't changed by accident.",
+    "If an AI's reply mentions your own details that you didn't type on that page, Clotr points it out: it may have them from an earlier chat or its memory.",
+    "Clotr says when it can't help: the popup shows whether it sees the chat box, and a red ! appears if a page refused its edit.",
+    "Catches more: many more service keys, crypto seed phrases, IBANs, UK and Canadian IDs, medical record numbers, home and card codes (\"the gate code is…\", a card's CVV, sign-in codes texted to you, remote-access codes a fake support call asks for), logins shared as \"email / password\", answers to security questions, and numbers or cards read out in words (\"double five\", Spanish pairs like \"treinta y cuatro\").",
+    "Plain words everywhere (Hide it / Leave it in, More choices to decide for good), and updates no longer need a page reload."
+  ],
+  "0.8": [
+    "Your vault: tell Clotr your name, family, addresses, phones, emails, employer and ID formats once. It keeps only one-way fingerprints and catches them however they're written.",
+    "Clotr learns, on this device only: delete a flagged item by hand and it offers to always watch for it; keep the same warning 3 times and it offers to warn less.",
+    "Updates: a copy running from a git folder now reloads itself when its files change."
+  ],
+  "0.7": [
+    "Watch list, per-site views and a per-site mode (stricter or quieter on one AI tool).",
+    "Large pastes and attached text files are summarized; database connection strings, login tokens and internal servers are caught."
+  ],
+  "0.6": [
+    "Street addresses, dates of birth, bank/ID numbers, international phones, and more disguises (fifty six, O for zero)."
+  ],
+  "translations": {
+    "es": {
+      "0.9": [
+        "También en español: los avisos, el panel, la página de bienvenida y el informe completo siguen el idioma de tu navegador, y reconoce mensajes, documentos (DNI/NIE y número de la seguridad social, CURP y RFC) y direcciones en español. Los nombres y direcciones de tu caja fuerte coinciden con o sin tildes.",
+        "Tu informe de exposición a la IA: una página completa con lo que cada servicio de IA sabe de ti, un mapa de adónde fueron tus datos, los momentos de más riesgo con qué hacer, y exportar o borrar tu historial.",
+        "Un resumen semanal arriba del panel: esta semana frente a la anterior, y lo único que conviene hacer ahora.",
+        "También revisa los PDF y los archivos de Word, Excel y PowerPoint que adjuntas; varios archivos a la vez reciben un solo aviso.",
+        "¿Lo configuras para otra persona? Avisos más grandes, un ajuste más estricto para los datos personales y un PIN para que los ajustes no se cambien por error.",
+        "Si la respuesta de una IA menciona tus propios datos que no escribiste en esa página, Clotr te lo señala: puede tenerlos de un chat anterior o de su memoria.",
+        "Clotr te dice cuándo no puede ayudar: el panel muestra si ve el cuadro de chat, y aparece un ! rojo si una página rechazó su cambio.",
+        "Detecta más: muchas más claves de servicios, frases semilla de criptomonedas, IBAN, documentos del Reino Unido y Canadá, números de historia clínica, códigos de casa y de tarjeta (incluido el CVV), códigos de verificación que te llegan por SMS, códigos de acceso remoto, inicios de sesión compartidos como «correo / contraseña», respuestas a preguntas de seguridad y números o tarjetas dichos en palabras («treinta y cuatro»).",
+        "Palabras sencillas en todo (Ocultarlo / Dejarlo, Más opciones para decidir de una vez), y las actualizaciones ya no necesitan recargar la página."
+      ]
+    }
+  }
+}

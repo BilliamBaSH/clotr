@@ -1,0 +1,5 @@
+{
+  "extDescription": {
+    "message": "Warns before you send credentials or personal data to AI chat tools. All detection runs locally."
+  }
+}

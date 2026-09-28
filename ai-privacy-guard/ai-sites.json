@@ -1,0 +1,20 @@
+[
+  { "name": "ChatGPT", "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"] },
+  { "name": "Claude", "matches": ["https://claude.ai/*"] },
+  { "name": "Gemini", "matches": ["https://gemini.google.com/*"] },
+  { "name": "Google AI Studio", "matches": ["https://aistudio.google.com/*"] },
+  { "name": "NotebookLM", "matches": ["https://notebooklm.google.com/*", "https://notebook.google.com/*"] },
+  { "name": "Microsoft Copilot", "matches": ["https://copilot.microsoft.com/*", "https://copilot.com/*", "https://www.copilot.com/*"] },
+  { "name": "Perplexity", "matches": ["https://www.perplexity.ai/*", "https://perplexity.ai/*"] },
+  { "name": "DeepSeek", "matches": ["https://chat.deepseek.com/*"] },
+  { "name": "Mistral Le Chat", "matches": ["https://chat.mistral.ai/*"] },
+  { "name": "Grok", "matches": ["https://grok.com/*"] },
+  { "name": "Meta AI", "matches": ["https://www.meta.ai/*"] },
+  { "name": "Poe", "matches": ["https://poe.com/*"] },
+  { "name": "HuggingChat", "matches": ["https://huggingface.co/chat/*"] },
+  { "name": "Qwen Chat", "matches": ["https://chat.qwen.ai/*"] },
+  { "name": "Kimi", "matches": ["https://www.kimi.com/*"] },
+  { "name": "Pi", "matches": ["https://pi.ai/*"] },
+  { "name": "Character.AI", "matches": ["https://character.ai/*"] },
+  { "name": "Arena (LMArena)", "matches": ["https://arena.ai/*", "https://lmarena.ai/*"] }
+]

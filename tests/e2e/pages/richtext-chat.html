@@ -1,0 +1,23 @@
+<!doctype html>
+<!-- Stand-in for a Claude-style page: ProseMirror-like contenteditable prompt + send button. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Claude (Clotr test page)</title></head>
+<body>
+  <div class="ProseMirror" contenteditable="true" aria-label="Write your prompt to Claude"
+       style="border:1px solid #999;min-height:60px;width:480px;padding:6px"></div>
+  <button id="send" aria-label="Send message">Send</button>
+  <script>
+    window.__sent = [];
+    const box = document.querySelector(".ProseMirror");
+    function send() {
+      if (!box.innerText.trim()) return;
+      window.__sent.push(box.innerText);
+      box.textContent = "";
+    }
+    document.getElementById("send").addEventListener("click", send);
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+  </script>
+</body>
+</html>

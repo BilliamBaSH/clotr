@@ -1,0 +1,29 @@
+<!doctype html>
+<!-- Stand-in for an AI site's sign-in page (same host as the chat): a username field, a password field
+     whose "show password" toggle makes it a text field, a one-time code, and a sign-up form with no
+     autocomplete hints. A chat box on the same page is the positive control. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Sign in (Clotr test page)</title></head>
+<body>
+  <form id="signin">
+    <input id="user" type="text" autocomplete="username" aria-label="Email">
+    <input id="pass" type="password" autocomplete="current-password" aria-label="Password">
+    <button type="button" id="show" aria-label="Show password">👁</button>
+    <input id="otp" type="text" autocomplete="one-time-code" aria-label="Code">
+    <button type="submit">Sign in</button>
+  </form>
+  <form id="signup">
+    <input id="new-user" type="text" aria-label="Email">
+    <input id="new-pass" type="password" aria-label="Choose a password">
+    <button type="submit">Create account</button>
+  </form>
+  <form id="composer">
+    <textarea id="msg" rows="3" cols="60" placeholder="Message"></textarea>
+    <button type="submit" id="send" aria-label="Send">Send</button>
+  </form>
+  <script>
+    for (const f of document.forms) f.addEventListener("submit", (e) => e.preventDefault());
+    document.getElementById("show").addEventListener("click", () => { document.getElementById("pass").type = "text"; });
+  </script>
+</body>
+</html>

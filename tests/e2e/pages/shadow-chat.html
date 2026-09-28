@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- Stand-in for a Gemini/NotebookLM-style page: the prompt lives inside a web component's shadow DOM. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>NotebookLM (Clotr test page)</title></head>
+<body>
+  <chat-box></chat-box>
+  <script>
+    window.__sent = [];
+    customElements.define("chat-box", class extends HTMLElement {
+      constructor() {
+        super();
+        const root = this.attachShadow({ mode: "open" });
+        const box = document.createElement("textarea");
+        box.setAttribute("aria-label", "Query box");
+        box.placeholder = "Start typing...";
+        box.rows = 4;
+        box.cols = 60;
+        const btn = document.createElement("button");
+        btn.setAttribute("aria-label", "Submit");
+        btn.textContent = "Go";
+        root.append(box, btn);
+        const send = () => {
+          if (!box.value) return;
+          window.__sent.push(box.value);
+          box.value = "";
+        };
+        btn.addEventListener("click", send);
+        box.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

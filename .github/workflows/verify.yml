@@ -1,0 +1,61 @@
+# The verifier's gate for dev → main (docs/automation.md): "Tests" runs the unit and browser suites
+# on that PR; this adds the slow checks: stress, the public export and a reproducible build.
+# Runs on PRs into main once they're out of draft (batched CI, D71), and by hand.
+name: Full verification
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+# A newer push to the same PR replaces its older run (saves this private repo's CI minutes);
+# runs on main and dev always finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Least privilege: the checks only read the code.
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: github.event_name == 'workflow_dispatch' || !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      # Actions pinned to exact commits (a moved tag can't change what runs); the tag is in the comment.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Stress (huge pastes, many tabs, full history, 60 attachments, a day-long tab)
+        run: npm run test:stress -- --browser /usr/bin/google-chrome
+        env:
+          PUPPETEER_DANGEROUS_NO_SANDBOX: "true"
+      - name: The public repo export builds and passes its own tests
+        # Only in the private repo: the public one is the export.
+        if: hashFiles('tools/export-public.js') != ''
+        run: |
+          git config --global user.email "ci@example.invalid"
+          git config --global user.name "CI"
+          npm run export-public -- --strict
+      - name: Reproducible - two builds must be byte-identical
+        run: |
+          npm run package
+          npm run package -- --firefox
+          node tools/package.js --out "$RUNNER_TEMP/again"
+          node tools/package.js --firefox --out "$RUNNER_TEMP/again"
+          diff <(sort dist/SHA256SUMS.txt) <(sort "$RUNNER_TEMP/again/SHA256SUMS.txt")
+      - name: Upload stress report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: stress-output
+          path: tests/e2e/output/
+          if-no-files-found: ignore
