@@ -9,7 +9,7 @@ const path = require("path");
 const crypto = require("crypto");
 const { build, crc32 } = require("../tools/package.js");
 
-const EXT = path.join(__dirname, "..", "ai-privacy-guard");
+const EXT = path.join(__dirname, "..", "extension");
 
 // Read a stored-only zip back: [name, bytes] per entry, checking each CRC.
 function unzip(buf) {
@@ -77,10 +77,12 @@ test("Firefox zip gets the Firefox manifest; checksums of both builds sit side b
       .find(([n]) => n === "manifest.json")[1]
       .toString("utf8"),
   );
-  assert.deepStrictEqual(m.background, { scripts: ["patterns.js", "detector.js", "sites.js", "background.js"] });
+  assert.deepStrictEqual(m.background, {
+    scripts: ["patterns.js", "detector.js", "backup.js", "sites.js", "background.js"],
+  });
   assert.ok(!m.storage, "Chrome's managed_schema key stays out of the Firefox manifest");
   assert.ok(!m.permissions.includes("declarativeContent"));
-  assert.strictEqual(m.browser_specific_settings.gecko.id, "clotr-ai-privacy-guard@billiambash");
+  assert.strictEqual(m.browser_specific_settings.gecko.id, "clotr@billiambash");
   const sums = fs.readFileSync(path.join(dir, "SHA256SUMS.txt"), "utf8").trim().split("\n");
   assert.deepStrictEqual(
     sums.sort(),
@@ -100,4 +102,41 @@ test("a file git doesn't track (personal notes, a saved chat) never ships", () =
   } finally {
     fs.rmSync(stray, { force: true });
   }
+});
+
+// #166: each release carries a software bill of materials (SPDX 2.3) beside its zip: every shipped file with its
+// checksums, the zip's own SHA-256, the license, and no third-party packages. Reproducible like the zip (D55).
+test("release SBOM: beside the zip, every shipped file, no third-party packages, byte-identical when rebuilt", () => {
+  const a = build({ outDir: tmp() });
+  const b = build({ outDir: tmp() });
+  assert.strictEqual(path.dirname(a.sbom), path.dirname(a.out));
+  assert.strictEqual(path.basename(a.sbom), path.basename(a.out).replace(/\.zip$/, ".spdx.json"));
+  assert.ok(fs.readFileSync(a.sbom).equals(fs.readFileSync(b.sbom)), "the SBOM changed between two builds");
+  const doc = JSON.parse(fs.readFileSync(a.sbom, "utf8"));
+  const { version } = JSON.parse(fs.readFileSync(path.join(EXT, "manifest.json"), "utf8"));
+  assert.strictEqual(doc.spdxVersion, "SPDX-2.3");
+  assert.strictEqual(doc.packages.length, 1, "a third-party package in the SBOM");
+  const [pkg] = doc.packages;
+  assert.strictEqual(pkg.name, "Clotr");
+  assert.strictEqual(pkg.versionInfo, version);
+  assert.strictEqual(pkg.licenseDeclared, "AGPL-3.0-or-later");
+  assert.deepStrictEqual(pkg.checksums, [{ algorithm: "SHA256", checksumValue: a.sha256 }]);
+  assert.deepStrictEqual(
+    doc.files.map((f) => f.fileName),
+    a.files.map((n) => `./${n}`),
+  );
+  const unzipped = new Map(unzip(fs.readFileSync(a.out)));
+  for (const f of doc.files) {
+    const sha256 = f.checksums.find((c) => c.algorithm === "SHA256").checksumValue;
+    assert.strictEqual(
+      sha256,
+      crypto
+        .createHash("sha256")
+        .update(unzipped.get(f.fileName.slice(2)))
+        .digest("hex"),
+      f.fileName,
+    );
+  }
+  const contains = doc.relationships.filter((r) => r.relationshipType === "CONTAINS");
+  assert.strictEqual(contains.length, doc.files.length);
 });

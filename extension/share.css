@@ -1,0 +1,106 @@
+/* "Share Clotr with someone" (share.html): the page, and the one-page guide that prints on its own. */
+.share-page h2 {
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+  font-size: 17px;
+  margin: 18px 0 6px;
+}
+.share-page .btn {
+  margin-left: 6px;
+}
+.share-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.share-link code {
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--wash);
+  word-break: break-all;
+}
+.guide {
+  margin-top: 26px;
+  padding: 22px 24px;
+  border: 2px solid var(--axis);
+  border-radius: 14px;
+  background: var(--surface);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.guide-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.guide h2 {
+  font-size: 22px;
+  margin: 0;
+}
+.guide h3 {
+  font-size: 18px;
+  margin: 18px 0 4px;
+}
+.guide p,
+.guide ul {
+  margin: 0 0 6px;
+}
+.guide-scam {
+  margin-top: 14px !important;
+  padding: 10px 12px;
+  border-left: 5px solid var(--signal);
+  background: var(--brand-wash);
+  border-radius: 4px 10px 10px 4px;
+}
+.guide-fill {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-top: 16px !important;
+  font-weight: 700;
+}
+.guide-fill .blank {
+  flex: 1;
+  border-bottom: 2px solid var(--ink-2);
+  min-height: 1.4em;
+}
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body.vault-page {
+    padding: 0;
+    max-width: none;
+    background: #fff;
+    color: #000;
+  }
+  .guide {
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16pt;
+    color: #000;
+    background: #fff;
+  }
+  .guide h2 {
+    font-size: 22pt;
+  }
+  .guide h3 {
+    font-size: 17pt;
+  }
+  .guide-scam {
+    background: #fff;
+    border-left-color: #000;
+  }
+  /* Paper is white whatever the screen's theme: every word prints black. */
+  .guide,
+  .guide * {
+    color: #000 !important;
+  }
+  .guide-fill .blank {
+    border-bottom-color: #000;
+  }
+}

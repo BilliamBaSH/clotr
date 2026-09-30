@@ -1,14 +1,30 @@
-# Clotr AI Privacy Guard
+# Clotr: clot your data leaks
 
-**Clotr warns you before you send a password, a key or a personal detail to an AI chat**, like ChatGPT,
-Claude, Gemini, Copilot or Perplexity. You decide: hide it, or send it anyway.
+![Clotr: a heads-up before you overshare. A mind map from You to chatgpt.com, claude.ai and gemini.google.com, where a bandage stops each detail (phone number, home address, API key, password, card number, date of birth) before it reaches the AI](docs/brand/readme-header.png)
+
+[![Tests](https://github.com/BilliamBaSH/clotr/actions/workflows/test.yml/badge.svg)](https://github.com/BilliamBaSH/clotr/actions/workflows/test.yml)
+[![no AI inside, rule-checked](https://img.shields.io/badge/no%20AI%20inside-rule--checked-blue)](https://github.com/BilliamBaSH/clotr/blob/main/tests/rules.test.js)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/BilliamBaSH/clotr/badge)](https://scorecard.dev/viewer/?uri=github.com/BilliamBaSH/clotr)
+License: [AGPL-3.0-or-later](LICENSE) · [What changed](CHANGELOG.md)
+
+**Clotr catches a password, a key or a personal detail before you send it**, in AI chats like ChatGPT, Claude,
+Gemini, Copilot or Perplexity. You decide: hide it, or send it anyway. Set it up for a parent in a few minutes, or
+roll it out to a whole office.
+
+> **A note from me.** I'm Alex, a computer science student. I caught myself telling AI chats things I'd never tell a
+> stranger, and when the AI started bringing up things I'd only been thinking about, it scared me. Clotr will always
+> be free for people. It runs only on your computer, never sends anything anywhere, and its code is open, so you don't
+> have to take my word for it. If it misses something, or warns you about nothing, please tell me. The more you use Clotr, the more you report bugs, the better it gets. For free.
+> — Alex ([BilliamBaSH](https://github.com/BilliamBaSH)) ·
+> [the whole story](https://clotr-app.github.io/#who)
 
 It is built for people who don't think of "my phone number, spelled out" as sensitive: it catches personal
 details however they're written (digits, number words, misspellings, mixes), and it explains itself in plain words.
 
 ![A warning in the corner of an AI chat: your message contains a street address, phone number and email address; Leave it in or Hide it](docs/store/1-warning.png)
 
-> **Status: alpha (0.9.x).** It works in Chrome, Brave and Microsoft Edge on a computer. Expect rough edges; please report them.
+> **Status: 1.0, the first public release.** It works in Chrome, Brave and Microsoft Edge on a computer, and in
+> Firefox (see below). If it gets something wrong or misses something, please report it: that is how it gets better.
 
 ## What it catches
 Everything is checked on your computer, in what you type or paste into an AI chat, before you send it:
@@ -30,12 +46,18 @@ Everything is checked on your computer, in what you type or paste into an AI cha
 - **Warns in the corner** by default and never stops you. You can choose, per kind of data, to be asked before
   sending instead, or to just have it counted.
 - **A dashboard** in its toolbar button: what it caught, where, and what you did, with a short "this week" summary.
-- **A full report** ("Your AI exposure report"): what each AI service has been told about you over time, a map of where
-  your details went, the riskiest moments with what to do now, and export or delete your history.
-- **Setting it up for someone else**: larger warnings, a stricter setting for personal details, and a PIN so
-  settings aren't changed by accident.
+- **A full report** ("Your AI exposure report"): what each AI service has been told about you over time, a mind map
+  of everything you could be leaking (what each AI already has, what Clotr stopped, what no AI has seen yet, and
+  where Clotr can't see), the riskiest moments with what to do now, and export or delete your history.
+- **Setting it up for someone else**: a step-by-step page (Settings → *Set it up step by step*) for their details,
+  larger warnings, a stricter setting for personal details, and a PIN so settings aren't changed by accident.
 - **Notices when an AI brings up your details**: if a reply mentions your own phone number or name that you
   didn't type on that page, Clotr points it out: the AI may have it from an earlier chat or its memory.
+- **Cover names while you type (Bandage)**: Clotr offers it the first time a personal detail shows up on an AI
+  site. Say yes and your name, family, phone number or address becomes a label like `[Me]` or `[Phone 1]` before it
+  ever reaches the AI. If the AI repeats it back, point at the label to see the real detail in
+  a small bubble, or copy the whole answer with your details back in. Only your browser tab knows what the label
+  means; it's on or off per AI site in Settings.
 - **In English and Spanish**: warnings, the dashboard and the welcome page follow your browser's language, and
   Spanish is understood too ("mi contraseña es…", "seis cero cero…", Spanish addresses and ID numbers).
 - **For teams**: IT can roll Clotr out with required settings and company watch words through the browser's
@@ -44,6 +66,17 @@ Everything is checked on your computer, in what you type or paste into an AI cha
   shows a red **!** if a chat box refused Clotr's edit or a page removed its warnings.
 
 ![The dashboard: leaks stopped this week, what was found per day, and by which AI tool](docs/store/4-dashboard.png)
+
+## What's inside
+**No AI inside, no network, no accounts, open code, free for people.**
+
+| What's in Clotr | How you know |
+|---|---|
+| Plain rules you can read (`extension/patterns.js`) and hundreds of tests | They run on every change |
+| No model files, no model runtime | The rule check *no AI inside: no model files or model runtimes in the extension* |
+| No network: no servers, no analytics, no requests | The rule check *100% local: no network calls, no remote code* |
+| Only on AI chat sites | The rule check *scope: only specific https AI-site origins, never broad patterns* |
+| No accounts | There's nothing to sign up for or log in to |
 
 ## Privacy guarantees
 - **Nothing leaves your computer.** Clotr has no servers, no analytics and makes no network requests (checked
@@ -56,10 +89,11 @@ Everything is checked on your computer, in what you type or paste into an AI cha
 
 Known limits are listed on the "What Clotr stores" page and in [docs/security-review.md](docs/security-review.md).
 
-## Install (alpha)
+## Install
+### From a release (Chrome, Brave, Edge)
 1. Download the latest `clotr-<version>.zip` from Releases and unzip it (or clone this repository).
 2. Open `chrome://extensions` (or `brave://extensions`), turn on **Developer mode** (top right).
-3. Click **Load unpacked** and choose the unzipped folder (the one with `manifest.json`; in a clone, `ai-privacy-guard/`).
+3. Click **Load unpacked** and choose the unzipped folder (the one with `manifest.json`; in a clone, `extension/`).
 4. Pin Clotr to the toolbar. A welcome page opens with a practice box.
 
 ### Browsers and devices
@@ -74,7 +108,7 @@ Known limits are listed on the "What Clotr stores" page and in [docs/security-re
 ## Permissions, in plain words
 | Permission | Why |
 |---|---|
-| Read and change data on the built-in AI chat sites | To check what you type there and replace it when you click *Hide it*, and to start the new version in AI tabs you already have open after an update, so you never need to reload them. That list is in `ai-privacy-guard/ai-sites.json`. |
+| Read and change data on the built-in AI chat sites | To check what you type there and replace it when you click *Hide it*, and to start the new version in AI tabs you already have open after an update, so you never need to reload them. That list is in `extension/ai-sites.json`. |
 | Storage | To keep your settings, your vault's fingerprints and the history of what was found, on this computer. |
 | Active tab | When you open Clotr's popup on an unknown page, to check whether it looks like an AI chat, only then and only that tab. |
 | Scripting | To run the one-time "is this an AI chat?" check above, and to start protecting an AI site you added (including tabs already open). |
@@ -87,19 +121,34 @@ Open an issue: *False alarm*, *Missed something* or *Bug*. Never paste the real 
 instead (for example "a phone number written as nine three seven…"). Security problems: see
 [SECURITY.md](SECURITY.md) (reported privately, not as an issue).
 
-## How Clotr works, and how it's made
+## How Clotr works
 **Rules, not AI, on purpose.** Clotr recognizes private details with ordinary pattern matching: it runs instantly
 and offline, gives the same answer every time, and anyone can read exactly what it looks for
-(`ai-privacy-guard/patterns.js`). **The extension contains no AI** and sends nothing to any AI service or anywhere
+(`extension/patterns.js`). **The extension contains no AI** and sends nothing to any AI service or anywhere
 else. Every pattern has tests, including more than 400 everyday messages in English and Spanish, full of numbers that
 aren't private (versions, prices, order numbers, times), which must not set off a warning.
 
-**Built with an AI assistant, checked by machines and a person.** Clotr is developed by its author with the help of
-an AI coding assistant (Anthropic's Claude); commits made that way say so. Every change goes through automatic
-checks: detection tests, rule tests that enforce the privacy guarantees above (no network code, no broad site
-access, nothing typed is stored), a real-browser suite and stress tests. The author reviews each public release
-before it's published, and releases are reproducible: rebuilding a release from its code gives a byte-identical zip,
-whose SHA-256 is published in `SHA256SUMS.txt`.
+**Checked by machines and a person.** Every change goes through automatic checks: detection tests, rule tests that
+enforce the privacy guarantees above (no network code, no broad site access, nothing typed is stored), a
+real-browser suite and stress tests. The author reviews each public release before it's published, and releases
+are reproducible: rebuilding a release from its code gives a byte-identical zip, whose SHA-256 is published in
+`SHA256SUMS.txt`.
+
+### Why there's no AI in Clotr
+> Clotr has absolutely NO AI, it defeats the point.
+
+- **It's instant.** The warning is there before you press Enter.
+- **It works offline.** Nothing to download, nothing to call.
+- **Same answer every time.** The same message always gets the same warning.
+- **Anyone can read it.** Every rule is plain code, with the tests that prove it.
+- **Nothing to poison.** No training data to tamper with, no prompt to trick.
+- **Small enough for an old laptop.** The whole extension is well under a megabyte.
+
+## For organizations
+Clotr is free at work too. An office can roll it out to every computer through browser policy, with ready-made
+presets for developers, for offices that handle client names (law, accounting, agencies) and for clinics, plus a
+printable page that shows the policy is applied. Nothing is ever reported to the organization: everyone's Clotr is
+the same free one. How: [docs/team-rollout.md](docs/team-rollout.md).
 
 ## License
 Clotr is free and open-source software: you may use, study, change and share it under the

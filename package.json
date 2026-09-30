@@ -1,10 +1,10 @@
 {
-  "name": "clotr-ai-privacy-guard",
+  "name": "clotr",
   "private": true,
   "license": "AGPL-3.0-or-later",
-  "description": "Dev tooling for the Clotr AI Privacy Guard extension (the extension itself is in ai-privacy-guard/ and has no dependencies).",
+  "description": "Dev tooling for the Clotr extension (the extension itself is in extension/ and has no dependencies).",
   "scripts": {
-    "test": "node --test tests/patterns.test.js tests/rules.test.js tests/sites.test.js tests/package.test.js tests/attachments.test.js",
+    "test": "node --test --test-reporter=dot tests/patterns.test.js tests/rules.test.js tests/sites.test.js tests/package.test.js tests/attachments.test.js tests/backup.test.js tests/mindmap.test.js tests/readme.test.js",
     "test:e2e": "node tests/e2e/run.js",
     "test:firefox": "node tests/e2e/firefox.js",
     "test:stress": "node tests/e2e/run.js --stress --only STS",

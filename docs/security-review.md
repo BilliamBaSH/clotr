@@ -1,6 +1,6 @@
 # Clotr security review (M5, 2026-09-24, v0.9.16)
 
-Scope: everything in `ai-privacy-guard/` plus the update tooling in `tools/`. Method: code review of every
+Scope: everything in `extension/` plus the update tooling in `tools/`. Method: code review of every
 entry point, plus automated checks that now run on every change (listed at the end).
 
 ## Found and fixed
@@ -31,7 +31,7 @@ entry point, plus automated checks that now run on every change (listed at the e
 | S15 | Clotr started after the page's scripts (document_idle): a site's own early window-level Enter handler could send before Ask before sending held the message | Start at document_start (built-in and user-added sites) | e2e EG1 (reproduced first); rule check; real ChatGPT re-checked |
 | S11 | Unlabeled send buttons bypassed Ask before sending | Composer buttons count as possible sends; Warn records only after the box empties (D53) | e2e UB1–UB3b |
 | S12 | Vault fields could be kept in the browser's restore data or sent to cloud spell check | autocomplete/spellcheck off, cleared on pagehide | e2e V1s |
-| S16 | Release packaging shipped every file in `ai-privacy-guard/` except logs: a personal note, saved chat or editor backup left in the folder would have gone into a public zip | Only files git tracks are packaged (warning outside a git checkout); zips are reproducible with published SHA-256 (D55) | unit test: an untracked file with a phone number never reaches the zip |
+| S16 | Release packaging shipped every file in `extension/` except logs: a personal note, saved chat or editor backup left in the folder would have gone into a public zip | Only files git tracks are packaged (warning outside a git checkout); zips are reproducible with published SHA-256 (D55) | unit test: an untracked file with a phone number never reaches the zip |
 | S17 | Sign-in pages on AI hosts: a username field, a password shown as text ("show password"), a one-time code or a sign-up form was watched like a chat box, so Clotr warned there and could record a fingerprint of your own login details | Inputs that are clearly sign-in fields (autocomplete hints, password/code names or labels, or in a form with a password field) are left alone (D56) | e2e LG1 (proven to fail before the fix; the chat box on the same page still warns) |
 | S18 | Hide it (then called Cover it) could fail silently: on an editor that applies edits later (Kimi), the key stayed in the box (plus a hidden copy), the notice closed and history said *Hidden*, so a user would send it believing it was gone | Clotr waits for the editor's own update, records *Covered* only when the text really changed, and otherwise says "Clotr couldn't cover it here… delete it by hand" | e2e KM1, KM2 (both fail before the fix); verified on kimi.com |
 | S19 | Tab state lost after an in-page navigation: sites that change their URL without reloading (a new ChatGPT chat, grok.com right after loading) made the background forget the tab, so the badge vanished and the tab looked unprotected | When a load completes and the tab is unknown, the background asks the tab's Clotr and restores its state from the answer | e2e HC4 (fails before the fix); verified on grok.com |
@@ -45,6 +45,69 @@ entry point, plus automated checks that now run on every change (listed at the e
 Checked on real sites (logged out, fake data): ChatGPT, Gemini and Grok send nothing typed before Send (`tools/draft-leak-monitor.js`, with a positive control).
 
 - **Full report (0.9.37–0.9.40).** Reads history only; fingerprints are used for counting and never shown (e2e DSH2); every value is set as text, never markup; the export is a file the user asks for, without the fingerprint secret, so its fingerprints can't be matched against guesses (DSH3); retention is validated in the background (only 90/365/730 days). The share card holds counts only.
+
+## Bandage and the live line (0.9.95-0.9.98, reviewed 2026-09-29)
+- **Cover names while typing.** The label ↔ detail map exists only in the page's memory, keyed by a salted fingerprint;
+  nothing new is stored. Events record only that a detail was covered (`via: "bandage"`) with its fingerprint. Keys and
+  passwords are never covered, so they always keep their warning. If a chat box refuses the edit, the detail falls back
+  to the normal warning (D30). The per-site on/off setting is set only by a message from that site's own tab.
+- **Hover to peek.** The AI's page is never changed: labels are found with live Ranges, and Clotr's hotspots and bubble
+  live in closed shadow roots. The page can see that a Clotr element appeared, never what it shows. The bubble shows the
+  person their own detail on purpose (D93): these are personal details, not keys, which stay masked everywhere. A page
+  that plants a fake label gets a hotspot but learns nothing. "Copy with real names" writes to the clipboard only on a
+  click. e2e BN8 checks the reply's HTML stays exactly as the site wrote it.
+- **Reading replies for labels.** With Bandage on, the reply window (D63) also looks for Clotr's own labels, for 90
+  seconds after a send; nothing from a reply is kept.
+- **The live line (developer copies only).** The unpacked build reloads when `local-update.txt` changes; it's
+  git-ignored and packaging takes only tracked files, so it can't ship. Only someone who can already write to the
+  extension's folder can trigger a reload.
+- **Backups** carry the Bandage setting, checked as host → true/false on load.
+
+## The small-team pack (0.9.101, reviewed 2026-09-29)
+- **No new permissions** (the manifest changes only its version); `storage.managed_schema` gains the preset, `orgName`
+  and format fields, all typed and capped.
+- **The "policy applied" page** (`policy.html/js`) reads the managed policy only; it writes nothing (e2e PA2 checks
+  `storage.local` before and after), makes no request beyond the extension's own files (PA2), and builds every field
+  with `textContent`. The office's watch words appear only after the person ticks the box; the fingerprint is a hash of
+  the policy, not of anything typed.
+- **The floor** (`Clotr.stricter`, D115): block over warn over count; an unknown response counts as warn. A person's
+  own "OK to share" entry, or a site set to "Just count", stays saved but can't lower a required response while the
+  policy holds (e2e TM3). Warnings still never stop a message on their own (D30).
+- **Watch formats** (`EMP-#####`): at most 20 formats of at most 40 characters, read by the vault's existing format
+  matcher (covered by the ReDoS fuzz); a format is never hashed as a literal phrase.
+- No blocking issues.
+
+## The release candidate (1.0.0-1.0.9, reviewed 2026-09-30)
+Scope: everything in `extension/` that changed since the small-team pack's review (586 lines), the public export
+and the website's split. Method: the diff line by line, a search for every API that sends, stores, runs code or acts on
+the page, and the ReDoS and timing sweep on hostile input (50,000 characters of letters, digits, number words,
+misspellings, brackets, zero-width characters, key and email look-alikes).
+
+| # | Finding | Impact | Fix | Test |
+|---|---------|--------|-----|------|
+| S25 | **Reading a long run of digits was quadratic**: for every digit added to a run, the list-marker check ("1.", "2)") walked the whole run first; 40,000 digits took about a second (older than 1.0; 0.9.101 did the same) | A huge numeric paste froze the chat page for a second or more | The cheap tests first (at most 3 digits, a "." or ")" gap); the worst case of the sweep went from 958 ms to 130 ms (1.0.9) | Unit test: four times the digits take about four times as long |
+
+- **No new permissions** since 0.9.101: the manifest changed its name and version only.
+- **Report a problem** (`report.js`, D119, D120) opens GitHub's issue forms with `noopener`. The address carries only
+  the form, Clotr's version, the browser, and the AI site's name if the person ticked "Include this site": never typed
+  text, a stored value or a fingerprint. The false-alarm link names only the kind of detail. A warning that reports are
+  public comes before any choice.
+- **Leave it in and send** (D121) acts only after the person's own click (or Enter) on Clotr's dialog, which lives in a
+  closed shadow root the page can't reach, and only through what they used: their button or form, or for Enter the
+  site's send button near the chat box, else Enter again. The page can't start it. Allowed details stay in memory for
+  that one message; nothing is stored.
+- **The reply window** (1.0.8) stays open up to 90 seconds to place cover-name hotspots in Clotr's own layer; it reads
+  only text the page shows, and the vault's reply check still runs once per message (S24).
+- **The edit check** (1.0.7) ignores zero-width characters when it compares the chat box with Clotr's text; it changes
+  no detection.
+- **Moving to a new computer** says what a file holds and what came back in counts only ("3 vault items, a PIN"),
+  never a detail or the PIN.
+- **Names and addresses** (1.0.6): the report address points at github.com/BilliamBaSH/clotr, and the Firefox add-on ID
+  is clotr@billiambash. The public repo has to carry that name before Clotr goes public, so the address in the
+  extension never points at someone else's repo.
+- **The public export** (D124, Q46) holds the extension, its tests and build tools, and the docs about the extension;
+  a --strict word check fails it on funding, prices, planning or AI-tooling words; pictures are only the README's.
+- No blocking issues.
 
 ## Accepted limits
 - **A hostile AI site can defeat Clotr on its own pages**: remove the warning (Clotr then says so and stops holding messages there, S21), imitate Clotr's warning, or cover its buttons so a click lands elsewhere. Planting fake *sent* entries by scripting its chat box doesn't work (S23). Clotr's warnings never ask you to type anything, so an imitation can't collect details. It can't learn anything it doesn't already receive, since it is the site the text is going to, with two narrow exceptions that need you to act: text it adds to your chat box while you type is checked with yours (you would see it in your box), and a reply is checked once per message you send, so it can test one guess per message against your vault (S24). Mitigation would need browser support that doesn't exist for extensions.

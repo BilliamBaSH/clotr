@@ -1,4 +1,4 @@
-// Attached files read as text (ai-privacy-guard/attachments.js), in Node: File and
+// Attached files read as text (extension/attachments.js), in Node: File and
 // DecompressionStream are built in. Browser behavior (warnings on attach) is in the e2e suite.
 "use strict";
 
@@ -7,9 +7,9 @@ const assert = require("node:assert/strict");
 const zlib = require("zlib");
 const { crc32 } = require("../tools/package.js");
 
-require("../ai-privacy-guard/patterns.js");
-require("../ai-privacy-guard/detector.js");
-require("../ai-privacy-guard/attachments.js");
+require("../extension/patterns.js");
+require("../extension/detector.js");
+require("../extension/attachments.js");
 const { readAttachment } = globalThis.Clotr;
 
 // A minimal zip: entries [name, text, deflate?].

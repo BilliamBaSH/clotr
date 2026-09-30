@@ -69,3 +69,4 @@ jobs:
           name: e2e-output
           path: tests/e2e/output/
           if-no-files-found: ignore
+          retention-days: 7 # screenshots and reports: a week is enough to look

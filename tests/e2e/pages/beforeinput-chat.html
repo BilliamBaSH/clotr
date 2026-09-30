@@ -1,0 +1,72 @@
+<!doctype html>
+<!-- Stand-in for a Slate / CKEditor 5 style page: the editor cancels every beforeinput event and
+     applies the edit to its own text model itself, so the browser never edits the DOM and never
+     fires an input event. (BI1, BI2) -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Qwen (Clotr test page)</title></head>
+<body>
+  <div id="msg" contenteditable="true" role="textbox" aria-label="How can I help you today?"
+       style="border:1px solid #999;min-height:60px;width:480px;padding:6px;white-space:pre-wrap"></div>
+  <button id="send" aria-label="Send message">Send</button>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("msg");
+    let model = "";
+
+    function offsetOf(node, offset) {
+      const r = document.createRange();
+      r.selectNodeContents(box);
+      r.setEnd(node, offset);
+      return r.toString().length;
+    }
+
+    function render(caret) {
+      box.textContent = model;
+      const node = box.firstChild || box;
+      const sel = getSelection();
+      sel.removeAllRanges();
+      const r = document.createRange();
+      r.setStart(node, Math.min(caret, node === box ? 0 : node.length));
+      sel.addRange(r);
+    }
+
+    // On the aistudio stand-in, the editor (like Lexical) knows the selection only from the async
+    // selectionchange event, so an edit sent in the same tick as a new selection lands at the old caret.
+    const lexicalLike = location.hostname === "aistudio.google.com";
+    let known = { start: 0, end: 0 };
+    const current = () => {
+      const sel = getSelection();
+      if (!sel.rangeCount || !box.contains(sel.anchorNode)) return null;
+      const r = sel.getRangeAt(0);
+      return { start: offsetOf(r.startContainer, r.startOffset), end: offsetOf(r.endContainer, r.endOffset) };
+    };
+    document.addEventListener("selectionchange", () => { known = current() || known; });
+
+    box.addEventListener("beforeinput", (e) => {
+      e.preventDefault();
+      const at = lexicalLike ? known : current() || { start: model.length, end: model.length };
+      let { start, end } = at;
+      let data = e.data ?? e.dataTransfer?.getData("text/plain") ?? "";
+      if (e.inputType === "insertParagraph" || e.inputType === "insertLineBreak") data = "\n";
+      else if (e.inputType.startsWith("delete")) {
+        data = "";
+        if (start === end) start = e.inputType.includes("Backward") ? Math.max(0, start - 1) : start;
+        if (start === end && e.inputType.includes("Forward")) end = Math.min(model.length, end + 1);
+      } else if (!e.inputType.startsWith("insert")) return;
+      model = model.slice(0, start) + data + model.slice(end);
+      render(start + data.length);
+    });
+
+    function send() {
+      if (!model.trim()) return;
+      window.__sent.push(model);
+      model = "";
+      render(0);
+    }
+    document.getElementById("send").addEventListener("click", send);
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+  </script>
+</body>
+</html>

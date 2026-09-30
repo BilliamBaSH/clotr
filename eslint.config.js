@@ -37,7 +37,7 @@ module.exports = [
   },
   {
     // The extension: classic scripts that share code through globalThis.Clotr (no import/export).
-    files: ["ai-privacy-guard/**/*.js", "tests/e2e/pages/**/*.js"],
+    files: ["extension/**/*.js", "tests/e2e/pages/**/*.js"],
     languageOptions: {
       sourceType: "script",
       globals: { ...globals.browser, ...globals.webextensions, ...globals.serviceworker },
@@ -51,7 +51,7 @@ module.exports = [
   },
   {
     // …and the browser-driving ones also run code inside pages and the extension.
-    files: ["tests/e2e/*.js", "tools/site-check.js", "tools/draft-leak-monitor.js"],
+    files: ["tests/e2e/*.js", "tests/e2e/checks/*.js", "tools/site-check.js", "tools/draft-leak-monitor.js"],
     languageOptions: { globals: { ...globals.browser, ...globals.webextensions, ...insideExtension } },
   },
 ];

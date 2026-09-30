@@ -3,6 +3,9 @@ description: Something in Clotr doesn't work (the chat misbehaves, a button does
 title: "Bug: "
 labels: ["bug"]
 body:
+  - type: markdown
+    attributes:
+      value: "**This page is public. Never paste a real password, key or personal detail here.** Describe it instead, or change the digits/letters so it keeps the same pattern."
   - type: textarea
     id: what
     attributes:

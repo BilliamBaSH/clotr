@@ -1,4 +1,4 @@
-// Builds dist/clotr-<version>.zip from ai-privacy-guard/ for a GitHub release or a store
+// Builds dist/clotr-<version>.zip from extension/ for a GitHub release or a store
 // upload, and records its SHA-256 in dist/SHA256SUMS.txt. Leaves out the user's saved logs
 // (bravelogs/) and anything not shipped.
 // Usage: npm run package              (Chrome, Brave, Edge)
@@ -17,7 +17,7 @@ const crypto = require("crypto");
 const { execFileSync } = require("child_process");
 
 const ROOT = path.join(__dirname, "..");
-const EXT = path.join(ROOT, "ai-privacy-guard");
+const EXT = path.join(ROOT, "extension");
 const SKIP = new Set(["bravelogs", ".DS_Store", "Thumbs.db", "desktop.ini"]);
 const TEXT = new Set([".js", ".json", ".html", ".css", ".md", ".txt", ".svg"]);
 // 1980-01-01 00:00, the earliest time a zip can hold.
@@ -27,12 +27,12 @@ const DOS_DATE = (0 << 9) | (1 << 5) | 1;
 // Firefox runs background *scripts* (no service worker) and has no declarativeContent; it needs
 // an add-on ID and a data-collection declaration (none).
 function firefoxManifest(m) {
-  m.background = { scripts: ["patterns.js", "detector.js", "sites.js", "background.js"] };
+  m.background = { scripts: ["patterns.js", "detector.js", "backup.js", "sites.js", "background.js"] };
   delete m.storage; // managed_schema is Chrome's; Firefox reads policies.json (docs/team-rollout.md)
   m.permissions = m.permissions.filter((p) => p !== "declarativeContent");
   m.browser_specific_settings = {
     gecko: {
-      id: "clotr-ai-privacy-guard@billiambash",
+      id: "clotr@billiambash",
       strict_min_version: "140.0",
       data_collection_permissions: { required: ["none"] },
     },
@@ -41,11 +41,11 @@ function firefoxManifest(m) {
   return m;
 }
 
-// Files git tracks under ai-privacy-guard/, or null outside a git checkout. Only these ship, so a
+// Files git tracks under extension/, or null outside a git checkout. Only these ship, so a
 // stray personal file in the folder (notes, a saved chat, an editor backup) never reaches a release.
 function trackedFiles() {
   try {
-    const out = execFileSync("git", ["ls-files", "-z", "--", "ai-privacy-guard"], {
+    const out = execFileSync("git", ["ls-files", "-z", "--", "extension"], {
       cwd: ROOT,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"],
@@ -54,7 +54,7 @@ function trackedFiles() {
       out
         .split(String.fromCharCode(0))
         .filter(Boolean)
-        .map((f) => f.slice("ai-privacy-guard/".length)),
+        .map((f) => f.slice("extension/".length)),
     );
   } catch {
     return null;
@@ -65,9 +65,7 @@ function trackedFiles() {
 function collect(firefox) {
   const tracked = trackedFiles();
   if (!tracked)
-    console.warn(
-      "[package] not a git checkout: packaging every file in ai-privacy-guard/ (check it has nothing personal)",
-    );
+    console.warn("[package] not a git checkout: packaging every file in extension/ (check it has nothing personal)");
   const entries = [];
   (function walk(dir) {
     for (const name of fs.readdirSync(dir)) {
@@ -163,6 +161,66 @@ function recordChecksum(outDir, fileName, hash) {
   fs.writeFileSync(sums, `${lines.sort((a, b) => a.slice(66).localeCompare(b.slice(66))).join("\n")}\n`);
 }
 
+// The release's software bill of materials (#166), SPDX 2.3 JSON beside the zip: the extension as one package (its
+// version, license and the zip's SHA-256) containing every shipped file with its checksums. No other packages: the
+// extension ships no third-party code. Reproducible like the zip: the same fixed time, sorted files, no random ids.
+function sbom({ fileName, version, sha256, entries }) {
+  const hash = (algo, data) => crypto.createHash(algo).update(data).digest("hex");
+  const files = entries.map(([name, data], i) => ({
+    fileName: `./${name}`,
+    SPDXID: `SPDXRef-File-${i + 1}`,
+    checksums: [
+      { algorithm: "SHA1", checksumValue: hash("sha1", data) },
+      { algorithm: "SHA256", checksumValue: hash("sha256", data) },
+    ],
+    licenseConcluded: "NOASSERTION",
+    copyrightText: "NOASSERTION",
+  }));
+  // SPDX's package verification code: the SHA-1 of the files' SHA-1s, sorted and joined.
+  const verification = hash(
+    "sha1",
+    files
+      .map((f) => f.checksums[0].checksumValue)
+      .sort()
+      .join(""),
+  );
+  const doc = {
+    spdxVersion: "SPDX-2.3",
+    dataLicense: "CC0-1.0",
+    SPDXID: "SPDXRef-DOCUMENT",
+    name: fileName,
+    documentNamespace: `https://github.com/BilliamBaSH/clotr/releases/${fileName}/${sha256}`,
+    creationInfo: { created: "1980-01-01T00:00:00Z", creators: ["Tool: clotr-tools-package"] },
+    packages: [
+      {
+        name: "Clotr",
+        SPDXID: "SPDXRef-Package-Clotr",
+        versionInfo: version,
+        packageFileName: fileName,
+        downloadLocation: "https://github.com/BilliamBaSH/clotr/releases",
+        filesAnalyzed: true,
+        packageVerificationCode: { packageVerificationCodeValue: verification },
+        checksums: [{ algorithm: "SHA256", checksumValue: sha256 }],
+        licenseConcluded: "AGPL-3.0-or-later",
+        licenseDeclared: "AGPL-3.0-or-later",
+        copyrightText: "NOASSERTION",
+        primaryPackagePurpose: "APPLICATION",
+        comment: "A browser extension. It ships no third-party packages and no AI model.",
+      },
+    ],
+    files,
+    relationships: [
+      { spdxElementId: "SPDXRef-DOCUMENT", relationshipType: "DESCRIBES", relatedSpdxElement: "SPDXRef-Package-Clotr" },
+      ...files.map((f) => ({
+        spdxElementId: "SPDXRef-Package-Clotr",
+        relationshipType: "CONTAINS",
+        relatedSpdxElement: f.SPDXID,
+      })),
+    ],
+  };
+  return `${JSON.stringify(doc, null, 2)}\n`;
+}
+
 function build({ firefox = false, outDir = path.join(ROOT, "dist") } = {}) {
   const { version } = JSON.parse(fs.readFileSync(path.join(EXT, "manifest.json"), "utf8"));
   const entries = collect(firefox);
@@ -190,7 +248,9 @@ function build({ firefox = false, outDir = path.join(ROOT, "dist") } = {}) {
   fs.writeFileSync(out, bytes);
   const sha256 = crypto.createHash("sha256").update(bytes).digest("hex");
   recordChecksum(outDir, fileName, sha256);
-  return { out, files: entries.map(([n]) => n), size: bytes.length, sha256 };
+  const sbomOut = path.join(outDir, fileName.replace(/\.zip$/, ".spdx.json"));
+  fs.writeFileSync(sbomOut, sbom({ fileName, version, sha256, entries }));
+  return { out, sbom: sbomOut, files: entries.map(([n]) => n), size: bytes.length, sha256 };
 }
 
 module.exports = { build, crc32 };
@@ -203,4 +263,5 @@ if (require.main === module) {
   });
   console.log(`${path.relative(ROOT, r.out)}: ${r.files.length} files, ${(r.size / 1024).toFixed(0)} KB`);
   console.log(`SHA-256 ${r.sha256} (also in ${path.relative(ROOT, path.join(path.dirname(r.out), "SHA256SUMS.txt"))})`);
+  console.log(`Software bill of materials: ${path.relative(ROOT, r.sbom)}`);
 }

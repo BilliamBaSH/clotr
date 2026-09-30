@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Clotr stores</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="vault.css">
+  <link rel="stylesheet" href="stored.css">
+</head>
+<body class="vault-page stored-page">
+  <header class="top">
+    <img src="icons/icon-on-32.png" alt="" width="24" height="24">
+    <span class="wordmark" data-i18n-skip>Clotr</span>
+    <h1 data-i18n="st_whatClotrStores">What Clotr stores</h1>
+    <span class="chip" data-i18n="st_onThisComputerOnly">On this computer only</span>
+  </header>
+
+  <p class="lead" data-i18n="st_everythingClotrKeepsIsBelow">Everything Clotr keeps is below, read straight from its storage in this browser. Nothing is sent anywhere. It never keeps what you typed, only what kind of thing it found, where and when, and what you chose.</p>
+
+  <h2 data-i18n="st_yourSettings">Your settings</h2>
+  <dl id="settings" class="facts-list"></dl>
+
+  <h2 data-i18n="st_yourVault">Your vault</h2>
+  <p class="muted"><span data-i18n="st_t14">Each item is a one-way fingerprint (or, for ID numbers, just a format like</span> <code>AB-######</code><span data-i18n="st_t1">).
+    The details you typed are not kept.</span></p>
+  <p id="vault-count"></p>
+  <table class="events" id="vault-table" hidden>
+    <thead><tr><th scope="col" data-i18n="st_kind">Kind</th><th scope="col" data-i18n="st_setting">Setting</th><th scope="col" data-i18n="st_storedAs">Stored as</th><th scope="col" data-i18n="st_added">Added</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h2 data-i18n="st_history">History</h2>
+  <p id="history-count"></p>
+  <table class="events" id="history-table" hidden>
+    <caption class="muted">The most recent 100 records, exactly as stored (newest first).</caption>
+    <thead><tr><th scope="col" data-i18n="st_when">When</th><th scope="col" data-i18n="st_aiTool">AI tool</th><th scope="col" data-i18n="st_whatKind">What kind</th><th scope="col" data-i18n="st_outcome">Outcome</th><th scope="col" data-i18n="st_fingerprint">Fingerprint</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h2 data-i18n="st_otherBookkeeping">Other bookkeeping</h2>
+  <dl id="other" class="facts-list"></dl>
+
+  <details class="raw">
+    <summary data-i18n="st_showTheRawData">Show the raw data</summary>
+    <p class="muted" data-i18n="st_theExactRecordsAsA">The exact records, as a developer would see them. The fingerprint secret is hidden.</p>
+    <pre id="raw"></pre>
+  </details>
+
+  <section id="reach" aria-labelledby="h-reach">
+    <h2 id="h-reach" data-i18n="st_whatClotrCanReach">What Clotr can reach</h2>
+    <p><b data-i18n="st_nothingOutsideYourBrowser">Nothing outside your browser.</b> <span data-i18n="st_t2">Clotr has no server and makes no connections. Your browser enforces this
+      rule on Clotr's own pages (read live from the installed copy):</span></p>
+    <p><code id="policy"></code></p>
+    <p class="muted"><code>connect-src 'self'</code> <span data-i18n="st_t3">means these pages can only load Clotr's own files: no website, no
+      server. The part that watches AI chat boxes runs inside those pages; it contains no code that sends anything, and an
+      automated check fails the build if any is ever added.</span></p>
+    <h3 data-i18n="st_whatClotrIsAllowedTo">What Clotr is allowed to do, and why</h3>
+    <dl id="permissions" class="facts-list"></dl>
+    <h3 data-i18n="st_checkItYourself">Check it yourself</h3>
+    <ul class="facts">
+      <li><span data-i18n="st_t15">Open</span> <code>brave://extensions</code> <span data-i18n="st_t4">(or</span> <code>chrome://extensions</code><span data-i18n="st_t5">), turn on Developer mode, and under Clotr
+        click</span> <b data-i18n="st_serviceWorker">service worker</b><span data-i18n="st_t6">. In the window that opens, the</span> <b data-i18n="st_network">Network</b> <span data-i18n="st_t7">tab stays empty while you use AI chats.</span></li>
+      <li><span data-i18n="st_t16">Every release zip can be rebuilt from the published code with</span> <code>npm run package</code><span data-i18n="st_t8">: the result is
+        byte-for-byte the same, so its checksum matches the one in the release's</span> <code>SHA256SUMS.txt</code>.</li>
+    </ul>
+  </section>
+
+  <section id="move" aria-labelledby="h-move">
+    <h2 id="h-move" data-i18n="mv_title">Move to a new computer</h2>
+    <p data-i18n="mv_intro">Take your settings, your vault and your PIN to another computer in one file. It's locked with a password you choose, made on this computer and never sent anywhere. Your history stays here.</p>
+    <h3 data-i18n="mv_saveTitle">On this computer: save the file</h3>
+    <div class="field">
+      <label for="mv-pass" data-i18n="mv_password">A password for the file (at least 8 characters)</label>
+      <input id="mv-pass" type="password" autocomplete="new-password">
+    </div>
+    <div class="field">
+      <label for="mv-pass2" data-i18n="mv_passwordAgain">The same password again</label>
+      <input id="mv-pass2" type="password" autocomplete="new-password">
+    </div>
+    <button id="mv-save" class="btn primary" type="button" data-i18n="mv_save">Save the file</button>
+    <p id="mv-save-msg" class="msg" role="status"></p>
+    <h3 data-i18n="mv_loadTitle">On the other computer: load it</h3>
+    <p class="muted" data-i18n="mv_loadHint">This replaces that computer's Clotr settings, vault and PIN with the file's. Sites you added yourself need adding again.</p>
+    <div class="field">
+      <label for="mv-file" data-i18n="mv_file">The file</label>
+      <input id="mv-file" type="file" accept=".clotr,application/json">
+    </div>
+    <div class="field">
+      <label for="mv-open" data-i18n="mv_filePassword">Its password</label>
+      <input id="mv-open" type="password" autocomplete="off">
+    </div>
+    <button id="mv-load" class="btn" type="button" data-i18n="mv_load">Load it on this computer</button>
+    <p id="mv-load-msg" class="msg" role="status"></p>
+  </section>
+
+  <h2 data-i18n="st_knownLimits">Known limits</h2>
+  <ul class="facts">
+    <li><b data-i18n="st_shortDetailsCanBeGuessed">Short details can be guessed from their fingerprints</b> <span data-i18n="st_t9">by someone who can open this browser's profile on this computer. There aren't that many possible phone numbers, so a determined person could try them all. Fingerprints keep your details from casual eyes, not from someone with full access to your computer.</span></li>
+    <li><b data-i18n="st_aiSitesMayKeepYour">AI sites may keep your unsent message in this browser.</b> <span data-i18n="st_t10">Some (like ChatGPT) save what you're typing so it's still there after a reload. Nothing is sent until you press Send, and hiding something replaces the saved copy too.</span></li>
+    <li><b data-i18n="st_clotrOnlyReadsText">Clotr only reads text.</b> <span data-i18n="st_t11">It checks what you type and attached text, PDF, Word, Excel and PowerPoint files, but not pictures, screenshots or voice. If your vault has details, it also reads the AI's reply for 90 seconds after you send, only to notice your own details; nothing from a reply is kept.</span></li>
+    <li><b data-i18n="st_clotrOnlyWorksOnAi">Clotr only works on AI chat sites</b> <span data-i18n="st_t12">it knows or that you added, and only in this browser.</span></li>
+    <li><b data-i18n="st_itCanMissThingsAnd">It can miss things and sometimes warn about ordinary text.</b> <span data-i18n="st_t13">It's a safety net, not a guarantee.</span></li>
+  </ul>
+
+  <footer class="app-footer">
+    <div id="report-root"></div>
+  </footer>
+
+  <script src="page-i18n.js"></script>
+  <script src="patterns.js"></script>
+  <script src="report.js"></script>
+  <script src="helper-core.js"></script>
+  <script src="backup.js"></script>
+  <script src="stored.js"></script>
+  <script src="move.js"></script>
+</body>
+</html>

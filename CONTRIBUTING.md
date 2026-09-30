@@ -4,7 +4,7 @@ Thanks for helping people keep their private details out of AI chats.
 
 ## The rules Clotr never breaks
 These are checked automatically (`npm test`); a change that breaks one won't be merged.
-- **AI chat sites only.** Never all websites. New AI sites go in `ai-privacy-guard/ai-sites.json`.
+- **AI chat sites only.** Never all websites. New AI sites go in `extension/ai-sites.json`.
 - **100% local.** No network requests of any kind from the extension.
 - **Never store what someone typed.** Only the kind of thing found, the site, the time, what they chose, and a salted
   one-way fingerprint.
@@ -12,7 +12,7 @@ These are checked automatically (`npm test`); a change that breaks one won't be 
 - **No `innerHTML`**, no remote code, no `eval`. Build the page with `createElement` / `textContent`.
 
 ## Good first contributions
-- **A missing AI site:** add `{ "name", "matches" }` to `ai-privacy-guard/ai-sites.json`, then `npm run sites`.
+- **A missing AI site:** add `{ "name", "matches" }` to `extension/ai-sites.json`, then `npm run sites`.
   Check the exact address the chat lives on.
 - **A missed detail or a false alarm:** add a test to `tests/patterns.test.js` that fails, then make it pass.
   Never use a real person's data or a real key; make up values of the same shape.
@@ -25,7 +25,7 @@ npm run format      # formats JavaScript and CSS (Prettier); npm run lint checks
 npm run test:e2e    # a real browser (Brave, Chrome or Edge) with Clotr loaded, against local test pages
 npm run package     # the release zip (reproducible) and its SHA-256
 ```
-- `ai-privacy-guard/` is the extension (load it unpacked in `chrome://extensions` with Developer mode on).
+- `extension/` is the extension (load it unpacked in `chrome://extensions` with Developer mode on).
 - How the parts fit together, what's stored and which checks guard it: [docs/architecture.md](docs/architecture.md).
 - Content scripts are classic scripts sharing code through `globalThis.Clotr` (no `import`/`export`).
 - Every bug fix comes with a test that failed before the fix.

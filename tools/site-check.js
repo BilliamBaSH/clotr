@@ -19,7 +19,7 @@ const path = require("path");
 const puppeteer = require("puppeteer-core");
 
 const ROOT = path.join(__dirname, "..");
-const EXT = path.join(ROOT, "ai-privacy-guard");
+const EXT = path.join(ROOT, "extension");
 const BASELINE = path.join(__dirname, "site-baseline.json");
 const REPORT = path.join(__dirname, "site-check-report.md");
 const args = process.argv.slice(2);

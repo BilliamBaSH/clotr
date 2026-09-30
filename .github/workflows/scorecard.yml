@@ -1,0 +1,37 @@
+# OpenSSF Scorecard (release review 2026-09-30, R22): scores this repo's security practices every week and on each
+# push to main, and publishes the result the README's badge shows. Public repo only: skipped in a private one.
+name: Scorecard
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+# Least privilege: read-only by default; the job may only upload its results and sign them for the badge.
+permissions:
+  contents: read
+
+jobs:
+  analysis:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      security-events: write # the results in the Security tab (code scanning)
+      id-token: write # publishing them for the badge
+    steps:
+      # Actions pinned to exact commits (a moved tag can't change what runs); the tag is in the comment.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: ossf/scorecard-action@2d1146689b8cda280b9bc96326124645441f03bc # v2.4.4
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+      - uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
+        with:
+          sarif_file: results.sarif
