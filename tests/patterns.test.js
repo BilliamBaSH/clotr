@@ -4,8 +4,8 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-require("../ai-privacy-guard/patterns.js");
-require("../ai-privacy-guard/detector.js");
+require("../extension/patterns.js");
+require("../extension/detector.js");
 
 // The extension's own detect(), reshaped to { patternId: [matched text, …] }
 function detect(text) {
@@ -70,6 +70,8 @@ test("credentials", () => {
   expectOnly(FAKE.openai, "openai_key");
   expectOnly("sk-" + "T3BlbkFJ9xQ2mZ7Lr4Wv8Kp1Nc6Hy5Gd0Bs3", "openai_key"); // legacy format
   expectOnly("-----BEGIN RSA PRIVATE KEY-----", "private_key");
+  // A Google key may end in a dash (the 10,000-message oracle run, 2026-09-30)
+  expectOnly("maps key AIzaHvneKu6rq2gXKZtw-eOhOYwuVw6AAiq_ps- is failing", "google_api_key");
 });
 
 test("fewer false alarms: placeholders and non-random look-alikes", () => {
@@ -86,11 +88,32 @@ test("fewer false alarms: placeholders and non-random look-alikes", () => {
   expectNothing("branch sk-My-Project-2024-Final-Draft-v2");
 });
 
+test("a house number that looks like a year (the 10,000-message oracle run)", () => {
+  expectOnly(
+    "Ship it to 2068 Oak Street, Albany, NY 12250 by Friday.",
+    "street_address",
+    "2068 Oak Street, Albany, NY 12250",
+  );
+  expectOnly("I live at 1999 Elm Street", "street_address", "1999 Elm Street");
+});
+
+test("phone numbers with misspelled digit words (the 10,000-message oracle run)", () => {
+  expectOnly("my number is nien three seven, fiv fiv sicks, zeero one four seven", "phone_number");
+  expectOnly("call nine three seven five five five zro one eigt seven", "phone_number");
+  // Sound-alikes still need real digits on both sides, so an ordinary sentence stays quiet
+  expectNothing("I won too many times to count, for real");
+});
+
 test("credit cards (Luhn)", () => {
   expectOnly("4111 1111 1111 1111", "credit_card");
   expectNothing("4111 1111 1111 1112");
   // Amex: its first 10 digits look like a phone number; report the card only.
   expectOnly("Card 3782 822463 10005", "credit_card");
+  // Book numbers (ISBN-13, the 978/979 prefix no card network uses) pass Luhn about one time in ten: the 10,000-
+  // message oracle run found 47 (2026-09-30). A 13-digit Visa still counts.
+  expectNothing("The ISBN is 978-1-299-78053-2; is that the second edition?");
+  expectNothing("isbn 9780353109620");
+  expectOnly("card 4222222222222", "credit_card");
 });
 
 test("credit cards spelled out in words (not mistaken for a crypto seed phrase)", () => {
@@ -185,6 +208,10 @@ test("phone numbers: things that are not phones", () => {
   expectNothing("ticket 555-1234 was closed, invoice no. 937-555-0199 paid");
   expectOnly("order 445-2231987 arrived, call me at 937-555-0147", "phone_number", "937-555-0147");
   expectNothing("El ID de la reunión de Zoom es 845 2931 7710");
+  // An ID in a log isn't a phone, even when it reads like "00 49 …" (the 10,000-message oracle run, 2026-09-30)
+  expectNothing("The log says 2026-05-11T14:11:59Z request id 004940008510.");
+  expectNothing("transaction ID: 004582298378 failed");
+  expectOnly("request id 004940008510, call me at 937-555-0147", "phone_number", "937-555-0147");
   expectOnly("about the order, call me at 937-555-0147", "phone_number", "937-555-0147");
   expectOnly("sobre el pedido, llámame al 612 345 678", "phone_number", "612 345 678");
 });
@@ -441,6 +468,9 @@ test("street addresses, however they're written", () => {
   expectNothing("it's a 2 way street");
   expectNothing("read chapter 12 of the book");
   expectNothing("in 2024 the road was closed");
+  // A house number like a year is still an address; it's a year only after a time word (the oracle run)
+  expectNothing("By 2030 Main Street will be pedestrian only");
+  expectNothing("since 1998 Elm Street has flooded");
   expectNothing("take the 3 main roads north");
   expectNothing("a 5 star place to eat");
   expectNothing("she came in 2nd place");
@@ -1349,7 +1379,7 @@ test("translations: Spanish with values filled in; English when a message is mis
   const fs = require("node:fs");
   const path = require("node:path");
   const es = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "..", "ai-privacy-guard", "_locales", "es", "messages.json"), "utf8"),
+    fs.readFileSync(path.join(__dirname, "..", "extension", "_locales", "es", "messages.json"), "utf8"),
   );
   const getMessage = (key, subs = []) => {
     const m = es[key];
@@ -1368,7 +1398,7 @@ test("translations: Spanish with values filled in; English when a message is mis
     );
     assert.equal(
       msg("tipHow", "How should Clotr treat $1 from now on?", "a Phone Number", "Número de teléfono"),
-      "¿Cómo debe tratar Clotr este tipo de dato (Número de teléfono) a partir de ahora?",
+      "¿Cómo quieres que Clotr trate este tipo de dato (Número de teléfono) a partir de ahora?",
     );
     assert.equal(msg("noSuchKey", "Only in English, $1", "here"), "Only in English, here");
   } finally {
@@ -1473,4 +1503,76 @@ test("not a secret: a year after OTP, words describing a password", () => {
   expectNone("the password for 2FA is separate");
   expectNone("the password for the account is expiring in 5 days");
   assert.ok(detect("the password for guest wifi is guest").password); // that one really is the password
+});
+
+// Pre-release Batch 3: "generalize instead of remove". A birth date keeps its month and year, an address its town;
+// what can't be made general is hidden as before, and the result never holds the exact detail.
+test("generalize: a birth date becomes its month and year, an address its town", () => {
+  const { detect: find, generalize, generalForms } = globalThis.Clotr;
+  const gen = (text) => generalize(text, find(text), "en-US");
+  assert.equal(gen("I was born on 03/14/1948"), "I was born on March 1948");
+  assert.equal(gen("born March 14, 1948 in Ohio"), "born March 1948 in Ohio");
+  assert.equal(gen("DOB: 1948-03-14"), "DOB: March 1948");
+  assert.equal(gen("my birthday is 14 March 1948"), "my birthday is March 1948");
+  // 04/05 could be April 5 or 4 May: only the year, never a wrong month.
+  assert.equal(gen("I was born on 04/05/1948"), "I was born on 1948");
+  assert.equal(gen("my address is 123 Oak Street, Springfield, IL 62704"), "my address is Springfield");
+  assert.equal(gen("send it to 42 Elm Ave, Portland OR 97201 please"), "send it to Portland please");
+  // No town to keep: hidden like before.
+  assert.equal(gen("I live at 123 Oak Street"), "I live at [REDACTED STREET ADDRESS]");
+  // Mixed: the date generalized, the phone hidden.
+  const mixed = gen("born 03/14/1948, call me at 937-555-0123");
+  assert.equal(mixed, "born March 1948, call me at [REDACTED PHONE NUMBER]");
+  // In Spanish, the month is Spanish.
+  const es = (text) => generalize(text, find(text), "es-ES");
+  assert.equal(es("nací el 14/03/1948"), "nací el marzo de 1948");
+  assert.equal(es("mi fecha de nacimiento es 14 de marzo de 1948"), "mi fecha de nacimiento es marzo de 1948");
+  // What the button shows, and nothing when there's nothing to generalize.
+  assert.deepEqual(
+    generalForms(find("born 03/14/1948, call me at 937-555-0123"), "en-US").map((g) => g.general),
+    ["March 1948"],
+  );
+  assert.deepEqual(generalForms(find("call me at 937-555-0123"), "en-US"), []);
+  // The general message is quiet: nothing in it is found again.
+  for (const t of ["I was born on 03/14/1948", "my address is 123 Oak Street, Springfield, IL 62704"]) {
+    assert.deepEqual(find(gen(t)), [], `still found in "${gen(t)}"`);
+  }
+});
+
+// Bug (2026-09-29): Spanish birth dates in these forms weren't caught.
+test("Spanish birth dates: nacido/nacida, nacimiento:, and year-month-day", () => {
+  assert.deepEqual(detect("fecha de nacimiento: 1948-03-14").date_of_birth, ["1948-03-14"]);
+  assert.deepEqual(detect("nacido el 14/03/1948 en Madrid").date_of_birth, ["14/03/1948"]);
+  assert.deepEqual(detect("nacida el 3 de julio de 1962").date_of_birth, ["3 de julio de 1962"]);
+  assert.deepEqual(detect("Nacimiento: 14/03/1948").date_of_birth, ["14/03/1948"]);
+  // Still quiet: a birthplace, and a date that isn't a birth date.
+  expectNone("lugar de nacimiento: Madrid");
+  expectNone("la reunión es el 14/03/2027");
+});
+
+// Security review (2026-09-30): a huge paste of digits must stay quick to read. Every digit added to a long run used to
+// re-check the whole run for a list marker ("1.", "2)"): 40,000 digits took about a second and froze the chat page.
+// Measured so a busy machine can't fail it (CI, 2026-09-30: 10,000 digits in 5 ms, 40,000 in 48 ms, where the 5 ms
+// floor made the check "under 40 ms"): texts large enough to time well above the floor, the two sizes read in
+// turns so a slow moment hits both, the best of five each. The rule is unchanged: four times the text may take less
+// than eight times as long; the old way took about sixteen times.
+test("reading a long run of digits grows in step with its length (no freeze on a huge paste)", () => {
+  let n = 0;
+  const once = (digits) => {
+    const text = "1".repeat(digits) + "x" + n++; // a new text each time: the last read is cached
+    const t0 = process.hrtime.bigint();
+    globalThis.Clotr.detect(text);
+    return Number(process.hrtime.bigint() - t0) / 1e6;
+  };
+  once(2000); // warm up
+  let small = Infinity;
+  let big = Infinity;
+  for (let i = 0; i < 5; i++) {
+    small = Math.min(small, once(20000));
+    big = Math.min(big, once(80000));
+  }
+  assert.ok(
+    big < 8 * Math.max(small, 5),
+    `20,000 digits: ${small.toFixed(0)} ms, 80,000: ${big.toFixed(0)} ms (four times the text should take about four times as long)`,
+  );
 });

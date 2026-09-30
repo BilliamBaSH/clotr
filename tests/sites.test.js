@@ -7,7 +7,7 @@ const fs = require("fs");
 const path = require("path");
 
 // sites.js reads the built-in list from the manifest and grants from chrome.permissions.
-const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "ai-privacy-guard", "manifest.json"), "utf8"));
+const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "extension", "manifest.json"), "utf8"));
 let granted = [];
 let stored = {};
 globalThis.chrome = {
@@ -15,8 +15,11 @@ globalThis.chrome = {
   permissions: { getAll: async () => ({ origins: granted }) },
   storage: { local: { get: async (k) => ({ [k]: stored[k] }) } },
 };
-require("../ai-privacy-guard/sites.js");
+require("../extension/sites.js");
+require("../extension/patterns.js");
+require("../extension/detector.js");
 const Sites = globalThis.ClotrSites;
+const Clotr = globalThis.Clotr;
 
 test("Protect this site: a whole AI site gets the whole host", () => {
   assert.equal(Sites.protectScope("https://chat.newtool.ai/c/123?x=1"), "https://chat.newtool.ai/*");
@@ -110,6 +113,111 @@ test("Team policy: required responses win, settings/pause locks apply, bad value
   assert.deepEqual(none.responses, user.responses);
   assert.equal(none.paused, true);
   assert.equal(none.locked, false);
+});
+
+test("Team pack presets: keys_never and client_names list exactly the credentials/personal PATTERNS groups (drift guard)", () => {
+  const groupIds = (group) =>
+    Clotr.PATTERNS.filter((p) => p.group === group)
+      .map((p) => p.id)
+      .sort();
+  // Every credential kind, Stripe publishable keys and internal addresses included (the maintainer's Q30 answer, D117).
+  assert.deepEqual(Object.keys(Sites.PRESETS.keys_never.requiredResponses).sort(), groupIds("credentials"));
+  const clientNamesIds = Object.keys(Sites.PRESETS.client_names.requiredResponses).filter((id) => id !== "watch_list");
+  assert.deepEqual(clientNamesIds.sort(), groupIds("personal"));
+});
+
+test("Team pack: a preset expands to its requiredResponses; an explicit field beats the preset; an unknown preset is ignored", () => {
+  const withPreset = Sites.mergePolicy({ preset: "keys_never" });
+  assert.equal(withPreset.requiredResponses.github_token, "block");
+  assert.equal(withPreset.allowPause, false);
+  assert.equal(withPreset.preset, "keys_never");
+
+  const overridden = Sites.mergePolicy({ preset: "keys_never", requiredResponses: { github_token: "warn" } });
+  assert.equal(overridden.requiredResponses.github_token, "warn", "the admin's explicit field beats the preset");
+  assert.equal(overridden.requiredResponses.aws_access_key, "block", "the rest of the preset still applies");
+
+  const unknown = Sites.mergePolicy({ preset: "not-a-real-preset", requiredResponses: { email: "warn" } });
+  assert.equal(unknown.preset, undefined, "an unknown preset is ignored, not carried through");
+  assert.deepEqual(unknown.requiredResponses, { email: "warn" });
+
+  const noProto = Sites.mergePolicy({ requiredResponses: JSON.parse('{"__proto__": {"polluted": true}}') });
+  assert.equal({}.polluted, undefined, "a __proto__ key in the policy never reaches Object.prototype");
+  assert.ok(!("polluted" in noProto.requiredResponses));
+});
+
+test("Clotr.stricter: block is stricter than warn, warn stricter than log; an unrecognized value counts as warn", () => {
+  assert.equal(Clotr.stricter("block", "warn"), "block");
+  assert.equal(Clotr.stricter("warn", "block"), "block");
+  assert.equal(Clotr.stricter("warn", "log"), "warn");
+  assert.equal(Clotr.stricter("log", "log"), "log");
+  assert.equal(Clotr.stricter("block", "block"), "block");
+  assert.equal(Clotr.stricter("nonsense", "log"), "warn", "an unrecognized response is a warn, not the loosest");
+});
+
+test("Team policy floor (D115): a required response never downgrades a stricter choice the person already made", () => {
+  const user = { responses: { credit_card: "block", phone_number: "log" } };
+  const policy = { requiredResponses: { credit_card: "warn", phone_number: "warn" } };
+  const eff = Sites.applyPolicy(user, policy);
+  assert.equal(eff.responses.credit_card, "block", "the person's own block is stricter than the policy's warn");
+  assert.equal(eff.responses.phone_number, "warn", "the policy's warn is stricter than the person's log");
+});
+
+test("Team pack: floorOf reports a required block so the background can keep a vault 'allow' entry from weakening it", () => {
+  const policy = { requiredResponses: { phone_number: "block", credit_card: "warn" } };
+  assert.equal(Sites.floorOf(policy, "phone_number"), "block");
+  assert.equal(Sites.floorOf(policy, "credit_card"), null, "a required warn is not a floor for this purpose");
+  assert.equal(Sites.floorOf(policy, "email"), null, "a kind with no required response");
+  assert.equal(Sites.floorOf({}, "phone_number"), null, "no policy at all");
+});
+
+test("Team pack: policyFingerprint is stable, a preset equals its expanded JSON, and orgName/preset/version don't affect it", () => {
+  const preset = Sites.mergePolicy({ preset: "keys_never", orgName: "Acme" });
+  const expanded = Sites.mergePolicy({
+    requiredResponses: Sites.PRESETS.keys_never.requiredResponses,
+    allowPause: false,
+  });
+  assert.equal(
+    Sites.policyFingerprint(preset),
+    Sites.policyFingerprint(expanded),
+    "a preset and its expanded JSON must print the same fingerprint",
+  );
+  assert.equal(Sites.policyFingerprint(preset), Sites.policyFingerprint(preset), "stable across calls");
+  const differentOrgName = Sites.mergePolicy({ preset: "keys_never", orgName: "Someone Else" });
+  assert.equal(Sites.policyFingerprint(preset), Sites.policyFingerprint(differentOrgName), "orgName excluded");
+  const differentRequired = Sites.mergePolicy({ preset: "client_names" });
+  assert.notEqual(Sites.policyFingerprint(preset), Sites.policyFingerprint(differentRequired));
+  assert.match(Sites.policyFingerprint(preset), /^[0-9A-F]{16}$/);
+});
+
+test("Team pack docs: the expanded JSON block for each preset in docs/team-rollout.md matches sites.js's PRESETS exactly (drift guard)", () => {
+  const doc = fs.readFileSync(path.join(__dirname, "..", "docs", "team-rollout.md"), "utf8");
+  const re = /```json\s*\{\s*"preset":\s*"(\w+)"\s*\}\s*```\s*is the same as:\s*```json([\s\S]*?)```/g;
+  const found = [...doc.matchAll(re)].map((m) => [m[1], JSON.parse(m[2])]);
+  assert.deepEqual(
+    found.map(([id]) => id).sort(),
+    Object.keys(Sites.PRESETS).sort(),
+    "docs/team-rollout.md should show one expanded block per preset in sites.js",
+  );
+  for (const [id, expanded] of found) assert.deepEqual(expanded, Sites.PRESETS[id], `preset ${id}`);
+});
+
+test("Team pack: a watch format (# digit, @ letter) needs 4+ marks and no digits, up to 40 characters", () => {
+  assert.equal(Sites.isShape("EMP-#####"), true);
+  assert.equal(Sites.isShape("EMP-12345"), false, "an actual example, not a format, has digits");
+  assert.equal(Sites.isShape("c#"), false, "only one mark");
+  assert.equal(Sites.isShape("#@#@" + "x".repeat(40)), false, "over 40 characters");
+  assert.equal(Sites.isShape(42), false);
+});
+
+test("Team pack: watch formats travel separately from watch words, capped at 20", () => {
+  const shapes = Sites.policyShapes({ watchWords: ["Acme Holdings", "EMP-#####", "EMP-#####", "c#"] });
+  assert.deepEqual(shapes, ["EMP-#####"]);
+  assert.deepEqual(Sites.policyShapes({}), []);
+  const many = Array.from({ length: 30 }, (_, i) => `@@${String.fromCharCode(65 + i)}-####`);
+  assert.equal(Sites.policyShapes({ watchWords: many }).length, 20);
+  // A format never also shows up as a hashed literal word.
+  const words = Sites.policyWords({ watchWords: ["Acme Holdings", "EMP-#####"] });
+  assert.deepEqual(words, ["acme holdings"]);
 });
 
 test("Team policy: watch words are cleaned (trimmed, lowercased, up to 4 words, capped), junk dropped", () => {

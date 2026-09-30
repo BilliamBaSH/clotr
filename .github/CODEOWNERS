@@ -3,5 +3,11 @@
 /.github/                         @BilliamBaSH
 /tools/package.js                 @BilliamBaSH
 /tests/rules.test.js              @BilliamBaSH
-/ai-privacy-guard/manifest.json   @BilliamBaSH
-/ai-privacy-guard/ai-sites.json   @BilliamBaSH
+/extension/manifest.json   @BilliamBaSH
+/extension/ai-sites.json   @BilliamBaSH
+# What the agents read as instructions, and what decides the installed and linted code (release review 2026-09-30).
+/package.json                     @BilliamBaSH
+/package-lock.json                @BilliamBaSH
+/.npmrc                           @BilliamBaSH
+/eslint.config.js                 @BilliamBaSH
+/.gitleaks.toml                   @BilliamBaSH

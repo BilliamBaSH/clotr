@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clotr: Set it up for someone</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="vault.css">
+  <link rel="stylesheet" href="helper.css">
+</head>
+<body class="vault-page helper-page">
+  <header class="top">
+    <img src="icons/icon-on-32.png" alt="" width="24" height="24">
+    <span class="wordmark" data-i18n-skip>Clotr</span>
+    <h1 data-i18n="hp_setItUpForSomeone">Set Clotr up for someone</h1>
+  </header>
+  <p class="lead" data-i18n="hp_intro">For a parent, a grandparent or a child. Four steps and a few minutes, on their computer, in the browser they use for AI chats.</p>
+
+  <p id="managed-note" class="managed" hidden><b data-i18n="popup_managedByYourOrganization">Managed by your organization.</b> <span data-i18n="popup_managedDetail">Clotr's settings on this computer are set by your IT team. It still only checks AI chats, on this computer, and reports nothing to anyone.</span></p>
+  <section id="unlock" class="unlock" hidden>
+    <h2 data-i18n="popup_settingsAreLocked">Settings are locked</h2>
+    <p class="muted" data-i18n="popup_someoneWhoSetClotrUp">Someone who set Clotr up for you added a PIN, so settings aren't changed by accident. Clotr keeps protecting you either way.</p>
+    <label for="unlock-pin" data-i18n="popup_pin">PIN</label>
+    <div class="pin-row">
+      <input id="unlock-pin" type="password" inputmode="numeric" maxlength="8" autocomplete="off">
+      <button id="unlock-go" class="btn primary" type="button" data-i18n="popup_unlock">Unlock</button>
+    </div>
+    <p id="unlock-msg" class="msg" role="status"></p>
+  </section>
+
+  <ol id="steps" class="helper-steps">
+    <li>
+      <h2 data-i18n="hp_step1">Tell Clotr what to protect</h2>
+      <p data-i18n="hp_step1Text">Their name, phone numbers, home address, email and the names of family members. Clotr keeps only one-way fingerprints of them, never the details themselves.</p>
+      <p class="step-action">
+        <button id="open-vault" class="btn primary" type="button" data-i18n="hp_addTheirDetails">Add their details</button>
+        <span id="vault-count" class="muted" role="status"></span>
+      </p>
+    </li>
+    <li>
+      <h2 data-i18n="hp_step2">Make the warnings bigger</h2>
+      <p data-i18n="hp_step2Text">Bigger text and bigger buttons in Clotr's notes, easier to read and to click.</p>
+      <label class="toggle"><input type="checkbox" id="large-text"> <span data-i18n="popup_largerWarnings">Larger warnings</span></label>
+    </li>
+    <li>
+      <h2 data-i18n="hp_step3">Ask before personal details go out</h2>
+      <p data-i18n="hp_step3Text">When a message holds a phone number, an address or a birthday, Clotr stops and asks before it's sent. Passwords and keys always get a warning.</p>
+      <label class="toggle"><input type="checkbox" id="strict-personal"> <span data-i18n="popup_askBeforeSendingPersonalDetails">Ask before sending personal details</span></label>
+    </li>
+    <li>
+      <h2 data-i18n="hp_step4">Lock the settings with a PIN</h2>
+      <p data-i18n="popup_thePinStopsAccidentalChanges">The PIN stops accidental changes. It isn't a real lock, since anyone who can remove Clotr from the browser can reset it.</p>
+      <label for="pin" data-i18n="popup_pinToLockTheseSettings">PIN to lock these settings (4 to 8 digits)</label>
+      <div class="pin-row">
+        <input id="pin" type="password" inputmode="numeric" maxlength="8" autocomplete="off">
+        <button id="lock-set" class="btn" type="button" data-i18n="popup_lockSettings">Lock settings</button>
+      </div>
+      <p id="lock-msg" class="msg" role="status"></p>
+    </li>
+  </ol>
+
+  <section id="done" class="helper-done">
+    <h2 data-i18n="hp_whatTheyllSee">What they'll see</h2>
+    <p data-i18n="hp_whatTheyllSeeText">A note in the corner of the AI chat when their message has something private in it, with a button to hide it. With step 3 on, Clotr asks before a personal detail goes out. Clotr itself never sends anything anywhere.</p>
+    <p data-i18n="hp_tryItTogether">Try it together: open an AI chat and type a made-up phone number.</p>
+    <p><button id="open-share" class="btn" type="button" data-i18n="hp_printAGuide">Print a one-page guide for them</button></p>
+  </section>
+
+  <footer class="app-footer">
+    <div id="report-root"></div>
+  </footer>
+
+  <script src="page-i18n.js"></script>
+  <script src="patterns.js"></script>
+  <script src="report.js"></script>
+  <script src="detector.js"></script>
+  <script src="helper-core.js"></script>
+  <script src="helper.js"></script>
+</body>
+</html>

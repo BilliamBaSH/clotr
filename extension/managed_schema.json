@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "preset": {
+      "title": "Preset",
+      "description": "A ready-made policy: keys_never (every credential kind must ask before sending), client_names (client and matter details must ask), or clinic (patient and staff identifiers must ask). Your other settings are added on top; an explicit requiredResponses entry beats the preset's.",
+      "type": "string",
+      "enum": ["keys_never", "client_names", "clinic"]
+    },
+    "orgName": {
+      "title": "Organization name",
+      "description": "Shown to your people in Clotr and on the printed policy page. Up to 80 characters.",
+      "type": "string"
+    },
+    "requiredResponses": {
+      "title": "Required responses",
+      "description": "Kinds of data (as in patterns.js, e.g. aws_access_key) and how Clotr must respond: block (ask before sending), warn or log. A floor, never a ceiling: a person may still choose a stricter response than this for themselves.",
+      "type": "object",
+      "additionalProperties": { "type": "string", "enum": ["block", "warn", "log"] }
+    },
+    "watchWords": {
+      "title": "Watch words",
+      "description": "Words or phrases (up to 4 words each, 200 at most) to warn about, e.g. project code names. A format with # for a digit and @ for a letter (at least 4 marks, no digits, for example EMP-#####) is watched as a format instead. Turned into one-way fingerprints on each computer; formats travel as typed (they aren't secret).",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "lockSettings": {
+      "title": "Lock settings",
+      "description": "People can see but not change Clotr's settings or vault.",
+      "type": "boolean"
+    },
+    "allowPause": {
+      "title": "Allow pausing",
+      "description": "false removes the per-site Pause.",
+      "type": "boolean"
+    },
+    "largeText": {
+      "title": "Larger warnings",
+      "description": "Larger warnings for everyone.",
+      "type": "boolean"
+    }
+  }
+}

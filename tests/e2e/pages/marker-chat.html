@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Stand-in for Microsoft Copilot's editor: a contenteditable span that keeps an invisible marker
+     (U+200B U+200C) in its own span at the end of the text, and puts a new one back after any edit
+     that removed it. The box's text then differs from what was typed only by zero-width characters. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Copilot (Clotr test page)</title></head>
+<body>
+  <span id="m365-chat-editor-target-element" role="textbox" contenteditable="true" aria-label="Message Copilot"
+        style="display:inline-block;border:1px solid #999;min-height:40px;width:480px;padding:6px"><p></p></span>
+  <button id="send" aria-label="Submit message">Send</button>
+  <script>
+    window.__sent = [];
+    const MARK = "​‌";
+    const box = document.getElementById("m365-chat-editor-target-element");
+    function keepMarker() {
+      const p = box.querySelector("p") || box.appendChild(document.createElement("p"));
+      const last = p.lastChild;
+      if (last && last.nodeType === 1 && last.classList.contains("mark")) return;
+      const mark = document.createElement("span");
+      mark.className = "mark";
+      mark.contentEditable = "false";
+      mark.textContent = MARK;
+      p.appendChild(mark);
+    }
+    keepMarker();
+    new MutationObserver(keepMarker).observe(box, { childList: true, subtree: true, characterData: true });
+    function send() {
+      const text = box.innerText.replace(/[​‌]/g, "").trim();
+      if (!text) return;
+      window.__sent.push(text);
+      box.replaceChildren(document.createElement("p"));
+    }
+    document.getElementById("send").addEventListener("click", send);
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+  </script>
+</body>
+</html>

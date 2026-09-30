@@ -1,0 +1,25 @@
+# Dependency updates (release review 2026-09-30, R16): the dev tools (npm) and the pinned GitHub Actions, once a
+# month, one grouped PR each, and only versions that have been out for a week (a hijacked release is usually caught
+# within days). They wait for the maintainer: dependency files are guard rails, so no agent merges them.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      dev-tools:
+        patterns: ["*"]
+    open-pull-requests-limit: 2
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+    open-pull-requests-limit: 2

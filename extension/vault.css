@@ -1,0 +1,350 @@
+/* "What should I protect?" page. Builds on popup.css tokens. */
+body.vault-page {
+  max-width: 640px;
+  width: auto;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+.vault-page .top h1 {
+  font-size: 20px;
+}
+.lead {
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin: 8px 0 18px;
+}
+.field {
+  margin-bottom: 14px;
+}
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.field .hint {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0 0 4px;
+}
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--axis);
+}
+.field textarea:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+.save-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 6px 0 24px;
+}
+.save-row .muted {
+  margin: 0;
+}
+.vault-page .list .cat {
+  font-size: 11px;
+  color: var(--muted);
+  display: block;
+}
+.vault-page code {
+  white-space: nowrap;
+}
+
+/* First-install welcome (vault.html?welcome=1) */
+#welcome h2 {
+  font-size: 16px;
+  margin: 22px 0 8px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+}
+#welcome label code {
+  display: inline-block;
+  font-size: 13px;
+  margin-top: 2px;
+  user-select: all;
+}
+/* The author's note on the welcome page (D98, D104): the brand's mind map draws itself once (branches
+   grow out of "You", the plasters land on each detail, the cut-off lines keep drifting), then the note.
+   Everything rests in its final state, so with reduced motion it's simply there. */
+.author-hero {
+  --hm-line: #8a909b;
+  --hm-faint: #c9cbd0;
+  --ease-out: cubic-bezier(0.22, 0.9, 0.26, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin: 14px 0 18px;
+  padding: 10px 18px 16px;
+  border-radius: 14px;
+  background-color: var(--surface);
+  background-image: radial-gradient(var(--grid) 1px, transparent 1.3px);
+  background-size: 16px 16px;
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+@media (prefers-color-scheme: dark) {
+  .author-hero {
+    --hm-line: #80858f;
+    --hm-faint: #4b4d53;
+  }
+}
+.hero-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.hero-map path {
+  fill: none;
+  stroke-linecap: round;
+}
+.hm-b,
+.hm-t {
+  stroke: var(--hm-line);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.hm-b {
+  stroke-width: 3.5;
+}
+.hm-t {
+  stroke-width: 2.5;
+}
+.hm-f {
+  stroke: var(--hm-faint);
+  stroke-width: 2.5;
+  stroke-dasharray: 2 7;
+}
+.hm-leaf circle {
+  fill: var(--hm-faint);
+}
+.hm-leaf text {
+  font-size: 13px;
+  fill: var(--ink-2);
+}
+.hm-site circle {
+  fill: var(--surface);
+  stroke: var(--hm-line);
+  stroke-width: 3;
+}
+.hm-site text {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+.hm-you circle {
+  fill: var(--ink);
+}
+.hm-you text {
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--page);
+  text-anchor: middle;
+}
+.hm-pulse {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2;
+  opacity: 0;
+}
+.hm-edge {
+  fill: var(--surface);
+}
+.hm-strip {
+  fill: var(--ink);
+}
+.hm-pad {
+  fill: var(--signal);
+}
+.hm-you,
+.hm-site,
+.hm-p,
+.hm-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.hero-map .i1 {
+  --i: 1;
+}
+.hero-map .i2 {
+  --i: 2;
+}
+.hero-map .i3 {
+  --i: 3;
+}
+.hero-map .i4 {
+  --i: 4;
+}
+.hero-map .i5 {
+  --i: 5;
+}
+.author-note {
+  margin: 4px 0 0;
+  color: var(--ink);
+  line-height: 1.55;
+}
+.author-note p {
+  margin: 0 0 8px;
+}
+.author-note p:last-child {
+  margin-bottom: 0;
+}
+.author-hello {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.author-why {
+  color: var(--ink-2);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hm-you {
+    animation: hm-pop 420ms var(--ease-pop) both;
+  }
+  .hm-pulse {
+    animation: hm-pulse 1100ms var(--ease-out) 260ms 2;
+  }
+  .hm-b {
+    animation: hm-draw 640ms var(--ease-out) calc(160ms + var(--i, 0) * 90ms) both;
+  }
+  .hm-site {
+    animation: hm-pop 380ms var(--ease-pop) calc(560ms + var(--i, 0) * 90ms) both;
+  }
+  .hm-t {
+    animation: hm-draw 420ms var(--ease-out) calc(820ms + var(--i, 0) * 60ms) both;
+  }
+  .hm-p {
+    animation: hm-land 520ms var(--ease-pop) calc(1120ms + var(--i, 0) * 85ms) both;
+  }
+  .hm-leaf {
+    animation: hm-fade 420ms var(--ease-out) calc(1280ms + var(--i, 0) * 85ms) both;
+  }
+  .hm-f {
+    animation: hm-drift 1.6s linear 1.9s infinite;
+  }
+  .author-note {
+    animation: hm-rise 620ms var(--ease-out) 380ms both;
+  }
+}
+@keyframes hm-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes hm-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes hm-land {
+  from {
+    opacity: 0;
+    transform: scale(1.9) rotate(-40deg);
+  }
+  60% {
+    opacity: 1;
+  }
+}
+@keyframes hm-fade {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+@keyframes hm-drift {
+  to {
+    stroke-dashoffset: -9;
+  }
+}
+@keyframes hm-pulse {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+@keyframes hm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+/* Narrow windows: the map keeps "You", the chats and the plasters; the labels past them are cropped. */
+@media (max-width: 480px) {
+  .hero-map {
+    height: 150px;
+    overflow: hidden;
+  }
+  .hm-leaf text {
+    display: none;
+  }
+}
+.facts {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.facts li {
+  margin: 4px 0;
+}
+.facts b {
+  color: var(--ink);
+}
+.try-result:empty {
+  display: none;
+}
+.try-result {
+  margin: 8px 0 4px;
+}
+.try-result > p {
+  margin: 0;
+  color: var(--ink-2);
+}
+.try-notice {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--ring);
+  border-left: 5px solid #e8a200;
+}
+.try-notice b {
+  display: block;
+  margin-bottom: 2px;
+}
+.try-notice p {
+  margin: 0 0 8px;
+  color: var(--ink-2);
+}
+.vault-page .btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.pin-step {
+  margin: 0 0 8px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.pin-step.done {
+  color: var(--good-ink);
+  font-weight: 600;
+}
+.try-notice .btn.primary {
+  background: #b3261e;
+} /* same red as the real warning (white text 6.5:1) */

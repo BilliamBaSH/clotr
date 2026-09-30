@@ -1,5 +1,5 @@
 // Dev tool (not shipped): does an AI site send what you type BEFORE you press Send?
-// Paste into DevTools as an init script (Chrome DevTools MCP: navigate_page → initScript),
+// Run it as an init script (for example with Puppeteer's evaluateOnNewDocument),
 // so it runs before the site's own code. It wraps every way a page can send data (fetch,
 // XMLHttpRequest, sendBeacon, WebSocket) and records any outgoing body containing the probe.
 //

@@ -36,9 +36,19 @@
   <script>
     window.__sent = [];
     const box = document.getElementById("prompt");
+    const log = document.getElementById("log");
+    const bubble = (who, text) => {
+      const d = document.createElement("div");
+      d.className = `msg ${who}`;
+      d.textContent = text;
+      log.append(d);
+    };
+    // The AI's answer, added by the screenshot run (like a streamed reply).
+    window.__reply = (text) => bubble("ai", text);
     function send() {
       if (!box.value.trim()) return;
       window.__sent.push(box.value);
+      bubble("me", box.value);
       box.value = "";
     }
     document.getElementById("send").addEventListener("click", send);

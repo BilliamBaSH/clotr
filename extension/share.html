@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clotr: Share it with someone</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="vault.css">
+  <link rel="stylesheet" href="share.css">
+</head>
+<body class="vault-page share-page">
+  <header class="top no-print">
+    <img src="icons/icon-on-32.png" alt="" width="24" height="24">
+    <span class="wordmark" data-i18n-skip>Clotr</span>
+    <h1 data-i18n="sh_shareClotr">Share Clotr with someone</h1>
+  </header>
+
+  <section class="no-print">
+    <p class="lead" data-i18n="sh_intro">For a parent, a friend or anyone who chats with AI. Send them the link, or print the one-page guide below and set it up together.</p>
+    <h2 data-i18n="sh_sendTheLink">Send them the link</h2>
+    <div class="share-link">
+      <code id="share-url"></code>
+      <button id="copy-link" class="btn" type="button" data-i18n="sh_copyLink">Copy the link</button>
+    </div>
+    <p id="copy-msg" class="msg" role="status"></p>
+    <h2 data-i18n="sh_setItUpTogether">Set it up together</h2>
+    <p><span data-i18n="sh_setItUpText">On their computer, after installing: bigger warnings, their details and a PIN, one step at a time.</span>
+      <button id="open-helper" class="btn" type="button" data-i18n="popup_setItUpStepByStep">Set it up step by step</button></p>
+    <h2 data-i18n="sh_printTheGuide">Print the guide</h2>
+    <p><span data-i18n="sh_printText">One page, in large type, to leave next to their computer.</span>
+      <button id="print" class="btn primary" type="button" data-i18n="sh_print">Print the guide</button></p>
+  </section>
+
+  <footer class="app-footer no-print">
+    <div id="report-root"></div>
+  </footer>
+
+  <article class="guide" aria-labelledby="guide-title">
+    <div class="guide-head">
+      <img src="icons/icon-on-128.png" alt="" width="56" height="56">
+      <h2 id="guide-title"><span data-i18n-skip>Clotr</span>: <span data-i18n="sh_guideTitle">a heads-up before you overshare</span></h2>
+    </div>
+    <h3 data-i18n="sh_whatItIs">What it is</h3>
+    <p data-i18n="sh_whatItIsText">A helper in your web browser. When you type to an AI chat like ChatGPT, Gemini or Copilot, it notices private things before you send them, like a password, your phone number, your address or a card number.</p>
+    <h3 data-i18n="sh_whatYoullSee">What you'll see</h3>
+    <p data-i18n="sh_whatYoullSeeText">A note in the corner of the chat, like: "Heads up: your message contains a phone number."</p>
+    <h3 data-i18n="sh_whatToDo">What to do</h3>
+    <ul>
+      <li><b data-i18n="coverIt">Hide it</b> <span data-i18n="sh_hideItText">takes it out of your message.</span></li>
+      <li><b data-i18n="leaveIt">Leave it in</b> <span data-i18n="sh_leaveItText">if you meant to share it.</span></li>
+      <li data-i18n="sh_notSure">Not sure? Hide it. You can always type it again.</li>
+    </ul>
+    <h3 data-i18n="sh_whatItNeverDoes">What it never does</h3>
+    <p data-i18n="sh_whatItNeverDoesText">It never sends anything anywhere and never saves what you type. It doesn't look at your email or your bank's website. It only works in AI chats.</p>
+    <p class="guide-scam" data-i18n="sh_scam">Real support never asks for your password, a code texted to you, or your card. If someone does, stop and call the person below.</p>
+    <p class="guide-report"><span data-i18n="sh_reportAt">Something wrong, or a warning that shouldn't be there? Tell Clotr's maker at</span> <b data-i18n-skip>github.com/BilliamBaSH/clotr/issues</b> <span data-i18n="sh_reportNever">(it's public: never write the real detail there).</span></p>
+    <p class="guide-fill"><span data-i18n="sh_setUpBy">Set up by:</span> <span class="blank"></span></p>
+    <p class="guide-fill"><span data-i18n="sh_phone">Phone:</span> <span class="blank"></span></p>
+  </article>
+
+  <script src="page-i18n.js"></script>
+  <script src="patterns.js"></script>
+  <script src="report.js"></script>
+  <script src="share.js"></script>
+</body>
+</html>

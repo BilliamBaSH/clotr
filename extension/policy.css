@@ -1,0 +1,42 @@
+/* The organization policy page (policy.html): an unsigned self-attestation, print or PDF (share.css's pattern). */
+.policy-page .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  word-break: break-word;
+}
+.policy-page #pa-fingerprint {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.pa-fill {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-top: 16px;
+  font-weight: 700;
+}
+.pa-fill .blank {
+  flex: 1;
+  border-bottom: 2px solid var(--ink-2);
+  min-height: 1.4em;
+}
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body.vault-page {
+    padding: 0;
+    max-width: none;
+    background: #fff;
+    color: #000;
+  }
+  .policy-page,
+  .policy-page * {
+    color: #000 !important;
+    background: #fff !important;
+  }
+  .pa-fill .blank {
+    border-bottom-color: #000;
+  }
+}

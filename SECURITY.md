@@ -15,9 +15,15 @@ The full review, with every issue found and fixed and the accepted limits, is in
 
 ## Reporting a vulnerability
 Please don't open a public issue for a security problem. Use GitHub's
-[**Report a vulnerability**](https://github.com/BilliamBaSH/clotr-ai-privacy-guard/security/advisories/new) form
+[**Report a vulnerability**](https://github.com/BilliamBaSH/clotr/security/advisories/new) form
 (Security tab → Advisories), which only the maintainer can see, so it can be fixed before it's public. Include the browser and version, Clotr's version (in
 `chrome://extensions`) and the steps. Never include real personal data or real keys.
+
+**What happens next:** you get a reply within 7 days. A confirmed problem is fixed in the next release (sooner if
+it exposes what people type), and you're credited in the advisory unless you'd rather not be.
+
+**Supported versions:** only the latest release. Store installs update on their own; a downloaded copy should be
+replaced with the newest one from Releases.
 
 ## Known limits
 - A hostile AI site controls its own page: it can hide Clotr's warnings (Clotr then says so and stops holding

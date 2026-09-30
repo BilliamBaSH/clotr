@@ -1,4 +1,4 @@
-// Copies the built-in AI-site list (ai-privacy-guard/ai-sites.json, the file people edit)
+// Copies the built-in AI-site list (extension/ai-sites.json, the file people edit)
 // into manifest.json's content_scripts matches and host_permissions. Run after editing the list:
 //   npm run sites
 // `npm test` fails if the two differ (tests/rules.test.js).
@@ -7,7 +7,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const EXT = path.join(__dirname, "..", "ai-privacy-guard");
+const EXT = path.join(__dirname, "..", "extension");
 const sites = JSON.parse(fs.readFileSync(path.join(EXT, "ai-sites.json"), "utf8"));
 const matches = sites.flatMap((s) => s.matches);
 

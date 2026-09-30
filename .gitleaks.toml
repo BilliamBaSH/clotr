@@ -1,0 +1,29 @@
+# gitleaks (secret scanner): its default rules, minus the made-up keys Clotr's tests and docs use on purpose to
+# trigger its own warnings. Each is listed as its exact value, so a real key anywhere, tests included, is still
+# reported. None of them works: trufflehog --only-verified found no live secret in the history (2026-09-30).
+# A new test value that gitleaks flags: check it's made up, then add it here.
+title = "Clotr"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Made-up test and example values"
+regexTarget = "secret"
+regexes = [
+  '''^\-\-\-\-\-BEGIN RSA PRIVATE KEY\-\-\-\-\-\\nMIIEow\$\{chars\(ALNUM \+ "\+\/", 58\)\}\\n\$\{chars\(ALNUM \+ "\+\/", 64\)\}\\n\-\-\-\-\-END RSA PRIVATE KEY\-\-\-\-\-$''',
+  '''^8f2k3m9x7q1w5e4r6t8y0u2i4o6p8a1s$''',
+  '''^AB12C\-D34EF\-5GH6I$''',
+  '''^AB12C\-D34EF\-5GH6I\-J78KL\-MN9OP$''',
+  '''^AIzaHvneKu6rq2gXKZtw\-eOhOYwuVw6AAiq_ps\-$''',
+  '''^AKIA4HPQ7XZ2R6TWLJ3N$''',
+  '''^AKIAABCDEFGHIJKLMNOP$''',
+  '''^AKIAZ7Q3M9WX2KD5HB8R$''',
+  '''^FgT7s9kX2mQ4vL8pR1nZ6wB3yH5jD0cA$''',
+  '''^Zq8Lm2Xv9Rt4Kp7Wn1Bc$''',
+  '''^Zq8Lm2Xv9Rt4Kp7Wn1Bc6Hy3Jd5Gf0QsAb12Cd34$''',
+  '''^eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.eyJzdWIiOiI0MjQyIiwibmFtZSI6IkphbmUifQ\.Xk3v9Qm2Lr7Tz5Wn8Bc1Hy4Jg6Df0SaPq$''',
+  '''^ghp_7Rk2QwZ9LmX4vB8nT1cY6pJ3sH5dF0gA2eUi$''',
+  '''^sk\-proj\-Hk3Pq9Zr7Tm2Xw5Lv8Nb1Cy4Jg6Df0Sa$''',
+  '''^whsec_9f8e7d6c5b4a$''',
+]

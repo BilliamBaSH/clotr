@@ -1,0 +1,60 @@
+{
+  "1.0": [
+    "Bandage: on a site where you say yes, Clotr swaps your personal details for cover names like [Phone 1] as you type, so the AI never sees the real detail. Point at a cover name in the answer to peek at the real one, or copy the whole answer with the real details back.",
+    "Say it more generally: when a message has a birth date or an address, More choices can turn it into \"March 1948\" or just the town, instead of hiding it completely.",
+    "Helping someone? Settings walks you through setting Clotr up for them step by step, and gives you a one-page guide in large type to print and leave by their computer.",
+    "Move to a new computer: your settings, your vault and your PIN in one file, locked with a password you choose. Nothing is sent anywhere.",
+    "For teams: an organization's browser policy can set a ready-made preset or a watched format like EMP-#####. It can only make Clotr more careful, never less, and Settings shows exactly what it applies.",
+    "Report a problem, on every Clotr page: it opens a GitHub form with only Clotr's version and your browser filled in. Nothing you typed goes in it, and Clotr itself still sends nothing.",
+    "Clotr has absolutely no AI, and never will: an automatic check stops any version that contains one."
+  ],
+  "0.9": [
+    "In Spanish too: warnings, the popup, the welcome page and the full report follow your browser's language, and Spanish messages, ID numbers (DNI/NIE and social security number, CURP and RFC) and addresses are recognized. Names and addresses in your vault match with or without accents.",
+    "Your AI exposure report: a full page with a mind map of everything you could be leaking (what each AI service already has, what Clotr stopped, what no AI has seen yet, and where Clotr can't see), the riskiest moments with what to do, and export or delete your history.",
+    "A weekly summary at the top of the popup: this week against last, and the one thing to do now.",
+    "Attached PDFs and Word, Excel and PowerPoint files are checked too; several files at once get one warning.",
+    "Helping someone? Larger warnings, a stricter setting for personal details, and a PIN so settings aren't changed by accident.",
+    "If an AI's reply mentions your own details that you didn't type on that page, Clotr points it out: it may have them from an earlier chat or its memory.",
+    "Clotr says when it can't help: the popup shows whether it sees the chat box, and a red ! appears if a page refused its edit.",
+    "Catches more: many more service keys, crypto seed phrases, IBANs, UK and Canadian IDs, medical record numbers, home and card codes (\"the gate code is…\", a card's CVV, sign-in codes texted to you, remote-access codes a fake support call asks for), logins shared as \"email / password\", answers to security questions, and numbers or cards read out in words (\"double five\", Spanish pairs like \"treinta y cuatro\").",
+    "Plain words everywhere (Hide it / Leave it in, More choices to decide for good), and updates no longer need a page reload.",
+    "A new look in burnt orange, set in Atkinson Hyperlegible, a typeface made to be easy to read."
+  ],
+  "0.8": [
+    "Your vault: tell Clotr your name, family, addresses, phones, emails, employer and ID formats once. It keeps only one-way fingerprints and catches them however they're written.",
+    "Clotr learns, on this device only: delete a flagged item by hand and it offers to always watch for it; keep the same warning 3 times and it offers to warn less.",
+    "Updates: a copy running from a git folder now reloads itself when its files change."
+  ],
+  "0.7": [
+    "Watch list, per-site views and a per-site mode (stricter or quieter on one AI tool).",
+    "Large pastes and attached text files are summarized; database connection strings, login tokens and internal servers are caught."
+  ],
+  "0.6": [
+    "Street addresses, dates of birth, bank/ID numbers, international phones, and more disguises (fifty six, O for zero)."
+  ],
+  "translations": {
+    "es": {
+      "1.0": [
+        "Bandage: en un sitio donde dices que sí, Clotr cambia tus datos personales por nombres de reemplazo como [Teléfono 1] mientras escribes, así la IA nunca ve el dato real. Señala un nombre de reemplazo en la respuesta para ver el dato real, o copia la respuesta entera con los datos reales.",
+        "Dilo de forma más general: si un mensaje tiene una fecha de nacimiento o una dirección, Más opciones puede dejarla en \"marzo de 1948\" o solo en la ciudad, en vez de ocultarla del todo.",
+        "¿Ayudas a alguien? Los ajustes te guían para configurar Clotr para esa persona paso a paso, y te dan una guía de una página en letra grande para imprimir y dejar junto a su ordenador.",
+        "Pasar a otro ordenador: tus ajustes, tu caja fuerte y tu PIN en un solo archivo, cerrado con una contraseña que eliges. No se envía nada a ningún sitio.",
+        "Para equipos: la política del navegador de una organización puede aplicar un conjunto listo o vigilar un formato como EMP-#####. Solo puede hacer que Clotr sea más prudente, nunca menos, y los ajustes muestran exactamente qué aplica.",
+        "Informar de un problema, en cada página de Clotr: abre un formulario de GitHub con solo la versión de Clotr y tu navegador ya puestos. No incluye nada de lo que escribiste, y Clotr sigue sin enviar nada.",
+        "Clotr no tiene absolutamente ninguna IA, y nunca la tendrá: una comprobación automática detiene cualquier versión que la contenga."
+      ],
+      "0.9": [
+        "También en español: los avisos, el panel, la página de bienvenida y el informe completo siguen el idioma de tu navegador, y reconoce mensajes, documentos (DNI/NIE y número de la seguridad social, CURP y RFC) y direcciones en español. Los nombres y direcciones de tu caja fuerte coinciden con o sin tildes.",
+        "Tu informe de exposición a la IA: una página completa con un mapa mental de todo lo que podrías estar filtrando (lo que cada servicio de IA ya tiene, lo que Clotr detuvo, lo que ninguna IA ha visto todavía y dónde Clotr no puede ver), los momentos de más riesgo con qué hacer, y exportar o borrar tu historial.",
+        "Un resumen semanal arriba del panel: esta semana frente a la anterior, y lo único que conviene hacer ahora.",
+        "También revisa los PDF y los archivos de Word, Excel y PowerPoint que adjuntas; varios archivos a la vez reciben un solo aviso.",
+        "¿Lo configuras para otra persona? Avisos más grandes, un ajuste más estricto para los datos personales y un PIN para que los ajustes no se cambien por error.",
+        "Si la respuesta de una IA menciona tus propios datos que no escribiste en esa página, Clotr te lo señala: puede tenerlos de un chat anterior o de su memoria.",
+        "Clotr te dice cuándo no puede ayudar: el panel muestra si ve el cuadro de chat, y aparece un ! rojo si una página rechazó su cambio.",
+        "Detecta más: muchas más claves de servicios, frases semilla de criptomonedas, IBAN, documentos del Reino Unido y Canadá, números de historia clínica, códigos de casa y de tarjeta (incluido el CVV), códigos de verificación que te llegan por SMS, códigos de acceso remoto, inicios de sesión compartidos como «correo / contraseña», respuestas a preguntas de seguridad y números o tarjetas dichos en palabras («treinta y cuatro»).",
+        "Palabras sencillas en todo (Ocultarlo / Dejarlo, Más opciones para decidir de una vez), y las actualizaciones ya no necesitan recargar la página.",
+        "Un aspecto nuevo en naranja tostado, con la letra Atkinson Hyperlegible, pensada para leerse con facilidad."
+      ]
+    }
+  }
+}

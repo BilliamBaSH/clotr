@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-const EXT = path.join(__dirname, "..", "ai-privacy-guard");
+const EXT = path.join(__dirname, "..", "extension");
 const manifest = JSON.parse(fs.readFileSync(path.join(EXT, "manifest.json"), "utf8"));
 const scripts = fs.readdirSync(EXT).filter((f) => f.endsWith(".js"));
 const htmls = fs.readdirSync(EXT).filter((f) => f.endsWith(".html"));
@@ -76,6 +76,33 @@ test("100% local: no network calls, no remote code", () => {
   assert.deepEqual(offenders(/fetch\((?!\s*chrome\.runtime\.getURL\()/), []);
   assert.deepEqual(offenders(/<script[^>]+src=["']https?:/i, htmls), []);
   assert.deepEqual(offenders(/<link[^>]+href=["']https?:/i, htmls), []);
+  // No code made from strings (release review 2026-09-30): the CSP forbids it on Clotr's pages, but content
+  // scripts run under each AI site's own policy.
+  assert.deepEqual(offenders(/\beval\s*\(|\bnew\s+Function\s*\(|\bset(Timeout|Interval)\(\s*["'`]/), []);
+});
+
+// Security (release review 2026-09-30): Clotr's scripts inside AI pages share the page with the site's code, so the
+// messages that remove or loosen a protected detail, or replace every setting, are taken only from Clotr's own pages.
+test("vault edits and backups are accepted only from Clotr's own pages", () => {
+  const bg = code("background.js");
+  assert.match(
+    bg,
+    /const fromClotrPage = \(sender\) => \(sender\.url \|\| ""\)\.startsWith\(chrome\.runtime\.getURL\(""\)\);/,
+  );
+  for (const type of ["clotr:vaultUpdate", "clotr:importBackup"]) {
+    const at = bg.indexOf(`case "${type}":`);
+    assert.ok(at > 0, type);
+    const body = bg.slice(at, bg.indexOf("return reply(", at));
+    assert.match(body, /if \(!fromClotrPage\(sender\)\) return false;/, `${type} checks the sender first`);
+  }
+  // And the scripts inside AI pages never send them.
+  assert.deepEqual(
+    offenders(
+      /clotr:(vaultUpdate|importBackup)/,
+      manifest.content_scripts.flatMap((c) => c.js),
+    ),
+    [],
+  );
 });
 
 test("chrome.action.setIcon always passes a tabId", () => {
@@ -117,7 +144,7 @@ test("built-in AI-site list (ai-sites.json) matches the manifest", () => {
 });
 
 test("every pattern belongs to a Settings group", () => {
-  require("../ai-privacy-guard/patterns.js");
+  require("../extension/patterns.js");
   for (const p of globalThis.Clotr.PATTERNS)
     assert.ok(["credentials", "personal", "custom"].includes(p.group), `${p.id}: group ${p.group}`);
 });
@@ -125,10 +152,7 @@ test("every pattern belongs to a Settings group", () => {
 test("changelog.json has notes for the current version", () => {
   const log = JSON.parse(fs.readFileSync(path.join(EXT, "changelog.json"), "utf8"));
   const minor = manifest.version.split(".").slice(0, 2).join(".");
-  assert.ok(
-    Array.isArray(log[minor]) && log[minor].length,
-    `add a "${minor}" entry to ai-privacy-guard/changelog.json`,
-  );
+  assert.ok(Array.isArray(log[minor]) && log[minor].length, `add a "${minor}" entry to extension/changelog.json`);
   // Every interface language gets the notes too (D65): the same number of notes, in the same order.
   for (const lang of fs.readdirSync(path.join(EXT, "_locales")).filter((l) => l !== "en")) {
     const notes = log.translations?.[lang]?.[minor];
@@ -147,10 +171,11 @@ test("extension JSON files have no byte-order mark", () => {
   }
 });
 
-// Alpha builds show "-alpha" in brave://extensions and the store (M6). version_name must
-// follow every version bump.
-test("manifest version_name is the version plus -alpha", () => {
-  assert.equal(manifest.version_name, `${manifest.version}-alpha`);
+// The 0.x builds were alphas and showed "-alpha" in brave://extensions and the store (M6); from 1.0.0, the public
+// release, version_name is the plain version. It must follow every version bump.
+test("manifest version_name follows the version (-alpha before 1.0)", () => {
+  const major = Number(manifest.version.split(".")[0]);
+  assert.equal(manifest.version_name, major >= 1 ? manifest.version : `${manifest.version}-alpha`);
 });
 
 // The same code ships to Firefox (desktop and Android) via `npm run package -- --firefox`.
@@ -294,7 +319,7 @@ test("every translated string has a Spanish message; placeholders are well forme
   const used = new Set(scripts.flatMap((f) => [...code(f).matchAll(/\bmsg\(\s*"([A-Za-z0-9_]+)"/g)].map((m) => m[1])));
   const missing = [...used].filter((k) => !es[k]);
   assert.deepEqual(missing, [], `no Spanish for: ${missing.join(", ")}`);
-  require("../ai-privacy-guard/patterns.js");
+  require("../extension/patterns.js");
   for (const p of globalThis.Clotr.PATTERNS) assert.ok(es[`type_${p.id}`], `no Spanish name for ${p.id}`);
   for (const [k, v] of Object.entries(es)) {
     for (const [, name] of v.message.matchAll(/\$([A-Za-z0-9_]+)\$/g)) {
@@ -334,8 +359,9 @@ test("Spanish: counts that can be 1 aren't written before a plural word", () => 
     "pp_nFound",
     "db_weekLabel",
     "db_card",
-    "mp_describe",
-    "mp_sub",
+    "mp_mentionedToo",
+    "mp_openDetail",
+    "mp_more",
   ];
   for (const key of COMBINED) {
     assert.ok(es[key], `${key} is missing`);
@@ -343,11 +369,170 @@ test("Spanish: counts that can be 1 aren't written before a plural word", () => 
   }
 });
 
+// CHANGELOG.md is the public "what changed": it names the version being built, so it can't fall behind.
+test("CHANGELOG.md has an entry for the manifest's version", () => {
+  const { version_name } = JSON.parse(fs.readFileSync(path.join(EXT, "manifest.json"), "utf8"));
+  const log = fs.readFileSync(path.join(__dirname, "..", "CHANGELOG.md"), "utf8");
+  assert.ok(log.includes(`## ${version_name}`), `CHANGELOG.md has no "## ${version_name}" section`);
+});
+
 // Every e2e check has its own ID: --only and the test notes refer to them.
 test("e2e check IDs are unique", () => {
-  const run = fs.readFileSync(path.join(__dirname, "e2e", "run.js"), "utf8");
+  // run.js plus one file per area in e2e/checks
+  const dir = path.join(__dirname, "e2e", "checks");
+  const run = [path.join(__dirname, "e2e", "run.js"), ...fs.readdirSync(dir).map((f) => path.join(dir, f))]
+    .map((f) => fs.readFileSync(f, "utf8"))
+    .join("\n");
   const ids = [...run.matchAll(/await check\(\s*"([^"]+)"/g)].map((m) => m[1]);
   assert.ok(ids.length > 100, `found only ${ids.length} checks: has the check() call format changed?`);
   const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
   assert.deepEqual(dup, [], `duplicate check IDs: ${dup.join(", ")}`);
+});
+
+// The website (D81) keeps the extension's promise: no script, nothing loaded from other sites, and every local
+// file it points to exists. Links to other sites (<a href>) are fine; they load nothing until clicked.
+const SITE = path.join(__dirname, "..", "site");
+test(
+  "the website runs no script and loads nothing from other sites",
+  { skip: !fs.existsSync(SITE) && "the website has its own repo" },
+  () => {
+    const site = SITE;
+    // Every page, each with the same strict policy (index.html and, since Batch 4, the printable guide).
+    const pages = fs.readdirSync(site).filter((f) => f.endsWith(".html"));
+    assert.ok(pages.includes("index.html") && pages.length >= 2, `pages: ${pages}`);
+    for (const page of pages.filter((p) => p !== "index.html")) {
+      const other = fs.readFileSync(path.join(site, page), "utf8");
+      assert.doesNotMatch(other, /<script|\son[a-z]+=|javascript:/i, `${page}: no scripts or inline handlers`);
+      assert.match(
+        other,
+        /Content-Security-Policy[^>]*default-src 'none'/,
+        `${page}: a strict content security policy`,
+      );
+      for (const [, ref] of other.matchAll(
+        /<(?:img|link|source|iframe|video|audio)\b[^>]*\s(?:src|href)="([^"]+)"/gi,
+      )) {
+        assert.doesNotMatch(ref, /^(https?:)?\/\//i, `${page} loads from another site: ${ref}`);
+        assert.ok(fs.existsSync(path.join(site, ref.split(/[?#]/)[0])), `${page}: missing file site/${ref}`);
+      }
+    }
+    const html = fs.readFileSync(path.join(site, "index.html"), "utf8");
+    const css = fs.readFileSync(path.join(site, "style.css"), "utf8");
+    assert.doesNotMatch(html, /<script|\son[a-z]+=|javascript:/i, "no scripts or inline handlers");
+    assert.match(html, /Content-Security-Policy[^>]*default-src 'none'/, "a strict content security policy");
+    const loads = [
+      ...[...html.matchAll(/<(?:img|link|source|iframe|video|audio)\b[^>]*\s(?:src|href)="([^"]+)"/gi)].map(
+        (m) => m[1],
+      ),
+      ...[...css.matchAll(/url\(\s*["']?([^"')]+)/g)].map((m) => m[1]),
+    ];
+    assert.ok(loads.length >= 8, `found only ${loads.length} loaded files: has the markup changed?`);
+    for (const ref of loads) {
+      assert.doesNotMatch(ref, /^(https?:)?\/\//i, `loads from another site: ${ref}`);
+      assert.ok(fs.existsSync(path.join(site, ref.split(/[?#]/)[0])), `missing file: site/${ref}`);
+    }
+  },
+);
+
+// Your D80 answer (2026-09-29): "use the figma generated branding for everything". Signal orange #FF6700 carries
+// Clotr's buttons and brand lines with near-black text on it (7:1); as text it's only 2.9:1 on white, so orange
+// words keep #B84A0C. Red and amber stay for warnings.
+test("brand: primary buttons are signal orange with dark text, and signal orange is never text", () => {
+  const css = fs.readFileSync(path.join(EXT, "popup.css"), "utf8");
+  assert.match(css, /--signal:\s*#ff6700/i, "popup.css defines --signal");
+  assert.match(css, /--on-signal:\s*#0b0b0b/i, "popup.css defines --on-signal");
+  const primary = /\.btn\.primary\s*\{([^}]*)\}/.exec(css)?.[1] || "";
+  assert.match(primary, /background:\s*var\(--(signal|btn-primary)\)/, ".btn.primary is signal orange");
+  assert.match(css, /--btn-primary:\s*var\(--signal\)/, "--btn-primary is the signal color");
+  assert.match(primary, /color:\s*var\(--on-signal\)/, ".btn.primary has dark text");
+  const ui = fs.readFileSync(path.join(EXT, "ui-styles.js"), "utf8");
+  for (const [name, re] of [
+    ["the offer in the chat", /\.offer button\.primary\s*\{([^}]*)\}/],
+    ["the reload prompt", /const reload = `[\s\S]*?button\.primary\s*\{([^}]*)\}/],
+  ]) {
+    const rule = re.exec(ui)?.[1] || "";
+    assert.match(rule, /background:\s*#ff6700/i, `${name}: signal orange button`);
+    assert.match(rule, /(^|;)\s*color:\s*#0b0b0b/i, `${name}: dark text on it`);
+  }
+  for (const [file, text] of [
+    ["popup.css", css],
+    ["ui-styles.js", ui],
+    ...["dashboard.css", "vault.css", "stored.css"].map((f) => [f, fs.readFileSync(path.join(EXT, f), "utf8")]),
+  ]) {
+    assert.doesNotMatch(text, /(^|[\s;{])color:\s*(#ff6700|var\(--signal\))/im, `${file}: signal orange used as text`);
+  }
+});
+
+// "No AI inside" (D107): Clotr is rules and tests. No model file and no model runtime may ever reach the extension;
+// the README, the site and the store cite this check by name.
+const MODEL_FILES = /\.(onnx|safetensors|bin|gguf|pt|pth|wasm|tflite|mlmodel)$/i;
+const MAX_FILE = 2 * 1024 * 1024; // a model is never small; nothing Clotr ships comes near 2 MB
+const MODEL_RUNTIMES = [
+  "@huggingface/transformers",
+  "onnxruntime-web",
+  "onnxruntime-node",
+  "@xenova/transformers",
+  "@mlc-ai/web-llm",
+  "@tensorflow/tfjs",
+];
+function aiInsideOffenders(extDir, pkgFile) {
+  const found = [];
+  const walk = (dir) => {
+    for (const d of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, d.name);
+      if (d.isDirectory()) walk(full);
+      else if (MODEL_FILES.test(d.name)) found.push(path.relative(extDir, full));
+      else if (fs.statSync(full).size > MAX_FILE) found.push(`${path.relative(extDir, full)} (over 2 MB)`);
+    }
+  };
+  walk(extDir);
+  const pkg = JSON.parse(fs.readFileSync(pkgFile, "utf8"));
+  const deps = { ...pkg.dependencies, ...pkg.devDependencies, ...pkg.optionalDependencies, ...pkg.peerDependencies };
+  for (const name of MODEL_RUNTIMES) if (deps[name]) found.push(`package.json: ${name}`);
+  return found;
+}
+test("no AI inside: no model files or model runtimes in the extension", () => {
+  assert.deepEqual(aiInsideOffenders(EXT, path.join(__dirname, "..", "package.json")), []);
+  // The check itself works: a planted model file and a model runtime are both caught.
+  const os = require("os");
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "clotr-noai-"));
+  fs.mkdirSync(path.join(fixture, "ext", "models"), { recursive: true });
+  fs.writeFileSync(path.join(fixture, "ext", "models", "privacy-filter.onnx"), "fake");
+  fs.writeFileSync(
+    path.join(fixture, "package.json"),
+    JSON.stringify({ dependencies: { "onnxruntime-web": "1.0.0" } }),
+  );
+  try {
+    assert.deepEqual(aiInsideOffenders(path.join(fixture, "ext"), path.join(fixture, "package.json")), [
+      path.join("models", "privacy-filter.onnx"),
+      "package.json: onnxruntime-web",
+    ]);
+  } finally {
+    fs.rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
+// The maintainer's own line on the welcome page, in their words: short, and the same in Spanish.
+test("welcome page: the no-AI line is the maintainer's wording", () => {
+  const html = fs.readFileSync(path.join(EXT, "vault.html"), "utf8");
+  const line = /data-i18n="vault_noteNoAi">([^<]*)</.exec(html)?.[1];
+  assert.equal(line, "Clotr has absolutely NO AI, it defeats the point.");
+  const es = JSON.parse(fs.readFileSync(path.join(EXT, "_locales", "es", "messages.json"), "utf8"));
+  assert.equal(
+    es.vault_noteNoAi.message,
+    "Clotr no tiene absolutamente NADA de IA, eso iría en contra de su propósito.",
+  );
+});
+
+// Their note's first sentence, in their words.
+test("welcome page: the note opens with the maintainer's own sentence", () => {
+  const html = fs.readFileSync(path.join(EXT, "vault.html"), "utf8");
+  const body = /data-i18n="vault_noteBody">([^<]*)</.exec(html)?.[1] || "";
+  assert.ok(
+    body.startsWith(
+      'I made Clotr after I noticed how much I was telling AI chats without a second thought, I immediately wanted a Tony Stark style "Suit of armor around the world" to exist. So, here we are.',
+    ),
+    body.slice(0, 160),
+  );
+  const es = JSON.parse(fs.readFileSync(path.join(EXT, "_locales", "es", "messages.json"), "utf8"));
+  assert.ok(es.vault_noteBody.message.includes("Tony Stark"), "the Spanish note says the same");
 });

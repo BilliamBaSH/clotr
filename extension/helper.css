@@ -1,0 +1,72 @@
+/* Guided setup for helping someone (helper.html). Builds on popup.css and vault.css: the steps are numbered
+   because they're a sequence, each hanging off one line like the report's mind map. */
+.helper-page h2 {
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+}
+.helper-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 8px 0 0;
+  padding: 0;
+  position: relative;
+}
+.helper-steps::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 16px;
+  bottom: 24px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--axis);
+}
+.helper-steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 22px 48px;
+}
+.helper-steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: var(--signal);
+  color: var(--on-signal);
+}
+.helper-steps h2 {
+  font-size: 17px;
+  margin: 4px 0 4px;
+}
+.helper-steps p {
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+.step-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.helper-done {
+  margin-top: 6px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--brand-wash);
+}
+.helper-done h2 {
+  font-size: 17px;
+  margin: 0 0 4px;
+}
+.helper-done p {
+  margin: 0 0 6px;
+  line-height: 1.5;
+}

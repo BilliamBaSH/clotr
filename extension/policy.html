@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clotr: organization policy applied here</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="vault.css">
+  <link rel="stylesheet" href="policy.css">
+</head>
+<body class="vault-page policy-page">
+  <header class="top no-print">
+    <img src="icons/icon-on-32.png" alt="" width="24" height="24">
+    <span class="wordmark" data-i18n-skip>Clotr</span>
+    <h1 data-i18n="pa_title">Organization policy applied here</h1>
+  </header>
+
+  <p id="pa-none" class="lead" data-i18n="pa_none" hidden>No organization policy is applied on this computer.</p>
+
+  <section id="pa-policy" hidden>
+    <div class="field">
+      <label data-i18n="pa_organization">Organization</label>
+      <p id="pa-org"></p>
+    </div>
+    <div class="field">
+      <label data-i18n="pa_versionDate">Clotr version, date and browser</label>
+      <p id="pa-version"></p>
+    </div>
+    <div class="field">
+      <label data-i18n="pa_preset">Preset</label>
+      <p id="pa-preset"></p>
+    </div>
+    <div class="field">
+      <label data-i18n="pa_fingerprint">Policy fingerprint</label>
+      <p id="pa-fingerprint" class="mono"></p>
+      <p class="hint" data-i18n="pa_fingerprintHint">Not a secret: it's the same on every computer running this exact policy, so you can compare it with a test machine. Compare it, don't just read it aloud.</p>
+    </div>
+    <div class="field">
+      <label data-i18n="pa_whatsSet">What's set</label>
+      <ul id="pa-counts" class="list"></ul>
+    </div>
+    <div class="field">
+      <label><input id="pa-show-words" type="checkbox"> <span data-i18n="pa_showWords">Show the watch words on screen</span></label>
+      <p id="pa-words" class="mono" hidden></p>
+    </div>
+    <p class="lead" data-i18n="pa_scope">Clotr checks browser AI chats on this computer only. It sends and stores nothing about this page. Where a kind is set to Ask before sending, the person can still choose to send. Apps outside the browser are not covered.</p>
+    <div class="pa-fill"><span data-i18n="pa_writtenPolicy">Written policy:</span> <span class="blank"></span></div>
+    <div class="pa-fill"><span data-i18n="pa_checkedBy">Checked by:</span> <span class="blank"></span></div>
+    <div class="pa-fill"><span data-i18n="pa_date">Date:</span> <span class="blank"></span></div>
+  </section>
+
+  <p class="no-print"><button id="pa-print" class="btn primary" type="button" data-i18n="pa_print">Print this page</button></p>
+
+  <footer class="app-footer no-print">
+    <div id="report-root"></div>
+  </footer>
+
+  <script src="page-i18n.js"></script>
+  <script src="patterns.js"></script>
+  <script src="report.js"></script>
+  <script src="detector.js"></script>
+  <script src="sites.js"></script>
+  <script src="policy.js"></script>
+</body>
+</html>
