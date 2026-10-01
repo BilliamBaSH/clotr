@@ -156,6 +156,30 @@ const SITES = {
     page: "ordinary-site.html",
     editor: `document.querySelector("textarea")`,
   },
+  // Email and chat apps (D134): Clotr runs there only once you switch the site on.
+  gmail: {
+    url: "https://mail.google.com/mail/u/0/#inbox?compose=new",
+    page: "email-compose.html",
+    editor: `document.querySelector("#body")`,
+    send: `document.querySelector("#send")`,
+  },
+  discord: {
+    url: "https://discord.com/channels/1/2",
+    page: "people-chat.html",
+    editor: `document.querySelector("#box")`,
+  },
+  // Neutral, unbranded webmail and group chat for store/README screenshots (--store, D135).
+  demomail: {
+    url: "https://outlook.live.com/mail/0/",
+    page: "demo-mail.html",
+    editor: `document.querySelector("#body")`,
+    send: `document.querySelector("#send")`,
+  },
+  demogroup: {
+    url: "https://app.slack.com/client/T1/C2",
+    page: "demo-group-chat.html",
+    editor: `document.querySelector("#box")`,
+  },
 };
 
 // Out of the box nothing blocks (design decision D1). Most checks exercise the blocking

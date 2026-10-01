@@ -75,6 +75,15 @@ function render(all) {
             .join(" · ")
         : msg("sj_seeSettings", "See Settings → AI tools you added"),
     ],
+    [
+      msg("sj_everydaySites", "Email and chat sites you switched on"),
+      Object.entries(all.siteKinds || {}).some(([, k]) => k === "everyday")
+        ? Object.entries(all.siteKinds)
+            .filter(([, k]) => k === "everyday")
+            .map(([h]) => h)
+            .join(", ")
+        : msg("sj_none", "None"),
+    ],
   ]);
 
   const vault = all.vault || [];

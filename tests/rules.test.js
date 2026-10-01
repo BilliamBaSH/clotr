@@ -66,6 +66,27 @@ test("scope: only specific https AI-site origins, never broad patterns", () => {
   assert.ok(!(manifest.permissions || []).some(broad), "broad pattern in permissions");
 });
 
+// D134: email and chat apps are never built in. Each one runs Clotr only after the user switches it on and the
+// browser grants that one site, so the install prompt never mentions them.
+test("scope: everyday sites (email, chat apps) are specific https hosts and never built in", () => {
+  globalThis.chrome ??= {};
+  require("../extension/sites.js");
+  const { EVERYDAY_SITES } = globalThis.ClotrSites;
+  assert.ok(EVERYDAY_SITES.length >= 4, "the everyday list is there");
+  const builtIn = new Set(
+    [...manifest.content_scripts.flatMap((c) => c.matches), ...(manifest.host_permissions || [])].map(
+      (p) => new URL(p.replace(/\*$/, "")).hostname,
+    ),
+  );
+  for (const s of EVERYDAY_SITES) {
+    assert.ok(s.name && ["email", "chat"].includes(s.kind), `${s.name}: a name and a kind`);
+    for (const m of s.matches) {
+      assert.match(m, /^https:\/\/[a-z0-9.-]+\.[a-z]+\/\*$/, `${s.name}: ${m} is one whole https host`);
+      assert.ok(!builtIn.has(new URL(m.replace(/\*$/, "")).hostname), `${s.name}: ${m} is built in`);
+    }
+  }
+});
+
 test("no innerHTML-style HTML injection (Trusted Types)", () => {
   assert.deepEqual(offenders(/\.(innerHTML|outerHTML)\s*=|insertAdjacentHTML|document\.write\(/), []);
 });

@@ -1452,6 +1452,22 @@ test("leak corpus: texted verification codes, a bare pin number, a security ques
   expectNone("my pin is loose on the hinge");
 });
 
+// Miss found 2026-09-30 while writing the website's examples (D135): the code named before who sent it, and
+// "asking for" rather than "asked for": the words of someone with a scam caller on the line.
+test("leak corpus: 'the code they texted me: 482913', 'asking for the code'", () => {
+  const cases = [
+    ["password", "The bank is on the phone asking for the code they texted me: 482913. Should I read it to them?"],
+    ["password", "the code that they sent me is 552019"],
+    ["password", "he keeps asking for the code 739201"],
+    ["password", "what's the code she emailed you, 8841?"],
+  ];
+  const missed = cases.filter(([id, text]) => !detect(text)[id]).map(([id, text]) => `${id} ← ${text.slice(0, 60)}`);
+  assert.deepEqual(missed, []);
+  expectNone("the code they sent me in 2024 still works");
+  expectNone("the code they sent me yesterday had a bug on line 4821");
+  expectNone("I'm asking for the code review by Friday");
+});
+
 test("leak corpus: misspelled passwords, what the password is for, SS#, keypad codes with dashes", () => {
   const cases = [
     ["password", "my pasword is Rover2011"],

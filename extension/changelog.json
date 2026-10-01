@@ -1,4 +1,10 @@
 {
+  "1.1": [
+    "Your email and chat apps too: Settings has a list (Gmail, Outlook, Discord, Slack, WhatsApp and more), each off until you switch it on, and on any other site the toolbar button offers \"Turn Clotr on here\". Your browser asks you first, for that one site.",
+    "There, the warning speaks of the people who'll read your message, and Clotr never reads anyone else's messages: cover names and the reply check stay off.",
+    "A warmer look: lighter pages, cards lit from the top, and an orange sheen on the main buttons.",
+    "Caught now: \"the code they texted me: 482913\", the words of someone with a scam caller on the line."
+  ],
   "1.0": [
     "Bandage: on a site where you say yes, Clotr swaps your personal details for cover names like [Phone 1] as you type, so the AI never sees the real detail. Point at a cover name in the answer to peek at the real one, or copy the whole answer with the real details back.",
     "Say it more generally: when a message has a birth date or an address, More choices can turn it into \"March 1948\" or just the town, instead of hiding it completely.",
@@ -34,6 +40,12 @@
   ],
   "translations": {
     "es": {
+      "1.1": [
+        "También tu correo y tus apps de chat: los ajustes tienen una lista (Gmail, Outlook, Discord, Slack, WhatsApp y más), cada una apagada hasta que la activas, y en cualquier otro sitio el botón de la barra ofrece \"Activar Clotr aquí\". Tu navegador te pregunta antes, solo por ese sitio.",
+        "Allí el aviso habla de las personas que leerán tu mensaje, y Clotr nunca lee los mensajes de otros: los nombres de reemplazo y la revisión de respuestas quedan apagados.",
+        "Un aspecto más cálido: páginas más claras, tarjetas iluminadas desde arriba y un brillo naranja en los botones principales.",
+        "Ahora detecta \"el código que me mandaron: 482913\", lo que dice alguien con un estafador al teléfono."
+      ],
       "1.0": [
         "Bandage: en un sitio donde dices que sí, Clotr cambia tus datos personales por nombres de reemplazo como [Teléfono 1] mientras escribes, así la IA nunca ve el dato real. Señala un nombre de reemplazo en la respuesta para ver el dato real, o copia la respuesta entera con los datos reales.",
         "Dilo de forma más general: si un mensaje tiene una fecha de nacimiento o una dirección, Más opciones puede dejarla en \"marzo de 1948\" o solo en la ciudad, en vez de ocultarla del todo.",

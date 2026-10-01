@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your AI exposure report</title>
+  <title>Your exposure report</title>
   <link rel="stylesheet" href="popup.css">
   <link rel="stylesheet" href="dashboard.css">
 </head>
@@ -11,27 +11,27 @@
   <header class="top">
     <img src="icons/icon-on-32.png" alt="" width="24" height="24">
     <span class="wordmark" data-i18n-skip>Clotr</span>
-    <h1 data-i18n="dash_yourAiExposureReport">Your AI exposure report</h1>
+    <h1 data-i18n="dash_yourAiExposureReport">Your exposure report</h1>
     <span class="chip" data-i18n="dash_onThisComputerOnly">On this computer only</span>
   </header>
-  <p class="lead" data-i18n="dash_everythingClotrNoticedInYour">Everything Clotr noticed in your AI chats, from its own records on this computer. It never kept what you typed, only what kind of thing it was, where, when, and what you chose.</p>
+  <p class="lead" data-i18n="dash_everythingClotrNoticedInYour">Everything Clotr noticed in your chats and email, from its own records on this computer. It never kept what you typed, only what kind of thing it was, where, when, and what you chose.</p>
 
   <section aria-labelledby="h-map">
     <h2 id="h-map" data-i18n="dash_everythingYouCouldBeLeaking">Everything you could be leaking</h2>
-    <p class="muted"><span data-i18n="dash_mindMapIntro">You're in the middle. The four branches show what AI services already have from you, what Clotr stopped, what's in your vault that no AI has seen yet, and where Clotr can't see.</span>
+    <p class="muted"><span data-i18n="dash_mindMapIntro">You're in the middle. The four branches show what services already have from you, what Clotr stopped, what's in your vault that hasn't gone anywhere yet, and where Clotr can't see.</span>
       <span class="key-sent" data-i18n="dash_keyHas">Solid</span>: <span data-i18n="dash_keyHasMeans">already has (thicker = more)</span> ·
       <span class="key-stopped" data-i18n="dash_keyNear">dashed</span>: <span data-i18n="dash_keyNearMeans">stopped</span> ·
       <span class="key-open" data-i18n="dash_keyOpen">dotted</span>: <span data-i18n="dash_keyOpenMeans">not shared yet</span> ·
       <span class="key-blind" data-i18n="dash_keyBlind">dash-dot</span>: <span data-i18n="dash_keyBlindMeans">blind spots. Choose a branch or a name for details.</span></p>
     <div class="range" role="radiogroup" aria-label="Group the map" data-i18n-aria-label="dash_groupTheMap" id="map-view">
-      <button type="button" role="radio" data-view="service" aria-checked="true" data-i18n="dash_byAiService">By AI service</button>
+      <button type="button" role="radio" data-view="service" aria-checked="true" data-i18n="dash_byAiService">By service</button>
       <button type="button" role="radio" data-view="kind" aria-checked="false" data-i18n="dash_byKindOfDetail">By kind of detail</button>
     </div>
     <svg id="map" class="map" viewBox="0 0 960 720" role="group" aria-label="Mind map of everything you could be leaking" data-i18n-aria-label="dash_mindMapLabel"></svg>
     <p id="map-details" class="map-details" role="status"></p>
     <details class="table-view">
       <summary data-i18n="dash_showAsATable">Show as a table</summary>
-      <table class="events" id="map-table"><thead><tr><th scope="col" data-i18n="dash_branch">Branch</th><th scope="col" data-i18n="dash_aiServiceOrKind">AI service or kind</th><th scope="col" data-i18n="dash_howMany">How many</th><th scope="col" data-i18n="dash_details">Details</th></tr></thead><tbody></tbody></table>
+      <table class="events" id="map-table"><thead><tr><th scope="col" data-i18n="dash_branch">Branch</th><th scope="col" data-i18n="dash_aiServiceOrKind">Service or kind</th><th scope="col" data-i18n="dash_howMany">How many</th><th scope="col" data-i18n="dash_details">Details</th></tr></thead><tbody></tbody></table>
     </details>
   </section>
 
@@ -42,7 +42,7 @@
   </section>
 
   <section aria-labelledby="h-exposure">
-    <h2 id="h-exposure" data-i18n="dash_whatEachAiServiceHas">What each AI service has been told about you</h2>
+    <h2 id="h-exposure" data-i18n="dash_whatEachAiServiceHas">What each service has been told about you</h2>
     <p class="muted" data-i18n="dash_differentPersonalDetailsYouSent">Different personal details you sent (not hidden), counted once each, however often they went.
       Keys and passwords are listed under riskiest moments instead.</p>
     <div id="exposure" class="exposure"></div>
@@ -50,7 +50,7 @@
 
   <section aria-labelledby="h-bandage" id="bandage-section" hidden>
     <h2 id="h-bandage" data-i18n="dash_whatBandageKept">What Bandage kept from each AI</h2>
-    <p class="muted" data-i18n="dash_bandageKeptMeans">Personal details Bandage swapped for a cover name before you sent your message, by AI tool.</p>
+    <p class="muted" data-i18n="dash_bandageKeptMeans">Personal details Bandage swapped for a cover name before you sent your message, by AI chat.</p>
     <div id="bandage-kept" class="exposure"></div>
   </section>
 

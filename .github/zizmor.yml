@@ -1,8 +1,5 @@
 # zizmor (workflow security linter): findings checked by hand and accepted. Each entry names one line, so a moved or
 # changed line shows its finding again.
 rules:
-  cache-poisoning:
-    ignore:
-      # The release job's setup-node is v4, which caches only when `cache:` is set, and it isn't (release.yml says
-      # why). zizmor assumes v5's automatic caching.
-      - release.yml:31
+  # cache-poisoning: none to accept since the release job switches setup-node's cache off (release review 2026-10-01).
+  {}

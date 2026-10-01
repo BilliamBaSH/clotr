@@ -1,15 +1,16 @@
 # Clotr: clot your data leaks
 
-![Clotr: a heads-up before you overshare. A mind map from You to chatgpt.com, claude.ai and gemini.google.com, where a bandage stops each detail (phone number, home address, API key, password, card number, date of birth) before it reaches the AI](docs/brand/readme-header.png)
+![Clotr: clot your data leaks. A mind map from You to AI chats, email, and Discord and Slack, where a bandage stops each detail (bank account, password, home address, card number, phone number, date of birth) before it goes out](docs/brand/readme-header.png)
 
 [![Tests](https://github.com/BilliamBaSH/clotr/actions/workflows/test.yml/badge.svg)](https://github.com/BilliamBaSH/clotr/actions/workflows/test.yml)
 [![no AI inside, rule-checked](https://img.shields.io/badge/no%20AI%20inside-rule--checked-blue)](https://github.com/BilliamBaSH/clotr/blob/main/tests/rules.test.js)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/BilliamBaSH/clotr/badge)](https://scorecard.dev/viewer/?uri=github.com/BilliamBaSH/clotr)
 License: [AGPL-3.0-or-later](LICENSE) · [What changed](CHANGELOG.md)
 
-**Clotr catches a password, a key or a personal detail before you send it**, in AI chats like ChatGPT, Claude,
-Gemini, Copilot or Perplexity. You decide: hide it, or send it anyway. Set it up for a parent in a few minutes, or
-roll it out to a whole office.
+**Clotr catches a password, a key or a personal detail before you send it**: in AI chats like ChatGPT, Claude,
+Gemini, Copilot or Perplexity, and in your email or chat apps (Gmail, Outlook, Discord, Slack, WhatsApp and more)
+once you switch them on. You decide: hide it, or send it anyway. Set it up for a parent in a few minutes, or roll it
+out to a whole office.
 
 > **A note from me.** I'm Alex, a computer science student. I caught myself telling AI chats things I'd never tell a
 > stranger, and when the AI started bringing up things I'd only been thinking about, it scared me. Clotr will always
@@ -21,13 +22,25 @@ roll it out to a whole office.
 It is built for people who don't think of "my phone number, spelled out" as sensitive: it catches personal
 details however they're written (digits, number words, misspellings, mixes), and it explains itself in plain words.
 
-![A warning in the corner of an AI chat: your message contains a street address, phone number and email address; Leave it in or Hide it](docs/store/1-warning.png)
+## Wherever you type something private
+- **At home:** a Social Security number in a tax question, your address in an email to the landlord, the code a
+  "bank" caller on the phone wants you to read out.
+- **At school:** your address in a college essay, a password shared in a group project on Discord, a kid telling a
+  chatbot where they live.
+- **At work:** a customer's card number in an email, a patient's record number in a summary, a cloud key pasted in
+  Slack.
+
+AI chats are protected out of the box. Email and chat apps are one click each in Settings, and your browser asks
+you first, for that one site.
+
+![A warning in the corner of an AI chat: your message contains a US Social Security number; if you send it, this AI gets it. Leave it in or Hide it](docs/store/shots/ai-chat.png)
 
 > **Status: 1.0, the first public release.** It works in Chrome, Brave and Microsoft Edge on a computer, and in
 > Firefox (see below). If it gets something wrong or misses something, please report it: that is how it gets better.
 
 ## What it catches
-Everything is checked on your computer, in what you type or paste into an AI chat, before you send it:
+Everything is checked on your computer, in what you type or paste into an AI chat (or an email or chat app you
+switched on), before you send it:
 - **Passwords and keys:** passwords however they're phrased, API keys (OpenAI, Anthropic, GitHub, AWS, Google, Stripe,
   Slack, Hugging Face, npm and many more), tokens and session cookies in pasted `curl` commands, webhook URLs,
   connection strings, crypto wallet seed phrases and keys.
@@ -46,9 +59,9 @@ Everything is checked on your computer, in what you type or paste into an AI cha
 - **Warns in the corner** by default and never stops you. You can choose, per kind of data, to be asked before
   sending instead, or to just have it counted.
 - **A dashboard** in its toolbar button: what it caught, where, and what you did, with a short "this week" summary.
-- **A full report** ("Your AI exposure report"): what each AI service has been told about you over time, a mind map
-  of everything you could be leaking (what each AI already has, what Clotr stopped, what no AI has seen yet, and
-  where Clotr can't see), the riskiest moments with what to do now, and export or delete your history.
+- **A full report** ("Your exposure report"): what each service has been told about you over time, a mind map
+  of everything you could be leaking (what each service already has, what Clotr stopped, what hasn't gone anywhere
+  yet, and where Clotr can't see), the riskiest moments with what to do now, and export or delete your history.
 - **Setting it up for someone else**: a step-by-step page (Settings → *Set it up step by step*) for their details,
   larger warnings, a stricter setting for personal details, and a PIN so settings aren't changed by accident.
 - **Notices when an AI brings up your details**: if a reply mentions your own phone number or name that you
@@ -65,7 +78,12 @@ Everything is checked on your computer, in what you type or paste into an AI cha
 - **It tells you when it can't help**: the popup says whether Clotr can see the chat box on this page, and the toolbar
   shows a red **!** if a chat box refused Clotr's edit or a page removed its warnings.
 
-![The dashboard: leaks stopped this week, what was found per day, and by which AI tool](docs/store/4-dashboard.png)
+- **On your email and chat apps too**: Settings → *Also on your email and chat apps* lists Gmail, Outlook, Yahoo
+  Mail, Discord, Slack, WhatsApp, Messenger and Microsoft Teams, each off until you switch it on; on any other site,
+  the toolbar button offers *Turn Clotr on here*. There the warning speaks of the people who'll read it, and Clotr
+  never reads anyone else's messages (cover names and the reply check stay off).
+
+![The dashboard: leaks stopped this week, what was found per day, and on which site](docs/store/5-dashboard.png)
 
 ## What's inside
 **No AI inside, no network, no accounts, open code, free for people.**
@@ -75,17 +93,18 @@ Everything is checked on your computer, in what you type or paste into an AI cha
 | Plain rules you can read (`extension/patterns.js`) and hundreds of tests | They run on every change |
 | No model files, no model runtime | The rule check *no AI inside: no model files or model runtimes in the extension* |
 | No network: no servers, no analytics, no requests | The rule check *100% local: no network calls, no remote code* |
-| Only on AI chat sites | The rule check *scope: only specific https AI-site origins, never broad patterns* |
+| AI chat sites built in; anything else only where you switch it on | The rule checks *scope: only specific https AI-site origins, never broad patterns* and *scope: everyday sites (email, chat apps) are specific https hosts and never built in* |
 | No accounts | There's nothing to sign up for or log in to |
 
 ## Privacy guarantees
 - **Nothing leaves your computer.** Clotr has no servers, no analytics and makes no network requests (checked
   automatically on every change).
-- **It never stores what you type.** It keeps a short record of *what kind* of thing it found, on which AI site,
+- **It never stores what you type.** It keeps a short record of *what kind* of thing it found, on which site,
   when, and what you chose, plus a salted one-way fingerprint so it can tell "the same thing again". You can see
   every stored record in Settings → History → *See exactly what's stored*, and clear it any time.
-- **It only runs on AI chat sites.** Never on your email, bank or other websites. A new AI tool is protected only
-  after you click *Protect this site* and approve that one site.
+- **It only runs where you say.** Out of the box, only on AI chat sites. Your email or a chat app, or a new AI
+  tool, only after you switch that one site on and your browser asks you to approve it. Never every website at once,
+  and on email and chat sites it never reads other people's messages.
 
 Known limits are listed on the "What Clotr stores" page and in [docs/security-review.md](docs/security-review.md).
 
@@ -111,10 +130,10 @@ Known limits are listed on the "What Clotr stores" page and in [docs/security-re
 | Read and change data on the built-in AI chat sites | To check what you type there and replace it when you click *Hide it*, and to start the new version in AI tabs you already have open after an update, so you never need to reload them. That list is in `extension/ai-sites.json`. |
 | Storage | To keep your settings, your vault's fingerprints and the history of what was found, on this computer. |
 | Active tab | When you open Clotr's popup on an unknown page, to check whether it looks like an AI chat, only then and only that tab. |
-| Scripting | To run the one-time "is this an AI chat?" check above, and to start protecting an AI site you added (including tabs already open). |
+| Scripting | To run the one-time "is this an AI chat?" check above, and to start protecting a site you added (including tabs already open). |
 | Declarative content | To show an amber dot on the toolbar icon when a page looks like an AI chat, without reading the page. |
 | Alarms | To refresh the daily count after midnight, remove history older than you chose to keep, and (for developer installs) notice a new version on disk. |
-| Optional: one site at a time | Only when you click *Protect this site*: the browser asks you to allow that single site. |
+| Optional: one site at a time | Only when you switch Clotr on for a site (an AI tool it doesn't know, or your email or a chat app): the browser asks you to allow that single site. |
 
 ## Reporting problems
 Open an issue: *False alarm*, *Missed something* or *Bug*. Never paste the real sensitive value; describe its shape

@@ -34,6 +34,7 @@ const {
   policyShapes,
   mergePolicy,
   floorOf,
+  isEveryday,
 } = globalThis.ClotrSites;
 
 const ICON = (variant) => ({ 16: `icons/icon-${variant}-16.png`, 32: `icons/icon-${variant}-32.png` });
@@ -57,7 +58,17 @@ chrome.storage.local
   .catch((err) => console.warn(LOG, "could not lock storage", err));
 
 const RESPONSE_VALUES = new Set(["block", "warn", "log"]);
-const SETTINGS_KEYS = ["responses", "paused", "vault", "siteModes", "guided", "largeText", "replyCheck", "bandage"];
+const SETTINGS_KEYS = [
+  "responses",
+  "paused",
+  "vault",
+  "siteModes",
+  "guided",
+  "largeText",
+  "replyCheck",
+  "bandage",
+  "siteKinds",
+];
 
 // The admin's policy (managed storage), or {} when there is none.
 async function readPolicy() {
@@ -108,6 +119,8 @@ async function settingsFor(url) {
   // kind's own (floored) response instead of counting everything on that site.
   const rawSiteMode = (host && r.siteModes?.[host]) || null;
   const hasPolicy = Boolean(policy?.requiredResponses && Object.keys(policy.requiredResponses).length);
+  // Email and chat apps (D134): you write to people there, so no cover names and no reading of replies.
+  const everyday = isEveryday(host, r.siteKinds || {});
   return {
     responses: eff.responses,
     paused: eff.paused,
@@ -115,9 +128,10 @@ async function settingsFor(url) {
     vault,
     guided: r.guided || {},
     largeText: eff.largeText,
-    replyCheck: r.replyCheck !== false, // D63: on unless switched off in Settings
+    replyCheck: r.replyCheck !== false && !everyday, // D63: on unless switched off in Settings
     // Bandage (D93): true = cover names on this site, false = the user said no, undefined = not asked yet.
-    bandage: host && typeof r.bandage?.[host] === "boolean" ? r.bandage[host] : undefined,
+    bandage: everyday ? false : host && typeof r.bandage?.[host] === "boolean" ? r.bandage[host] : undefined,
+    everyday,
   };
 }
 

@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- Stand-in for a web email's compose window (Gmail-style): To and Subject fields, a rich-text body, a Send button. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>Compose (Clotr test page)</title></head>
+<body>
+  <input id="to" aria-label="To recipients" value="landlord@example.com" style="width:480px">
+  <input id="subject" aria-label="Subject" value="The heater" style="width:480px">
+  <div id="body" role="textbox" contenteditable="true" aria-label="Message Body" aria-multiline="true"
+       style="border:1px solid #999;min-height:120px;width:480px;padding:6px"></div>
+  <div id="send" role="button" tabindex="0" aria-label="Send">Send</div>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("body");
+    function send() {
+      if (!box.innerText.trim()) return;
+      window.__sent.push(box.innerText);
+      box.textContent = "";
+    }
+    document.getElementById("send").addEventListener("click", send);
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && e.ctrlKey) { e.preventDefault(); send(); }
+    });
+  </script>
+</body>
+</html>

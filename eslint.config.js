@@ -20,6 +20,7 @@ const insideExtension = Object.fromEntries(
     "migrateSuppressed",
     "migrateToVault",
     "runMigrations",
+    "settingsFor",
     "syncUserSites",
   ].map((name) => [name, "readonly"]),
 );

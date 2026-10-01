@@ -121,6 +121,10 @@ open tabs when those keys change. **Nothing stored is ever a detected value.**
 - `lock`: `{ salt, iterations, hash }` of the helper PIN (salted PBKDF2-SHA-256, D61), never the PIN itself.
 - `salt`: random hex, created only by the background. Event `fp`s use the same normalized `fingerprint()` (synchronous
   SHA-256, so a send can be checked against the vault instantly).
+- `siteKinds`: `{ [host]: "everyday" | "ai" }` (D134). Which sites you switched on are email or chat apps (people
+  read what you send) and which are AI tools; the `EVERYDAY_SITES` list in `sites.js` counts as "everyday" unless you
+  said otherwise. The background's `settingsFor()` sends each frame `everyday`, and turns Bandage and the reply check
+  off there.
 - `siteScopes`: `{ ["https://host/*"]: [section patterns] }`. Sites people add are the granted optional host
   permissions, narrowed by this: on a *shared host* (one whose built-in entry is only a section, such as
   huggingface.co) "Protect this site" records the page's section (`protectScope()`), and Clotr runs only there. No

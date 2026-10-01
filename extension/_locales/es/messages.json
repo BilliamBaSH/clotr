@@ -530,7 +530,7 @@
     "message": "Encontrado por día"
   },
   "popup_byAiTool": {
-    "message": "Por herramienta de IA"
+    "message": "Por chat"
   },
   "popup_byKindOfData": {
     "message": "Por tipo de dato"
@@ -542,7 +542,7 @@
     "message": "Abrir el mapa completo"
   },
   "popup_whatEachAiToolHas": {
-    "message": "Lo que ha visto cada herramienta de IA"
+    "message": "Lo que ha visto cada chat"
   },
   "popup_differentPersonalDetailsYouSent": {
     "message": "Datos personales distintos que enviaste de todos modos, en todo tu historial. Clotr los cuenta sin guardar nunca los datos."
@@ -592,13 +592,13 @@
     "message": "Desbloquear"
   },
   "popup_aiToolsYouAdded": {
-    "message": "Herramientas de IA que añadiste"
+    "message": "Chats de IA que añadiste"
   },
   "popup_noneYetWhenAPage": {
     "message": "Ninguna todavía. Cuando una página parece un chat de IA, el icono de Clotr muestra un punto ámbar. Abre esta ventana allí para añadirla."
   },
   "popup_builtInTools": {
-    "message": "Herramientas de IA incluidas"
+    "message": "Chats de IA incluidos"
   },
   "popup_howClotrResponds": {
     "message": "Cómo responde Clotr"
@@ -637,7 +637,7 @@
     "message": "Mostrar opciones avanzadas"
   },
   "popup_settingsForEachKindOf": {
-    "message": "Ajustes para cada tipo de dato, más estricto o más discreto en una herramienta de IA, y la lista de herramientas de IA incluidas."
+    "message": "Ajustes para cada tipo de dato, más estricto o más discreto en un chat, y la lista de chats de IA incluidos."
   },
   "popup_someAdvancedSettingsAreIn": {
     "message": "Hay ajustes avanzados en uso."
@@ -682,7 +682,7 @@
     "message": "Borrar el historial"
   },
   "popup_howClotrRespondsOnThis": {
-    "message": "Cómo responde Clotr en esta herramienta de IA"
+    "message": "Cómo responde Clotr en este chat"
   },
   "popup_thisWeek": {
     "message": "Esta semana"
@@ -694,7 +694,7 @@
     "message": "Encontrado por día, según lo que elegiste"
   },
   "popup_mapOfTheAiServices": {
-    "message": "Mapa de los servicios de IA a los que fueron tus datos"
+    "message": "Mapa de los servicios a los que fueron tus datos"
   },
   "popup_detectionAndHistoryNeverLeave": {
     "message": "La detección y el historial nunca salen de este navegador"
@@ -742,7 +742,7 @@
     "message": "Solo contado"
   },
   "pp_allTools": {
-    "message": "Todas las herramientas de IA"
+    "message": "Todos los chats"
   },
   "pp_coverage": {
     "message": "Clotr funciona en $p1$ y $p2$ chats de IA más. ¿Usas otro? Abre esta ventana allí.",
@@ -802,7 +802,7 @@
     }
   },
   "pp_override": {
-    "message": "Es una herramienta de IA, protégela"
+    "message": "Es un chat de IA: protégelo"
   },
   "pp_notAi": {
     "message": "No es una herramienta de IA. Clotr no actúa aquí."
@@ -975,7 +975,7 @@
     "message": "Quitar"
   },
   "pp_wider": {
-    "message": "Todas las páginas de este sitio: más de lo que necesita una herramienta de IA. Quítalo y protege solo la página de la IA."
+    "message": "Todas las páginas de este sitio: más de lo que necesita un chat. Quítalo y protege solo la página del chat."
   },
   "pp_whatDoes": {
     "message": "Lo que hace Clotr cuando encuentra: $p1$",
@@ -1086,13 +1086,13 @@
     "message": "Solo huellas"
   },
   "vault_clotrChecksWhatYouType": {
-    "message": "Clotr funciona en chats de IA como ChatGPT, Claude y Gemini. Te avisa antes de que salga una contraseña, una clave o un dato personal, y luego tú decides: quitarlo o enviarlo igualmente."
+    "message": "Clotr funciona en chats de IA como ChatGPT, Claude y Gemini, y en tu correo o tus apps de chat cuando los activas en Ajustes. Te avisa antes de que salga una contraseña, una clave o un dato personal, y luego tú decides: quitarlo o enviarlo igualmente."
   },
   "vault_onlyOnAiChats": {
-    "message": "Solo en chats de IA."
+    "message": "Solo donde tú eliges."
   },
   "vault_fact1": {
-    "message": "Nunca funciona en tu correo, tu banco ni en ningún otro sitio web."
+    "message": "De serie, solo en chats de IA. En tu correo o una app de chat solo si lo activas, sitio por sitio. Nunca en un sitio que no elegiste, nunca en todas partes a la vez."
   },
   "vault_nothingLeavesThisComputer": {
     "message": "Nada sale de este equipo."
@@ -1372,19 +1372,19 @@
     "message": "✓ Clotr está fijado. Su contador aparece en el escudo de tu barra de herramientas."
   },
   "dash_yourAiExposureReport": {
-    "message": "Tu informe de exposición a la IA"
+    "message": "Tu informe de exposición"
   },
   "dash_onThisComputerOnly": {
     "message": "Solo en este equipo"
   },
   "dash_everythingClotrNoticedInYour": {
-    "message": "Todo lo que Clotr detectó en tus chats de IA, según sus propios registros en este equipo. Nunca guardó lo que escribiste, solo qué tipo de dato era, dónde, cuándo y qué elegiste."
+    "message": "Todo lo que Clotr detectó en tus chats y tu correo, según sus propios registros en este equipo. Nunca guardó lo que escribiste, solo qué tipo de dato era, dónde, cuándo y qué elegiste."
   },
   "dash_soFar": {
     "message": "Hasta ahora"
   },
   "dash_whatEachAiServiceHas": {
-    "message": "Lo que se le ha contado de ti a cada servicio de IA"
+    "message": "Lo que se le ha contado de ti a cada servicio"
   },
   "dash_differentPersonalDetailsYouSent": {
     "message": "Datos personales distintos que enviaste (sin ocultar), contados una vez aunque salieran varias veces. Las claves y contraseñas aparecen en los momentos de más riesgo."
@@ -1393,7 +1393,7 @@
     "message": "Lo que Bandage mantuvo a salvo en cada IA"
   },
   "dash_bandageKeptMeans": {
-    "message": "Datos personales que Bandage cambió por un nombre de reemplazo antes de que enviaras tu mensaje, por herramienta de IA."
+    "message": "Datos personales que Bandage cambió por un nombre de reemplazo antes de que enviaras tu mensaje, por chat de IA."
   },
   "dash_showAsATable": {
     "message": "Ver como tabla"
@@ -1468,7 +1468,7 @@
     "message": "1 herramienta de IA"
   },
   "db_toolN": {
-    "message": "$p1$ herramientas de IA",
+    "message": "$p1$ servicios",
     "placeholders": {
       "p1": {
         "content": "$1"
@@ -1490,7 +1490,7 @@
     }
   },
   "db_nothingYet": {
-    "message": "Aquí no hay nada todavía. Lo que Clotr detecte aparecerá aquí a medida que uses chats de IA."
+    "message": "Aquí no hay nada todavía. Lo que Clotr detecte aparecerá aquí con el uso."
   },
   "db_siteDetails": {
     "message": "$p1$: $p2$",
@@ -1537,10 +1537,10 @@
     }
   },
   "db_noDetails": {
-    "message": "No se ha enviado ningún dato personal a un servicio de IA. 👍"
+    "message": "No se ha enviado ningún dato personal a ningún servicio. 👍"
   },
   "db_mapEmpty": {
-    "message": "Aquí no hay nada todavía. El mapa se irá llenando a medida que Clotr detecte cosas en tus chats de IA."
+    "message": "Aquí no hay nada todavía. El mapa se irá llenando a medida que Clotr detecte cosas en tus chats y tu correo."
   },
   "db_weekLabel": {
     "message": "Semana del $p1$ — ocultados: $p2$, enviados: $p3$, solo contados: $p4$",
@@ -1627,7 +1627,7 @@
     }
   },
   "db_cardTitle": {
-    "message": "🛡️ Mi privacidad en la IA, hasta ahora"
+    "message": "🛡️ Mi privacidad, hasta ahora"
   },
   "db_copied": {
     "message": "Copiado."
@@ -1820,10 +1820,10 @@
     "message": "Revisa lo que escribes y los archivos de texto, PDF, Word, Excel y PowerPoint que adjuntas, pero no imágenes, capturas de pantalla ni voz. Si tu caja fuerte tiene datos, también lee la respuesta de la IA durante 90 segundos después de enviar, solo para notar tus propios datos; no se guarda nada de la respuesta."
   },
   "st_clotrOnlyWorksOnAi": {
-    "message": "Clotr solo funciona en los sitios de chat de IA"
+    "message": "Clotr solo funciona en los chats de IA"
   },
   "st_t12": {
-    "message": "que conoce o que añadiste, y solo en este navegador."
+    "message": "que conoce y en los sitios que tú activaste, y solo en este navegador."
   },
   "st_itCanMissThingsAnd": {
     "message": "Puede pasar cosas por alto y a veces avisar de texto normal."
@@ -1997,7 +1997,7 @@
     "message": "Todo lo que podrías estar filtrando"
   },
   "dash_mindMapIntro": {
-    "message": "Tú estás en el centro. Las cuatro ramas muestran lo que los servicios de IA ya tienen de ti, lo que Clotr detuvo, lo que está en tu caja fuerte y ninguna IA ha visto todavía, y dónde Clotr no puede ver."
+    "message": "Tú estás en el centro. Las cuatro ramas muestran lo que los servicios ya tienen de ti, lo que Clotr detuvo, lo que está en tu caja fuerte y aún no ha salido a ninguna parte, y dónde Clotr no puede ver."
   },
   "dash_keyHas": {
     "message": "Continua"
@@ -2027,7 +2027,7 @@
     "message": "Agrupar el mapa"
   },
   "dash_byAiService": {
-    "message": "Por servicio de IA"
+    "message": "Por servicio"
   },
   "dash_byKindOfDetail": {
     "message": "Por tipo de dato"
@@ -2039,7 +2039,7 @@
     "message": "Rama"
   },
   "dash_aiServiceOrKind": {
-    "message": "Servicio de IA o tipo"
+    "message": "Servicio o tipo"
   },
   "dash_howMany": {
     "message": "Cuántos"
@@ -2060,13 +2060,13 @@
     "message": "Puntos ciegos"
   },
   "mp_hasDetail": {
-    "message": "Lo que los servicios de IA ya tienen de ti: enviado tras un aviso, solo contado, o mencionado en sus respuestas."
+    "message": "Lo que los servicios ya tienen de ti: enviado tras un aviso, solo contado, o mencionado en sus respuestas."
   },
   "mp_nearDetail": {
-    "message": "Lo que Clotr ocultó o retuvo antes de que llegara a una IA."
+    "message": "Lo que Clotr ocultó o retuvo antes de que saliera."
   },
   "mp_openDetailBranch": {
-    "message": "Datos de tu caja fuerte que ninguna IA ha visto de ti todavía."
+    "message": "Datos de tu caja fuerte que aún no han salido a ninguna parte."
   },
   "mp_blindDetailBranch": {
     "message": "Donde Clotr no puede protegerte: herramientas de IA que detectó pero no cubre, y lugares que ninguna extensión puede ver."
@@ -2127,7 +2127,7 @@
     }
   },
   "mp_openDetail": {
-    "message": "$p1$: aún sin compartir con ninguna IA (tuyos: $p2$)",
+    "message": "$p1$: aún sin compartir en ninguna parte (tuyos: $p2$)",
     "placeholders": {
       "p1": {
         "content": "$1"
@@ -2315,13 +2315,13 @@
     "message": "Imprimir la guía"
   },
   "sh_guideTitle": {
-    "message": "un aviso antes de contar demasiado"
+    "message": "tapa tus fugas de datos"
   },
   "sh_whatItIs": {
     "message": "Qué es"
   },
   "sh_whatItIsText": {
-    "message": "Un ayudante en tu navegador. Cuando escribes a un chat de IA como ChatGPT, Gemini o Copilot, se da cuenta de las cosas privadas antes de que las envíes, como una contraseña, tu teléfono, tu dirección o una tarjeta."
+    "message": "Un ayudante en tu navegador. Cuando escribes a un chat de IA como ChatGPT, Gemini o Copilot, o en un correo o una app de chat donde lo activaste, se da cuenta de las cosas privadas antes de que las envíes, como una contraseña, tu teléfono, tu dirección o una tarjeta."
   },
   "sh_whatYoullSee": {
     "message": "Lo que verás"
@@ -2345,7 +2345,7 @@
     "message": "Lo que nunca hace"
   },
   "sh_whatItNeverDoesText": {
-    "message": "Nunca envía nada a ningún sitio y nunca guarda lo que escribes. No mira tu correo ni la web de tu banco. Solo funciona en los chats de IA."
+    "message": "Nunca envía nada a ningún sitio y nunca guarda lo que escribes. Funciona en los chats de IA, y en tu correo o una app de chat solo si alguien lo activó allí."
   },
   "sh_scam": {
     "message": "El soporte de verdad nunca te pide tu contraseña, un código que te llegó por SMS ni tu tarjeta. Si alguien lo hace, para y llama a la persona de abajo."
@@ -2496,6 +2496,15 @@
   },
   "vault_noteReport": {
     "message": "Cuanto más uses Clotr y más fallos reportes, mejor se vuelve. Gratis."
+  },
+  "vault_heroAiChats": {
+    "message": "Chats de IA"
+  },
+  "vault_heroEmail": {
+    "message": "Correo"
+  },
+  "vault_heroChatApps": {
+    "message": "Discord y Slack"
   },
   "vault_heroYou": {
     "message": "Tú"
@@ -2675,5 +2684,74 @@
   },
   "mv_seeVault": {
     "message": "Ver tu caja fuerte"
+  },
+  "dialogLeadHere": {
+    "message": "Si lo envías, quienes lo lean aquí verán:"
+  },
+  "noticeSharedHere": {
+    "message": ". Si lo envías, quienes lo lean aquí lo reciben."
+  },
+  "noticeSharedBulkHere": {
+    "message": " Si lo envías, quienes lo lean aquí lo reciben."
+  },
+  "justSentTitleHere": {
+    "message": "⚠️ Acabas de enviarlo"
+  },
+  "justSentTextHere": {
+    "message": "Tu mensaje llevaba $p1$. Si fue un error, bórralo o anula el envío si puedes. La próxima vez Clotr puede preguntarte antes.",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_addedEveryday": {
+    "message": "Correo o chat que activaste"
+  },
+  "pp_turnOnFor": {
+    "message": "Activar en $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_turnOnHere": {
+    "message": "Activar Clotr aquí"
+  },
+  "pp_offHere": {
+    "message": "Clotr está apagado en este sitio."
+  },
+  "pp_offHereWhy": {
+    "message": "De serie solo funciona en chats de IA. ¿Quieres un aviso aquí también, como en tu correo o una app de chat?"
+  },
+  "pp_on": {
+    "message": "Sí"
+  },
+  "pp_everydayFor": {
+    "message": "Clotr en $p1$",
+    "placeholders": {
+      "p1": {
+        "content": "$1"
+      }
+    }
+  },
+  "pp_kindEmail": {
+    "message": "Correo"
+  },
+  "pp_kindChat": {
+    "message": "App de chat"
+  },
+  "popup_everydaySites": {
+    "message": "También en tu correo y tus apps de chat"
+  },
+  "popup_everydaySitesWhy": {
+    "message": "Apagado hasta que actives uno. Tu navegador te pregunta antes, solo por ese sitio. Allí Clotr avisa y oculta como en un chat de IA, y nunca lee las respuestas de nadie."
+  },
+  "sj_everydaySites": {
+    "message": "Correos y chats que activaste"
+  },
+  "pp_turnOn": {
+    "message": "Activar"
   }
 }

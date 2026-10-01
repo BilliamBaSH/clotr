@@ -58,8 +58,10 @@ body.dash-page {
 .tool {
   padding: 12px 14px;
   border-radius: 10px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  background: var(--card-bg);
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
 }
 .tool .name {
   font-weight: 600;
@@ -125,8 +127,10 @@ body.dash-page {
 .moment {
   padding: 12px 14px;
   border-radius: 10px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  background: var(--card-bg);
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
   border-left: 4px solid var(--critical);
 }
 .moment .what {
@@ -143,8 +147,10 @@ body.dash-page {
 .card {
   padding: 16px;
   border-radius: 12px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  background: var(--card-bg);
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
   margin-bottom: 8px;
   line-height: 1.6;
 }

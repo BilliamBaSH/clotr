@@ -16,11 +16,13 @@ const COLORS = {
   grayTop: "#8B919C",
   grayBottom: "#5E646E",
   ink: "#0B0B0B",
-  ink2: "#52514E",
-  slate: "#8A909B",
-  faint: "#BFC3CA",
-  paper: "#FAFAFB",
-  dot: "#DADDE2",
+  ink2: "#534E49",
+  // The warm refresh (D135): warm slate lines, warm paper and dots, a peach halo.
+  slate: "#9C958E",
+  faint: "#D9D1C9",
+  paper: "#FBF8F5",
+  dot: "#E8E0D8",
+  peach: "#FFE8D6",
   white: "#FFFFFF",
 };
 
@@ -114,31 +116,31 @@ function plasterAt(x, y, angle, s = 1) {
   );
 }
 
-// The mind map: you in the middle, branches to AI chats, and on each branch the details Clotr stopped
-// (a plaster across the twig; past it the line fades to dashes and the detail stays gray).
-// Drawn in an 860×480 box; place it with transform.
+// The mind map: you in the middle, branches to the places you type (AI chats, email, chat apps: D135), and on
+// each branch the details Clotr stopped (a plaster across the twig; past it the line fades to dashes and the
+// detail stays gray). Drawn in an 860×480 box; place it with transform.
 const MAP = [
   {
-    site: "chatgpt.com",
+    site: "AI chats",
     at: [440, 96],
     leaves: [
-      ["Phone number", 44],
-      ["Home address", 110],
+      ["Bank account", 44],
+      ["Password", 110],
     ],
   },
   {
-    site: "claude.ai",
+    site: "Email",
     at: [480, 250],
     leaves: [
-      ["API key", 210],
-      ["Password", 276],
+      ["Home address", 210],
+      ["Card number", 276],
     ],
   },
   {
-    site: "gemini.google.com",
+    site: "Discord &amp; Slack",
     at: [430, 400],
     leaves: [
-      ["Card number", 370],
+      ["Phone number", 370],
       ["Date of birth", 436],
     ],
   },
@@ -153,7 +155,8 @@ function mindMap({ labels = true } = {}) {
   for (const b of MAP) {
     const [ax, ay] = b.at;
     lines += `<path class="mm-b" d="M${you[0]} ${you[1]} C${you[0] + 170} ${you[1]} ${ax - 190} ${ay} ${ax - 26} ${ay}" fill="none" stroke="${COLORS.slate}" stroke-width="4" stroke-linecap="round"/>`;
-    nodes += `<circle class="mm-ring" cx="${ax}" cy="${ay}" r="22" fill="${COLORS.white}" stroke="${COLORS.slate}" stroke-width="4"/>`;
+    nodes += `<circle class="mm-halo" cx="${ax}" cy="${ay}" r="32" fill="${COLORS.peach}"/>`;
+    nodes += `<circle class="mm-ring" cx="${ax}" cy="${ay}" r="22" fill="${COLORS.white}" stroke="${COLORS.orange}" stroke-width="4"/>`;
     if (labels) text += t(ax, ay - 36, b.site, 20, 700, COLORS.ink, "middle", "mm-site");
     for (const [label, ly] of b.leaves) {
       const sx = ax + 24,

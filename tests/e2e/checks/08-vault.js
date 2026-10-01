@@ -66,7 +66,7 @@ module.exports = async function (env) {
         const pin = await page.evaluate(() => document.getElementById("pin-step")?.innerText || "");
         expect(/puzzle piece/i.test(pin) || /Clotr is pinned/.test(pin), `pin step: ${JSON.stringify(pin)}`);
         for (const fact of [
-          "Only on AI chats",
+          "Only where you choose",
           "Nothing leaves this computer",
           "never saves what you type",
           "It only warns",

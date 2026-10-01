@@ -162,10 +162,10 @@
     has: () =>
       msg(
         "mp_hasDetail",
-        "What AI services already have from you: sent after a warning, just counted, or brought up in their replies.",
+        "What services already have from you: sent after a warning, just counted, or brought up in their replies.",
       ),
-    near: () => msg("mp_nearDetail", "What Clotr hid or held before it reached an AI."),
-    open: () => msg("mp_openDetailBranch", "Details in your vault that no AI has seen from you yet."),
+    near: () => msg("mp_nearDetail", "What Clotr hid or held before it went out."),
+    open: () => msg("mp_openDetailBranch", "Details in your vault that haven't gone anywhere yet."),
     blind: () =>
       msg(
         "mp_blindDetailBranch",
@@ -233,7 +233,7 @@
       label: o.label,
       count: o.count,
       severity: "none",
-      detail: msg("mp_openDetail", "$1: not shared with any AI yet ($2 of yours)", o.label, o.count),
+      detail: msg("mp_openDetail", "$1: not shared anywhere yet ($2 of yours)", o.label, o.count),
       children: [],
     }));
     const blind = model.blind.map((host) => ({
