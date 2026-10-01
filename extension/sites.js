@@ -1,14 +1,43 @@
 // Clotr — which sites Clotr runs on, and how new AI tools are spotted.
 // Shared by background.js (importScripts) and popup.js. Not a content script.
 //
-// Scope rule: Clotr only ever runs on AI chat / AI tool sites. New tools are
+// Scope rule: out of the box Clotr runs only on AI chat / AI tool sites. New tools are
 // *spotted* automatically, but protecting one always takes a user click plus a
-// browser permission prompt for that one site. Never all websites.
+// browser permission prompt for that one site. Email and chat apps work the same
+// way (D134): never built in, one site at a time when you switch it on. Never all websites.
 (() => {
   "use strict";
 
   const CONTENT_JS = ["patterns.js", "detector.js", "attachments.js", "ui-styles.js", "editor.js", "content.js"];
   const USER_SCRIPT_ID = "clotr-user-sites";
+
+  // Everyday sites (D134): email and chat apps, where you write to people rather than to an AI. None is built in:
+  // Settings lists them, and each runs Clotr only after you switch it on and the browser grants that one site.
+  // There, Bandage and the reply check stay off: cover names would reach people, and replies are other people's.
+  const EVERYDAY_SITES = [
+    { name: "Gmail", kind: "email", matches: ["https://mail.google.com/*"] },
+    { name: "Outlook", kind: "email", matches: ["https://outlook.live.com/*", "https://outlook.office.com/*"] },
+    { name: "Yahoo Mail", kind: "email", matches: ["https://mail.yahoo.com/*"] },
+    { name: "Discord", kind: "chat", matches: ["https://discord.com/*"] },
+    { name: "Slack", kind: "chat", matches: ["https://app.slack.com/*"] },
+    { name: "WhatsApp", kind: "chat", matches: ["https://web.whatsapp.com/*"] },
+    { name: "Messenger", kind: "chat", matches: ["https://www.messenger.com/*"] },
+    { name: "Microsoft Teams", kind: "chat", matches: ["https://teams.microsoft.com/*", "https://teams.live.com/*"] },
+  ];
+  const hostOf = (pattern) => new URL(pattern.replace(/\*$/, "")).hostname;
+
+  function everydaySiteFor(host) {
+    return EVERYDAY_SITES.find((s) => s.matches.some((p) => hostOf(p) === host)) || null;
+  }
+
+  // Is this a site where you write to people? One from the list, or one you switched on as "not an AI"
+  // (storage `siteKinds`: host → "everyday" | "ai"; your choice wins over the list).
+  function isEveryday(host, siteKinds = {}) {
+    if (!host) return false;
+    if (siteKinds[host] === "everyday") return true;
+    if (siteKinds[host] === "ai") return false;
+    return Boolean(everydaySiteFor(host));
+  }
 
   // Built-in AI sites come straight from the manifest, so there is one list.
   function builtInMatches() {
@@ -413,6 +442,9 @@
     hasPolicy,
     CONTENT_JS,
     USER_SCRIPT_ID,
+    EVERYDAY_SITES,
+    everydaySiteFor,
+    isEveryday,
     AI_URL_REGEX,
     PROMPT_SELECTORS,
     builtInMatches,

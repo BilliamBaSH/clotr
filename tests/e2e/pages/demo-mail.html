@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- A neutral, unbranded webmail for store/README screenshots (npm run test:e2e -- --store, D135). It deliberately
+     imitates no real product: a folder list, and a message being written with a textarea body and a Send button. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mail</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; background: #f6f7f9; color: #1d2330; height: 100vh; display: flex; flex-direction: column; }
+    header { padding: 14px 24px; border-bottom: 1px solid #e3e6eb; background: #fff; font-weight: 600; display: flex; gap: 10px; align-items: center; }
+    header .logo { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(135deg, #5aa7ff, #7b61ff); }
+    .app { flex: 1; display: flex; min-height: 0; }
+    nav { width: 200px; padding: 18px 12px; display: flex; flex-direction: column; gap: 2px; color: #4a5160; }
+    nav span { padding: 7px 12px; border-radius: 10px; }
+    nav .on { background: #e4ebff; color: #1d2330; font-weight: 600; }
+    main { flex: 1; padding: 22px 28px 28px 8px; display: flex; }
+    .compose { flex: 1; max-width: 780px; background: #fff; border: 1px solid #e3e6eb; border-radius: 16px; box-shadow: 0 2px 10px rgba(20, 30, 60, .06); display: flex; flex-direction: column; }
+    .compose h1 { margin: 0; padding: 14px 20px; font-size: 16px; border-bottom: 1px solid #eef0f3; }
+    .field { display: flex; gap: 10px; padding: 10px 20px; border-bottom: 1px solid #eef0f3; color: #4a5160; }
+    .field b { width: 64px; font-weight: 500; }
+    .field span { color: #1d2330; }
+    textarea { flex: 1; border: 0; outline: 0; resize: none; font: inherit; padding: 16px 20px; min-height: 260px; color: inherit; background: transparent; }
+    .bar { padding: 12px 20px 16px; }
+    #send { border: 0; border-radius: 12px; background: #2f5bd8; color: #fff; padding: 9px 22px; font: inherit; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header><span class="logo" aria-hidden="true"></span>Mail</header>
+  <div class="app">
+    <nav aria-label="Folders"><span class="on">Inbox</span><span>Starred</span><span>Sent</span><span>Drafts</span></nav>
+    <main>
+      <section class="compose" aria-label="New message">
+        <h1>New message</h1>
+        <div class="field"><b>To</b><span>Oak Street Rentals</span></div>
+        <div class="field"><b>Subject</b><span>The heater in 4B</span></div>
+        <textarea id="body" aria-label="Message body"></textarea>
+        <div class="bar"><button id="send" aria-label="Send">Send</button></div>
+      </section>
+    </main>
+  </div>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("body");
+    document.getElementById("send").addEventListener("click", () => {
+      if (!box.value.trim()) return;
+      window.__sent.push(box.value);
+      box.value = "";
+    });
+  </script>
+</body>
+</html>

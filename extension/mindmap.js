@@ -81,9 +81,9 @@
     const cx = W / 2,
       cy = H / 2;
     const deep = (n) => (n.children?.length ? 1 + Math.max(...n.children.map(deep)) : 0);
-    const rings = deep(tree) > 2 ? [0, 0.3, 0.64, 1] : [0, 0.42, 1];
+    const rings = deep(tree) > 2 ? [0, 0.3, 0.64, 1] : compact ? [0, 0.45, 1] : [0, 0.42, 1];
     // Room at the sides for the outermost labels, never more than a third of the width.
-    const labelChars = compact ? 16 : deep(tree) > 2 ? 26 : 18;
+    const labelChars = compact ? 18 : deep(tree) > 2 ? 26 : 18;
     const rx = W / 2 - Math.min(W / 3, labelChars * (compact ? 4 : 6)),
       ry = H / 2 - (compact ? 22 : 40);
     const list = tree.layout === "list";
@@ -189,7 +189,21 @@
       g.setAttribute("aria-label", text);
       g.append(svgEl("title", {}, text));
 
-      if (n.type === "branch") {
+      if (n.type === "branch" && compact) {
+        // The popup's map: a junction dot on the line; the key under the map names the branch and its count.
+        g.append(
+          svgEl("circle", {
+            cx: 0,
+            cy: 0,
+            r: 4.5,
+            fill: "var(--surface)",
+            stroke: STROKE[n.branch].stroke,
+            "stroke-width": 2.5,
+          }),
+        );
+        grow(x - 5, y - 5, x + 5, y + 5);
+        choosable(g, n);
+      } else if (n.type === "branch") {
         // "Already has" and its count, set apart: the count is the figure, the name says what it counts.
         const count = String(n.count);
         const w = (n.label.length + count.length + 1) * (compact ? 5.8 : 7) + (compact ? 14 : 20),
@@ -242,7 +256,7 @@
       nodes.push(g);
     });
 
-    const youR = compact ? 16 : 24;
+    const youR = compact ? 14 : 24;
     const you = svgEl("g", { class: "mind-you" });
     you.dataset.you = "";
     const [ux, uy] = at(tree);
@@ -296,7 +310,13 @@
     };
     if (!motion) {
       svg.setAttribute("viewBox", estimate.join(" "));
-      svg.setAttribute("viewBox", measured().join(" "));
+      const fit = measured();
+      svg.setAttribute("viewBox", fit.join(" "));
+      // The popup's map keeps its own size: one unit is one pixel, so its words read like the popup's.
+      if (compact) {
+        svg.setAttribute("width", fit[2]);
+        svg.setAttribute("height", fit[3]);
+      }
       delete svg.dataset.moving;
       return tree;
     }

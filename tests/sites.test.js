@@ -21,6 +21,19 @@ require("../extension/detector.js");
 const Sites = globalThis.ClotrSites;
 const Clotr = globalThis.Clotr;
 
+test("Everyday sites (D134): email and chat apps are 'everyday', AI tools aren't, and your own choice wins", () => {
+  assert.equal(Sites.isEveryday("mail.google.com"), true);
+  assert.equal(Sites.isEveryday("discord.com"), true);
+  assert.equal(Sites.isEveryday("app.slack.com"), true);
+  assert.equal(Sites.isEveryday("chatgpt.com"), false);
+  assert.equal(Sites.isEveryday("chat.newtool.ai"), false, "a site you added as an AI tool stays an AI tool");
+  assert.equal(Sites.isEveryday("forum.example.org", { "forum.example.org": "everyday" }), true);
+  assert.equal(Sites.isEveryday("discord.com", { "discord.com": "ai" }), false, "you said it's an AI tool");
+  assert.equal(Sites.isEveryday(""), false);
+  assert.equal(Sites.everydaySiteFor("outlook.office.com")?.name, "Outlook");
+  assert.equal(Sites.everydaySiteFor("chatgpt.com"), null);
+});
+
 test("Protect this site: a whole AI site gets the whole host", () => {
   assert.equal(Sites.protectScope("https://chat.newtool.ai/c/123?x=1"), "https://chat.newtool.ai/*");
   assert.equal(Sites.protectScope("https://duck.ai/"), "https://duck.ai/*");

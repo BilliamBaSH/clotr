@@ -23,8 +23,8 @@ body:
   - type: input
     id: site
     attributes:
-      label: AI site (optional)
-      placeholder: "chatgpt.com"
+      label: Site (optional)
+      placeholder: "chatgpt.com, mail.google.com"
   - type: input
     id: version
     attributes:

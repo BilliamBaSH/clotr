@@ -1,5 +1,6 @@
 /* Clotr's shared styles (popup, report, vault, stored pages). Brand: burnt orange (D76), for buttons,
-   links, focus and headers only. Chart colors follow a separate validated categorical palette:
+   links, focus and headers only. The look (D135, the warm refresh): warm paper, cards lit
+   from the top with a warm shadow, an orange sheen on primary buttons and chosen tabs. Chart colors follow a separate validated categorical palette:
    blue / orange / aqua, all-pairs colorblind-safe in light and dark. Warnings stay red/amber. */
 /* Atkinson Hyperlegible (Braille Institute, SIL OFL: fonts/OFL.txt), made for low-vision readers.
    Bundled, so nothing is fetched; Clotr's own pages only (the in-page warning uses the system font). */
@@ -17,11 +18,12 @@
 }
 :root {
   color-scheme: light;
-  --page: #f9f9f7;
-  --surface: #fcfcfb;
+  --page: #fbf8f5;
+  --surface: #ffffff;
+  --surface-2: #fffaf6;
   --ink: #0b0b0b;
-  --ink-2: #52514e;
-  --muted: #6b6a65; /* 5:1 on page/surface (WCAG AA text) */
+  --ink-2: #534e49;
+  --muted: #6b645e; /* 5:1 on page/surface (WCAG AA text) */
   --brand: #b84a0c; /* orange as text, links and focus rings: 4.95:1 on page */
   --on-brand: #ffffff;
   --brand-wash: #fbeee4; /* brand text on it 4.6:1 */
@@ -29,10 +31,21 @@
   --signal: #ff6700;
   --on-signal: #0b0b0b;
   --btn-primary: var(--signal);
-  --grid: #e1e0d9;
-  --axis: #c3c2b7;
-  --ring: rgba(11, 11, 11, 0.1);
-  --wash: rgba(11, 11, 11, 0.05);
+  --grid: #ebe4dc;
+  --axis: #cdc3b9;
+  --ring: rgba(80, 45, 15, 0.12);
+  --wash: rgba(160, 80, 20, 0.07);
+  /* Cards lit from the top, a warm lift under them; the orange sheen for primary buttons and chosen tabs. */
+  --card-bg: linear-gradient(180deg, var(--surface), var(--surface-2));
+  --lift:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(60, 30, 10, 0.06), 0 14px 36px -18px rgba(120, 60, 20, 0.16);
+  --sheen: linear-gradient(180deg, #ff8a3d, #ff6700 60%, #f25f00);
+  --sheen-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -3px 0 rgba(0, 0, 0, 0.12),
+    0 8px 16px -10px rgba(255, 103, 0, 0.65);
+  --btn-lift: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 5px 12px -10px rgba(20, 22, 28, 0.4);
+  --chosen-bg: #fff0e6;
+  --glow: rgba(255, 103, 0, 0.07);
 
   --series-1: #2a78d6; /* redacted */
   --series-2: #eb6834; /* allowed */
@@ -53,15 +66,20 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --page: #0d0d0d;
-    --surface: #1a1a19;
-    --ink: #ffffff;
-    --ink-2: #c3c2b7;
-    --muted: #898781;
-    --grid: #2c2c2a;
-    --axis: #383835;
-    --ring: rgba(255, 255, 255, 0.1);
-    --wash: rgba(255, 255, 255, 0.06);
+    --page: #16130f;
+    --surface: #1f1b17;
+    --surface-2: color-mix(in srgb, #ff6700 5%, #1f1b17);
+    --ink: #f6f2ee;
+    --ink-2: #cbc3ba;
+    --muted: #9c948b;
+    --grid: #2f2923;
+    --axis: #453d35;
+    --ring: rgba(255, 230, 205, 0.1);
+    --wash: rgba(255, 170, 110, 0.08);
+    --lift: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 36px -24px rgba(0, 0, 0, 0.8);
+    --btn-lift: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 5px 12px -10px rgba(0, 0, 0, 0.7);
+    --chosen-bg: #33200f;
+    --glow: rgba(255, 103, 0, 0.1);
 
     --series-1: #3987e5;
     --series-2: #d95926;
@@ -95,7 +113,9 @@ body {
     -apple-system,
     "Segoe UI",
     sans-serif;
-  background: var(--page);
+  background:
+    radial-gradient(120% 70% at 50% -12%, var(--glow), transparent 60%) no-repeat,
+    var(--page);
   color: var(--ink);
 }
 [hidden] {
@@ -154,8 +174,8 @@ a {
   padding: 2px 8px;
   border-radius: 999px;
   color: var(--ink-2);
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  background: color-mix(in srgb, var(--signal) 8%, var(--surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--signal) 22%, var(--ring));
 }
 
 /* Site status card */
@@ -164,9 +184,11 @@ a {
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
-  border-radius: 10px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  border-radius: 12px;
+  background: var(--card-bg);
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
 }
 .site .grow {
   flex: 1;
@@ -214,23 +236,48 @@ a {
 }
 
 .btn {
-  border-radius: 7px;
+  border-radius: 8px;
   padding: 6px 12px;
   border: none;
   flex: none;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--axis);
+  background: var(--card-bg);
+  box-shadow:
+    var(--btn-lift),
+    inset 0 0 0 1px var(--axis);
+  transition:
+    box-shadow 0.15s,
+    filter 0.15s;
 }
 .btn:hover {
-  background: var(--wash);
+  box-shadow:
+    var(--btn-lift),
+    inset 0 0 0 1px color-mix(in srgb, var(--signal) 40%, var(--axis));
 }
 .btn.primary {
   background: var(--btn-primary);
+  background-image: var(--sheen);
   color: var(--on-signal);
-  box-shadow: none;
+  font-weight: 700;
+  box-shadow: var(--sheen-shadow);
 }
 .btn.primary:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.05);
+  box-shadow: var(--sheen-shadow);
+}
+/* A switch that's on (Settings: email and chat apps): the chosen look, orange edge, orange words. */
+.btn.switch {
+  min-width: 48px;
+}
+.btn.switch.on {
+  background: var(--chosen-bg);
+  color: var(--brand);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--signal);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
 }
 .linkish {
   border: none;
@@ -241,34 +288,43 @@ a {
   font-size: 11px;
 }
 
-/* Tabs */
+/* Tabs: at the bottom of the popup, always in view (D135) */
 .tabs {
+  position: sticky;
+  bottom: -14px;
+  z-index: 5;
   display: flex;
   gap: 2px;
-  margin: 12px 0 10px;
-  border-bottom: 1px solid var(--grid);
+  margin: 12px -14px -14px;
+  padding: 0 14px 6px;
+  border-top: 1px solid var(--grid);
+  background: color-mix(in srgb, var(--page) 94%, transparent);
+  backdrop-filter: blur(8px);
 }
 .tabs button {
+  flex: 1;
   border: none;
   background: none;
-  padding: 6px 10px 8px;
+  padding: 9px 10px 7px;
   color: var(--ink-2);
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
+  border-top: 2px solid transparent;
+  margin-top: -1px;
 }
 .tabs button[aria-selected="true"] {
   color: var(--ink);
-  font-weight: 600;
-  border-bottom-color: var(--ink);
+  font-weight: 700;
+  border-top-color: var(--signal);
 }
 
 /* Range filter: one row above everything it scopes */
 .range {
   display: inline-flex;
   padding: 2px;
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  border-radius: 9px;
+  background: var(--card-bg);
+  box-shadow:
+    var(--btn-lift),
+    inset 0 0 0 1px var(--ring);
   margin-bottom: 10px;
 }
 .range button {
@@ -280,9 +336,11 @@ a {
   font-size: 12px;
 }
 .range button[aria-checked="true"] {
-  background: var(--wash);
-  color: var(--ink);
-  font-weight: 600;
+  background: var(--btn-primary);
+  background-image: var(--sheen);
+  color: var(--on-signal);
+  font-weight: 700;
+  box-shadow: var(--sheen-shadow);
 }
 
 /* Hero figure (one per view) */
@@ -308,9 +366,11 @@ a {
 
 /* Cards */
 .card {
-  background: var(--surface);
-  border-radius: 10px;
-  box-shadow: inset 0 0 0 1px var(--ring);
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
   padding: 10px 12px;
   margin-bottom: 8px;
 }
@@ -325,9 +385,11 @@ a {
   gap: 4px;
   margin-bottom: 8px;
   padding: 14px;
-  border-radius: 10px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  border-radius: 12px;
+  background: var(--card-bg);
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
   color: var(--ink-2);
 }
 .empty-card b {
@@ -340,10 +402,11 @@ a {
   gap: 8px;
   align-items: flex-start;
   padding: 8px 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 8px;
-  background: var(--surface);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--serious) 12%, var(--surface)), var(--surface) 55%);
   box-shadow:
+    var(--lift),
     inset 3px 0 0 var(--serious),
     inset 0 0 0 1px var(--ring);
   font-size: 12px;
@@ -432,11 +495,11 @@ a {
   pointer-events: none;
   min-width: 128px;
   padding: 7px 9px;
-  border-radius: 8px;
-  background: var(--surface);
+  border-radius: 9px;
+  background: var(--card-bg);
   color: var(--ink);
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.18),
+    0 10px 24px -8px rgba(80, 40, 10, 0.3),
     inset 0 0 0 1px var(--ring);
   font-size: 11px;
 }
@@ -576,11 +639,9 @@ a {
 
 /* Settings */
 h2 {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted);
-  margin: 12px 0 6px;
+  font-size: 13px;
+  color: var(--ink);
+  margin: 14px 0 6px;
 }
 h2:first-child {
   margin-top: 0;
@@ -616,8 +677,10 @@ h2:first-child {
   border-radius: 6px;
   border: none;
   color: var(--ink);
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--axis);
+  background: var(--card-bg);
+  box-shadow:
+    var(--btn-lift),
+    inset 0 0 0 1px var(--axis);
 }
 .resp-group {
   padding: 6px 0;
@@ -713,7 +776,7 @@ h2:first-child {
   gap: 6px;
   font-size: 12px;
   color: var(--ink-2);
-  margin: 0 0 8px;
+  margin: 12px 0 0;
 }
 .filter-bar select {
   max-width: 220px;
@@ -727,10 +790,11 @@ body[data-tab="settings"] .filter-bar {
   margin: 0 0 6px;
 }
 .whats-new {
-  background: var(--surface);
-  border-radius: 10px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--signal) 16%, var(--surface)), var(--surface) 70%);
+  border-radius: 12px;
   box-shadow:
-    inset 3px 0 0 var(--brand),
+    var(--lift),
+    inset 3px 0 0 var(--signal),
     inset 0 0 0 1px var(--ring);
   padding: 10px 12px;
   margin-bottom: 10px;
@@ -770,9 +834,11 @@ body:not(.advanced) .advanced-only {
 .digest {
   margin: 0 0 10px;
   padding: 10px 12px;
-  border-radius: 10px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  border-radius: 12px;
+  background: var(--card-bg);
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
 }
 .digest p {
   margin: 0 0 4px;
@@ -786,11 +852,45 @@ body:not(.advanced) .advanced-only {
   padding-left: 8px;
 }
 
-/* Small mind map (D75) */
+/* Small mind map (D75): drawn at its own size (never stretched past it), centered, first on Overview */
+.mini-map-card {
+  margin-top: 10px;
+}
 .mini-map {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
+  margin: 2px auto 4px;
+}
+.mini-key {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 16px;
+  margin: 0 0 6px;
+  color: var(--ink-2);
+  font-size: 12px;
+}
+.mini-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.mini-key b {
+  color: var(--ink);
+}
+.mini-key i {
+  width: 18px;
+  border-top: 3px solid var(--series-2);
+}
+.mini-key .key-near i {
+  border-top: 3px dashed var(--series-1);
+}
+.mini-key .key-open i {
+  border-top: 3px dotted var(--good-ink);
+}
+.mini-key .key-blind i {
+  border-top: 3px dashed var(--medium-fg);
 }
 .mini-map .mind-count {
   font-size: 10px;

@@ -45,6 +45,11 @@
     };
     // The AI's answer, added by the screenshot run (like a streamed reply).
     window.__reply = (text) => bubble("ai", text);
+    // A different conversation so far: [["me", "…"], ["ai", "…"]] (store screenshots, D135).
+    window.__setLog = (pairs) => {
+      log.replaceChildren();
+      for (const [who, text] of pairs) bubble(who, text);
+    };
     function send() {
       if (!box.value.trim()) return;
       window.__sent.push(box.value);

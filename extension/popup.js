@@ -49,6 +49,7 @@ let state = {
   lock: null,
   largeText: false,
   bandage: {},
+  siteKinds: {},
 };
 let site = { kind: "none" }; // none | protected | spotted | not-ai
 let rangeDays = readPref("rangeDays", 7);
@@ -63,7 +64,7 @@ function renderSiteFilter() {
   const counts = countBy(state.events, (e) => e.site);
   if (siteFilter && !counts.some(([site]) => site === siteFilter)) siteFilter = "";
   $("site-filter").replaceChildren(
-    el("option", { value: "", textContent: msg("pp_allTools", "All AI tools"), selected: !siteFilter }),
+    el("option", { value: "", textContent: msg("pp_allTools", "All chats"), selected: !siteFilter }),
     ...counts.map(([site, n]) =>
       el("option", { value: site, textContent: `${site} (${n})`, selected: site === siteFilter }),
     ),
@@ -187,7 +188,8 @@ async function noteSpotted(host) {
   await chrome.storage.local.set({ spotted }).catch(() => {});
 }
 
-async function protectSite(url) {
+// `kind`: "ai" for an AI tool, "everyday" for an email or chat app (D134: no cover names, no reply check there).
+async function protectSite(url, kind = "ai") {
   // Record the section first: the browser's prompt (for exactly this one host) may close
   // the popup, and background.js finishes the setup from storage either way.
   const scope = Sites.protectScope(url);
@@ -196,14 +198,40 @@ async function protectSite(url) {
   if (scope === perm)
     delete siteScopes[perm]; // the whole host
   else siteScopes[perm] = [...new Set([...(siteScopes[perm] || []), scope])];
+  await setSiteKinds([new URL(url).hostname], kind);
   await chrome.storage.local.set({ siteScopes });
   const granted = await chrome.permissions.request({ origins: [perm] });
-  if (granted) {
-    state.userSites = await Sites.userSitePatterns();
-    await detectSite();
-    renderSite();
-    renderSettings();
+  if (granted) await refreshSites();
+}
+
+async function setSiteKinds(hosts, kind) {
+  const { siteKinds = {} } = await chrome.storage.local.get("siteKinds");
+  for (const h of hosts) {
+    if (kind) siteKinds[h] = kind;
+    else delete siteKinds[h];
   }
+  state.siteKinds = siteKinds;
+  await chrome.storage.local.set({ siteKinds });
+}
+
+async function refreshSites() {
+  state.userSites = await Sites.userSitePatterns();
+  await detectSite();
+  renderSite();
+  renderSettings();
+}
+
+// Settings → "Also on your email and chat apps": one switch per app, asking the browser for exactly its sites.
+async function setEverydaySite(s, on) {
+  const hosts = s.matches.map((p) => new URL(p.replace(/\*$/, "")).hostname);
+  if (on) {
+    await setSiteKinds(hosts, "everyday");
+    await chrome.permissions.request({ origins: s.matches });
+  } else {
+    await chrome.permissions.remove({ origins: s.matches });
+    await setSiteKinds(hosts, null);
+  }
+  await refreshSites();
 }
 
 async function setPaused(host, value) {
@@ -280,7 +308,9 @@ function renderSite() {
           line.title =
             site.source === "built-in"
               ? msg("pp_builtInSite", "Built-in AI site")
-              : msg("pp_addedSite", "AI site you added");
+              : Sites.isEveryday(site.host, state.siteKinds)
+                ? msg("pp_addedEveryday", "Email or chat site you switched on")
+                : msg("pp_addedSite", "AI site you added");
           return line;
         })(),
         ...(isPaused ? [] : testHere(site)),
@@ -345,21 +375,36 @@ function renderSite() {
     return;
   }
 
-  // not-ai
+  // not-ai: off here until you switch it on (D134): an email or chat app, any other site, or an AI tool it missed.
+  const https = Boolean(site.host && site.url?.startsWith("https:"));
+  const known = Sites.everydaySiteFor(site.host);
+  const turnOn = el("button", {
+    className: "btn primary",
+    textContent: known ? msg("pp_turnOnFor", "Turn on for $1", known.name) : msg("pp_turnOnHere", "Turn Clotr on here"),
+  });
+  turnOn.addEventListener("click", () => protectSite(site.url, "everyday"));
   const override = el("button", {
     className: "linkish",
-    textContent: msg("pp_override", "It is an AI tool, protect it"),
+    textContent: msg("pp_override", "It's an AI chat: protect it"),
   });
-  override.addEventListener("click", () => protectSite(site.url));
-  const https = Boolean(site.host && site.url?.startsWith("https:"));
+  override.addEventListener("click", () => protectSite(site.url, "ai"));
   box.replaceChildren(
     el("div", { className: "grow" }, [
       el("div", { className: "host", textContent: site.host }),
-      stateLine("", msg("pp_notAi", "Not an AI tool. Clotr stays off here.")),
-      coverageLine(),
-      https ? override : "",
+      stateLine("", msg("pp_offHere", "Clotr is off on this site.")),
+      https
+        ? el("div", {
+            className: "why",
+            textContent: msg(
+              "pp_offHereWhy",
+              "Out of the box it runs only on AI chats. Want a heads-up here too, like on your email or a chat app?",
+            ),
+          })
+        : coverageLine(),
       https ? willCover() : "",
+      https && !known ? override : "",
     ]),
+    ...(https ? [turnOn] : []),
   );
 }
 
@@ -454,7 +499,18 @@ function renderMiniMap() {
   const model = exposureModel({ events, mentions });
   $("mini-map-card").hidden = !model.has.bySite.length && !model.near.bySite.length;
   if ($("mini-map-card").hidden) return;
-  renderMindMap($("mini-map"), layoutRadial(buildMindMapTree(model, { compact: true, max: 4 })), { compact: true });
+  const tree = layoutRadial(buildMindMapTree(model, { compact: true, max: 4 }));
+  renderMindMap($("mini-map"), tree, { compact: true });
+  // The key: each branch's name and count, drawn in its line's style.
+  $("mini-map-key").replaceChildren(
+    ...tree.children.map((b) =>
+      el("span", { className: `key-${b.branch}` }, [
+        el("i", { "aria-hidden": "true" }),
+        `${b.label} `,
+        el("b", { textContent: String(b.count) }),
+      ]),
+    ),
+  );
 }
 
 // Weekly digest: this week against last week, and the one thing to do now (v1.0). Local, no notifications.
@@ -919,28 +975,66 @@ $("unlock-pin").addEventListener("keydown", (e) => {
   if (e.key === "Enter") tryUnlock();
 });
 
+// Email and chat apps (D134): a switch per app on the list, then any other site you switched on as "not an AI".
+function renderEverydaySites(granted) {
+  const listed = new Set(Sites.EVERYDAY_SITES.flatMap((s) => s.matches));
+  const rows = Sites.EVERYDAY_SITES.map((s) => {
+    const on = s.matches.some((p) => granted.includes(p));
+    const btn = el("button", {
+      className: on ? "btn switch on" : "btn switch",
+      textContent: on ? msg("pp_on", "On") : msg("pp_turnOn", "Turn on"),
+      disabled: isLocked(),
+    });
+    btn.setAttribute("aria-pressed", String(on));
+    btn.setAttribute("aria-label", msg("pp_everydayFor", "Clotr on $1", s.name));
+    btn.addEventListener("click", () => setEverydaySite(s, !on));
+    return el("li", {}, [
+      el("span", { className: "grow" }, [
+        el("b", { textContent: s.name }),
+        el("span", {
+          className: "why",
+          textContent: s.kind === "email" ? msg("pp_kindEmail", "Email") : msg("pp_kindChat", "Chat app"),
+        }),
+      ]),
+      btn,
+    ]);
+  });
+  const others = granted
+    .filter((p) => !listed.has(p))
+    .map((p) => {
+      const btn = el("button", { className: "btn", textContent: msg("pp_remove", "Remove") });
+      btn.addEventListener("click", () => removeUserSite(p));
+      return el("li", {}, [el("span", { className: "grow", textContent: prettyPattern(p) }), btn]);
+    });
+  $("everyday-sites").replaceChildren(...rows, ...others);
+}
+
 function renderSettings() {
   renderHelper();
   renderBandage();
-  const userItems = state.userSites.map((p) => {
-    const btn = el("button", { className: "btn", textContent: msg("pp_remove", "Remove") });
-    btn.addEventListener("click", () => removeUserSite(p));
-    const label = el("span", { className: "grow", textContent: prettyPattern(p) });
-    if (Sites.isWiderThanNeeded(p)) {
-      label.append(
-        el("span", {
-          className: "why",
-          textContent: msg(
-            "pp_wider",
-            "Every page of this site: wider than an AI tool needs. Remove it, then protect just the AI page.",
-          ),
-        }),
-      );
-    }
-    return el("li", {}, [label, btn]);
-  });
+  const everydayHost = (p) => Sites.isEveryday(new URL(p.replace(/\*$/, "")).hostname, state.siteKinds);
+  const userItems = state.userSites
+    .filter((p) => !everydayHost(p))
+    .map((p) => {
+      const btn = el("button", { className: "btn", textContent: msg("pp_remove", "Remove") });
+      btn.addEventListener("click", () => removeUserSite(p));
+      const label = el("span", { className: "grow", textContent: prettyPattern(p) });
+      if (Sites.isWiderThanNeeded(p)) {
+        label.append(
+          el("span", {
+            className: "why",
+            textContent: msg(
+              "pp_wider",
+              "Every page of this site: wider than a chat needs. Remove it, then protect just the chat page.",
+            ),
+          }),
+        );
+      }
+      return el("li", {}, [label, btn]);
+    });
   $("user-sites").replaceChildren(...userItems);
   $("user-sites-empty").hidden = userItems.length > 0;
+  renderEverydaySites(state.userSites.filter(everydayHost));
 
   // Named list from ai-sites.json; falls back to the raw manifest patterns.
   const tools = state.builtInTools.length
@@ -1143,6 +1237,7 @@ async function init() {
     "mentions",
     "spotted",
     "bandage",
+    "siteKinds",
   ]);
   unlockedUntil = await Helper.unlockedUntil();
   const policy = Sites.mergePolicy((await chrome.storage.managed?.get(null).catch(() => ({}))) || {});
@@ -1162,6 +1257,7 @@ async function init() {
     bandage: stored.bandage || {},
     userSites: await Sites.userSitePatterns(),
     builtInTools: await loadBuiltInTools(),
+    siteKinds: stored.siteKinds || {},
   };
   await detectSite();
   renderAll();

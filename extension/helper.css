@@ -39,7 +39,9 @@
   place-items: center;
   font-weight: 700;
   background: var(--signal);
+  background-image: var(--sheen);
   color: var(--on-signal);
+  box-shadow: var(--sheen-shadow);
 }
 .helper-steps h2 {
   font-size: 17px;

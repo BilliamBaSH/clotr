@@ -15,8 +15,8 @@ body:
   - type: input
     id: site
     attributes:
-      label: AI site
-      placeholder: "gemini.google.com"
+      label: Site
+      placeholder: "gemini.google.com, discord.com"
   - type: input
     id: version
     attributes:

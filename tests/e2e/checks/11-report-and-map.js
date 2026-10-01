@@ -154,7 +154,7 @@ module.exports = async function (env) {
         }));
         expect(/AWS Access Key/.test(got.risky) && /Credit Card Number/.test(got.risky), `risky: ${got.risky}`);
         expect(/turn it off/i.test(got.risky) && /bank/i.test(got.risky), `no advice: ${got.risky}`);
-        expect(/Phone Number[^\n]*3 times[^\n]*2 AI/.test(got.repeats), `repeats: ${got.repeats}`);
+        expect(/Phone Number[^\n]*3 times[^\n]*2 services/.test(got.repeats), `repeats: ${got.repeats}`);
         expect(!/aaaaaaaaaaaaaaa1|fffffffffffffff6/.test(got.body), "fingerprints shown on the page");
       } finally {
         await page.close();
@@ -478,7 +478,10 @@ module.exports = async function (env) {
           guide: document.querySelector(".guide h2")?.textContent || "",
           blanks: document.querySelectorAll(".guide-fill .blank").length,
         }));
-        expect(/^https:\/\//.test(got.url) && /heads-up/.test(got.guide) && got.blanks === 2, JSON.stringify(got));
+        expect(
+          /^https:\/\//.test(got.url) && /clot your data leaks/.test(got.guide) && got.blanks === 2,
+          JSON.stringify(got),
+        );
         await page.screenshot({ path: path.join(OUT, "share.png"), fullPage: true });
         await page.emulateMediaType("print");
         const printed = await page.evaluate(() => ({
@@ -1244,7 +1247,7 @@ module.exports = async function (env) {
           /bienvenida/.test(w.title) && /Número de teléfono/.test(w.tryResult) && w.lang === "es",
           `welcome: ${JSON.stringify(w)}`,
         );
-        expect(/Tu informe de exposición a la IA/.test(d), `report: ${d}`);
+        expect(/Tu informe de exposición/.test(d), `report: ${d}`);
         expect(you === "Tú", `the map's middle says "${you}", not "Tú"`);
         expect(/Qué guarda Clotr/.test(s) && /sitios de chat de IA/.test(s), `stored: ${s.slice(0, 200)}`);
       } finally {

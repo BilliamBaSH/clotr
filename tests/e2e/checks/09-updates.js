@@ -28,6 +28,19 @@ module.exports = async function (env) {
     waitForDialog,
     waitForNotice,
   } = env;
+  // Reads an expression in a freshly reloaded service worker. Its session can attach before the extension's APIs are
+  // bound (lib.js waits for the same at launch): PR #186's CI read "undefined" in U2d that way, once in 198 checks.
+  // So wait until chrome.runtime is there, then read.
+  const readReloaded = async (session, expression) =>
+    waitFor(async () => {
+      const r = await session
+        .send("Runtime.evaluate", {
+          expression: `typeof chrome === "object" && chrome.runtime?.id ? JSON.stringify(${expression}) : ""`,
+          returnByValue: true,
+        })
+        .catch(() => null);
+      return r?.result?.value ? JSON.parse(r.result.value) : null;
+    }, 10000);
   await check("U1", 'After an update the popup shows "what\'s new" once', async () => {
     const version = await ctx.worker.evaluate(() => chrome.runtime.getManifest().version);
     await store.set(ctx, { lastUpdate: { from: "0.7.5", to: version, t: Date.now(), seen: false } });
@@ -161,12 +174,8 @@ module.exports = async function (env) {
         (t) => t.type() === "service_worker" && t.url().endsWith("/background.js") && t !== other.swTarget,
         { timeout: 15000 },
       );
-      const s = await fresh.createCDPSession();
-      const { result } = await s.send("Runtime.evaluate", {
-        expression: "chrome.runtime.getManifest().version",
-        returnByValue: true,
-      });
-      expect(result.value === "9.9.9", `running version after reload: ${result.value}`);
+      const version = await readReloaded(await fresh.createCDPSession(), "chrome.runtime.getManifest().version");
+      expect(version === "9.9.9", `running version after reload: ${version}`);
     }),
   );
 
@@ -188,13 +197,10 @@ module.exports = async function (env) {
           )
           .catch(() => null);
         expect(fresh, "Clotr didn't come back after the update (disabled for new permissions?)");
-        const s = await fresh.createCDPSession();
-        const { result } = await s.send("Runtime.evaluate", {
-          expression:
-            "JSON.stringify([chrome.runtime.getManifest().version, (chrome.runtime.getManifest().host_permissions || []).length])",
-          returnByValue: true,
-        });
-        const [version, hosts] = JSON.parse(result.value);
+        const [version, hosts] = (await readReloaded(
+          await fresh.createCDPSession(),
+          "[chrome.runtime.getManifest().version, (chrome.runtime.getManifest().host_permissions || []).length]",
+        )) || [undefined, undefined];
         expect(version === "9.9.9" && hosts > 0, `after update: version ${version}, host permissions ${hosts}`);
       },
       (m) => {

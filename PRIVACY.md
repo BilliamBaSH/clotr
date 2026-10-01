@@ -3,11 +3,14 @@
 Last updated: 2026-09-30 (Report a problem)
 
 Clotr is a browser extension that warns you before you send sensitive information (passwords, keys and personal
-details) to AI chat websites. This policy explains exactly what it handles. In short: **everything stays on your
+details) in AI chat websites, and in email or chat websites you switch it on for. This policy explains exactly what it
+handles. In short: **everything stays on your
 computer, nothing is sent anywhere, and what you type is never stored.**
 
 ## What Clotr reads
-While you use a supported AI chat website (or one you added), Clotr reads, **on your computer**:
+While you use a supported AI chat website, or a website you switched Clotr on for yourself (an AI tool it doesn't
+know yet, or your webmail or a chat app such as Discord or Slack, one site at a time), Clotr reads, **on your
+computer**:
 - the text you type or paste into its message box, to look for sensitive information;
 - files you attach there (text, PDF, Word, Excel and PowerPoint), to look for the same;
 - if you added details to your vault: for 90 seconds after you send a message, the new text of the AI's reply on
@@ -20,6 +23,9 @@ While you use a supported AI chat website (or one you added), Clotr reads, **on 
   the real detail. The label-to-detail map lives only in that tab's memory while the page is open; it is never
   stored, and the real detail is never written into the AI's page.
 
+On email and chat websites you switched on, Clotr reads only what you type or attach there. It never reads other
+people's messages on those sites, and Bandage and the reply check are always off there.
+
 It does not read other websites. If your organization's IT set a policy for Clotr through the browser, Clotr reads
 that policy (required settings and watch words); nothing goes back to them. Settings has a page showing what that
 policy sets ("See what's applied"), for your own records or an insurer's checklist; the page reads and shows the
@@ -28,11 +34,11 @@ policy on your screen and, if you choose, prints it — it never sends or stores
 ## What Clotr stores (on your computer only)
 Clotr stores the following in your browser's extension storage, on this computer:
 - **Your settings**: how Clotr should respond to each kind of data (warn, ask before sending, or just count),
-  sites where you paused it, AI sites you added, display preferences (such as larger warnings), and whether
-  **Bandage** (cover names) is on or off for each AI site.
+  sites where you paused it, sites you added (and whether each is an AI tool or an email or chat site), display
+  preferences (such as larger warnings), and whether **Bandage** (cover names) is on or off for each AI site.
 - **Your vault** (only what you choose to add): one-way fingerprints of your details (for example your phone
   number), or just the *format* of an ID number (like `AB-######`). The details themselves are not stored.
-- **A history of detections**, kept for 1 year by default (you can choose 3 months or 2 years), up to 10,000 records: the time, the AI website, the kind of data found (for example
+- **A history of detections**, kept for 1 year by default (you can choose 3 months or 2 years), up to 10,000 records: the time, the website, the kind of data found (for example
   "Phone Number"), what you chose (hidden, sent, or just counted, marked `via: "bandage"` when it was covered with a
   label instead), and a salted one-way fingerprint so the dashboard can tell "the same item again". **The detected
   text itself is never stored.**

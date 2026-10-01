@@ -15,8 +15,8 @@
     }
     .box {
       width: min(440px, 100%); box-sizing: border-box; outline: none;
-      background: #fff; color: #1a1a1a; border-top: 5px solid #d93025;
-      border-radius: 10px; box-shadow: 0 12px 40px rgba(0,0,0,.35); padding: 18px 20px;
+      background: linear-gradient(180deg, #fff, #fffaf6); color: #1a1a1a; border-top: 5px solid #d93025;
+      border-radius: 14px; box-shadow: 0 1px 2px rgba(60,30,10,.1), 0 28px 60px -14px rgba(40,20,5,.5); padding: 18px 20px;
     }
     h2 { font-size: 17px; margin: 0 0 6px; }
     p { margin: 0 0 10px; }
@@ -38,9 +38,9 @@
     .box.large button { font-size: 17px; padding: 10px 18px; }
     .box.large code, .box.large .more summary { font-size: 16px; }
     .box.large button.link { font-size: 16px; padding: 2px 0; }
-    button { font: inherit; cursor: pointer; border-radius: 6px; padding: 7px 14px; border: 1px solid #8a8a8a; background: #f5f5f5; color: #1a1a1a; }
+    button { font: inherit; cursor: pointer; border-radius: 8px; padding: 7px 14px; border: 1px solid #8a8a8a; background: linear-gradient(180deg, #fff, #f4f0ec); color: #1a1a1a; }
     button:focus-visible { outline: 3px solid #8e3708; outline-offset: 2px; }
-    button.primary { background: #d93025; border-color: #d93025; color: #fff; }
+    button.primary { background: #d93025; border-color: #d93025; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 6px 14px -8px rgba(217,48,37,.8); }
     .more { margin: 12px 0 0; font-size: 13px; }
     .more summary { cursor: pointer; color: #444; width: fit-content; }
     .more .choices { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
@@ -50,10 +50,10 @@
     .shake { animation: shake .3s ease-in-out; }
     @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
     @media (prefers-color-scheme: dark) {
-      .box { background: #2b2b2b; color: #eee; }
+      .box { background: #221e1a; color: #eee; }
       .note, .keys { color: #bbb; }
       .more summary, button.link { color: #ccc; background: none; }
-      button { background: #3a3a3a; border-color: #8a8a8a; color: #eee; }
+      button { background: #332d28; border-color: #8a8a8a; color: #eee; }
       button:focus-visible { outline-color: #f08a3c; }
     }
   `;
@@ -64,20 +64,20 @@
     .notice {
       position: fixed; right: 16px; top: 16px; z-index: 2147483647; /* top: keeps the chat box and send button clear */
       width: min(340px, calc(100vw - 32px)); box-sizing: border-box;
-      background: #fff; color: #1a1a1a; border-left: 5px solid #e8a200;
-      border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.25); padding: 12px 14px;
+      background: linear-gradient(180deg, #fff, #fffaf6); color: #1a1a1a; border-left: 5px solid #e8a200;
+      border-radius: 12px; box-shadow: 0 1px 2px rgba(60,30,10,.1), 0 18px 40px -12px rgba(60,30,10,.4); padding: 12px 14px;
       font: 13px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
     }
     b { display: block; margin-bottom: 4px; font-size: 14px; }
     .hint { font-size: 12px; color: #555; }
     .offer { border-left-color: #ff6700; }
-    .offer button.primary { background: #ff6700; border-color: #ff6700; color: #0b0b0b; } /* signal orange (D80), ink text 7:1 */
+    .offer button.primary { background: #ff6700; border-color: #f25f00; color: #0b0b0b; background-image: linear-gradient(180deg, #ff8a3d, #ff6700 60%, #f25f00); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 6px 14px -8px rgba(255,103,0,.8); } /* signal orange (D80), ink text 7:1 */
     p { margin: 0 0 10px; }
     code { font-family: ui-monospace, Consolas, monospace; font-size: 12px; white-space: nowrap; }
     .actions { display: flex; gap: 8px; justify-content: flex-end; }
-    button { font: inherit; cursor: pointer; border-radius: 6px; padding: 5px 12px; border: 1px solid #8a8a8a; background: #f5f5f5; color: #1a1a1a; }
+    button { font: inherit; cursor: pointer; border-radius: 8px; padding: 5px 12px; border: 1px solid #8a8a8a; background: linear-gradient(180deg, #fff, #f4f0ec); color: #1a1a1a; }
     button:focus-visible { outline: 3px solid #8e3708; outline-offset: 2px; }
-    button.primary { background: #b3261e; border-color: #b3261e; color: #fff; }
+    button.primary { background: #b3261e; border-color: #b3261e; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 6px 14px -8px rgba(179,38,30,.8); }
     .notice .actions { flex-wrap: wrap; }
     /* Larger warnings (settings → helping someone): easier to read and to hit */
     .notice.large { width: min(440px, calc(100vw - 32px)); font-size: 17px; padding: 16px 18px; }
@@ -108,8 +108,8 @@
       .why { color: #bbb; }
       .tip { border-top-color: #444; }
       .tip button.chosen { border-color: #f08a3c; box-shadow: inset 0 0 0 1px #f08a3c; }
-      .notice { background: #2b2b2b; color: #eee; }
-      button { background: #3a3a3a; border-color: #8a8a8a; color: #eee; }
+      .notice { background: #221e1a; color: #eee; }
+      button { background: #332d28; border-color: #8a8a8a; color: #eee; }
       button:focus-visible { outline-color: #f08a3c; }
     }
   `;
@@ -117,7 +117,7 @@
   // "Clotr was updated: reload this page": the dialog, in Clotr's signal orange (D80).
   const reload = `
     .box { border-top-color: #ff6700; }
-    button.primary { background: #ff6700; border-color: #ff6700; color: #0b0b0b; }
+    button.primary { background: #ff6700; border-color: #f25f00; color: #0b0b0b; background-image: linear-gradient(180deg, #ff8a3d, #ff6700 60%, #f25f00); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 6px 14px -8px rgba(255,103,0,.8); }
   `;
 
   // "Test Clotr here" (popup): an orange outline over the chat box Clotr watches; never catches clicks.
@@ -142,17 +142,17 @@
     :host { all: initial; }
     .box {
       position: fixed; z-index: 2147483647; max-width: min(320px, calc(100vw - 32px)); box-sizing: border-box;
-      background: #fff; color: #1a1a1a; border-left: 5px solid #ff6700;
-      border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.25); padding: 10px 12px;
+      background: linear-gradient(180deg, #fff, #fffaf6); color: #1a1a1a; border-left: 5px solid #ff6700;
+      border-radius: 12px; box-shadow: 0 1px 2px rgba(60,30,10,.1), 0 18px 40px -12px rgba(60,30,10,.4); padding: 10px 12px;
       font: 13px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
     }
     .value { font-weight: 600; margin-bottom: 8px; word-break: break-word; }
-    button { font: inherit; cursor: pointer; border-radius: 6px; padding: 5px 10px; border: 1px solid #8a8a8a; background: #f5f5f5; color: #1a1a1a; }
+    button { font: inherit; cursor: pointer; border-radius: 8px; padding: 5px 10px; border: 1px solid #8a8a8a; background: linear-gradient(180deg, #fff, #f4f0ec); color: #1a1a1a; }
     button:focus-visible { outline: 3px solid #8e3708; outline-offset: 2px; }
     .copied { font-size: 12px; color: #2a7a2a; margin-top: 6px; }
     @media (prefers-color-scheme: dark) {
-      .box { background: #2b2b2b; color: #eee; }
-      button { background: #3a3a3a; border-color: #8a8a8a; color: #eee; }
+      .box { background: #221e1a; color: #eee; }
+      button { background: #332d28; border-color: #8a8a8a; color: #eee; }
       button:focus-visible { outline-color: #f08a3c; }
       .copied { color: #7fd07f; }
     }

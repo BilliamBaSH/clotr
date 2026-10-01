@@ -80,22 +80,27 @@ body.vault-page {
    grow out of "You", the plasters land on each detail, the cut-off lines keep drifting), then the note.
    Everything rests in its final state, so with reduced motion it's simply there. */
 .author-hero {
-  --hm-line: #8a909b;
-  --hm-faint: #c9cbd0;
+  --hm-line: #9c958e;
+  --hm-faint: #d9d1c9;
   --ease-out: cubic-bezier(0.22, 0.9, 0.26, 1);
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
   margin: 14px 0 18px;
   padding: 10px 18px 16px;
   border-radius: 14px;
   background-color: var(--surface);
-  background-image: radial-gradient(var(--grid) 1px, transparent 1.3px);
-  background-size: 16px 16px;
-  box-shadow: inset 0 0 0 1px var(--ring);
+  background-image:
+    radial-gradient(var(--grid) 1px, transparent 1.3px), linear-gradient(180deg, var(--surface), var(--surface-2));
+  background-size:
+    16px 16px,
+    100% 100%;
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
 }
 @media (prefers-color-scheme: dark) {
   .author-hero {
-    --hm-line: #80858f;
-    --hm-faint: #4b4d53;
+    --hm-line: #7d756d;
+    --hm-faint: #4a423a;
   }
 }
 .hero-map {
@@ -319,9 +324,11 @@ body.vault-page {
 }
 .try-notice {
   padding: 10px 12px;
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--ring);
+  border-radius: 10px;
+  background: var(--card-bg);
+  box-shadow:
+    var(--lift),
+    inset 0 0 0 1px var(--ring);
   border-left: 5px solid #e8a200;
 }
 .try-notice b {

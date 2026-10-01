@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- A neutral, unbranded group chat for store/README screenshots (npm run test:e2e -- --store, D135). It deliberately
+     imitates no real product: channels, people's messages, and a composer where Enter sends. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chat</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; background: #f6f7f9; color: #1d2330; height: 100vh; display: flex; }
+    nav { width: 220px; background: #2b2f3a; color: #c9ced8; padding: 18px 12px; display: flex; flex-direction: column; gap: 2px; }
+    nav b { color: #fff; padding: 0 12px 12px; font-size: 16px; }
+    nav span { padding: 6px 12px; border-radius: 8px; }
+    nav .on { background: #444a58; color: #fff; }
+    .room { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    header { padding: 14px 24px; border-bottom: 1px solid #e3e6eb; background: #fff; font-weight: 600; }
+    main { flex: 1; overflow: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
+    .msg { display: flex; gap: 12px; }
+    .face { width: 36px; height: 36px; border-radius: 50%; flex: none; }
+    .msg b { display: block; font-size: 14px; }
+    footer { padding: 0 24px 24px; }
+    textarea { width: 100%; border: 1px solid #d5d9e0; border-radius: 12px; padding: 12px 14px; font: inherit; min-height: 52px; resize: none; background: #fff; color: inherit; outline: 0; box-shadow: 0 2px 10px rgba(20, 30, 60, .06); }
+  </style>
+</head>
+<body>
+  <nav aria-label="Channels"><b>Science class</b><span>general</span><span class="on">group-project</span><span>homework-help</span></nav>
+  <div class="room">
+    <header>group-project</header>
+    <main id="log">
+      <div class="msg"><span class="face" style="background:#f2b880"></span><div><b>Priya</b>the slides are due friday, who has the login for the class site?</div></div>
+      <div class="msg"><span class="face" style="background:#8fc1a9"></span><div><b>Leo</b>not me, I never set mine up</div></div>
+    </main>
+    <footer><textarea id="box" aria-label="Message group-project" placeholder="Message group-project"></textarea></footer>
+  </div>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("box");
+    box.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" || e.shiftKey) return;
+      e.preventDefault();
+      if (!box.value.trim()) return;
+      window.__sent.push(box.value);
+      box.value = "";
+    });
+  </script>
+</body>
+</html>

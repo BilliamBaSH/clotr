@@ -56,3 +56,5 @@ Code comments refer to design decisions by number (for example `D30`). Each one 
 | D120 | Reports stay public, with a warning first and the address in words. |
 | D121 | "Leave it in" sends the message when the question stopped a send. |
 | D124 | The public repo is just the extension. |
+| D134 | Clotr on your email and chat apps, one site at a time. |
+| D135 | One refreshed look for everything Clotr shows, and marketing for everyone. |

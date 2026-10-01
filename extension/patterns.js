@@ -1417,9 +1417,10 @@
   const CODE_TOLD =
     /\b(?:(?:gate|alarm|garage|door|lock\s*box|locker|lock|keypad|safe|building|entry|house|atm|debit(?:\s+card)?|credit\s+card|card|phone|iphone|bank)\s+(?:code|combination|combo|passcode|pin)|passcode|combination|pin(?=\s+(?:number|code|#))|my\s+pin)(?:\s+(?:number|code))?(?:\s+(?:to|for|on|of)\s+(?:my|the|our|his|her)\s+[\p{L}-]+)?\s*(?:is|was|:|=)?\s*["'“‘]?(\d{3,10}#?|\d{1,3}(?:-\d{1,3}){2,3}|\d{1,2}(?: \d{1,2}){2,3})(?![\d-]| \d)/giu;
   // Sign-in codes sent by text or email: "the verification code they texted me is 482913", "my one-time code: 552 019",
-  // "they asked for the code 739201" (what a scam caller wants). Error codes, zip codes and "sent the code" stay quiet.
+  // "they asked for the code 739201", "asking for the code they texted me: 482913" (what a scam caller wants). Error
+  // codes, zip codes and "sent the code" stay quiet.
   const LOGIN_CODE = new RegExp(
-    String.raw`(?<![\p{L}\d])(?:(?:verification|one[- ]time|login|log-?in|sign[- ]?in|two[- ]factor|authentication|auth|access)\s+(?:code|pin|passcode)|(?:otp|2fa|mfa)(?:\s+(?:code|pin))?)(?![\p{L}])[^\n\d]{0,30}?(?:\b(?:is|was)\b)?\s*[:=]?\s*["'“‘]?(?<!(?<![\p{L}])(?:in|since|by|from|of|until|before|after|at|to|about|around|every)\s+)(?<![\p{L}\d])(?!(?:19|20)\d\d(?!\d))(\d{4,8}|\d{3}[\s-]\d{3})(?![\p{L}\d-]|\s\d)|(?<![\p{L}])(?:(?:texted|sent|messaged|emailed|gave)\s+(?:me|us|him|her)\s+(?:(?:the|a|that|this|my)\s+)?|asked\s+(?:me\s+)?for\s+(?:the|my|a|that)\s+)(?:\p{L}+\s+)?code\s*(?:(?:is|was)\s*)?[:=]?\s*["'“‘]?(?<!(?<![\p{L}])(?:in|since|by|from|of|until|before|after|at|to|about|around|every)\s+)(?<![\p{L}\d])(?!(?:19|20)\d\d(?!\d))(\d{4,8}|\d{3}[\s-]\d{3})(?![\p{L}\d-]|\s\d)`,
+    String.raw`(?<![\p{L}\d])(?:(?:verification|one[- ]time|login|log-?in|sign[- ]?in|two[- ]factor|authentication|auth|access)\s+(?:code|pin|passcode)|(?:otp|2fa|mfa)(?:\s+(?:code|pin))?)(?![\p{L}])[^\n\d]{0,30}?(?:\b(?:is|was)\b)?\s*[:=]?\s*["'“‘]?(?<!(?<![\p{L}])(?:in|since|by|from|of|until|before|after|at|to|about|around|every)\s+)(?<![\p{L}\d])(?!(?:19|20)\d\d(?!\d))(\d{4,8}|\d{3}[\s-]\d{3})(?![\p{L}\d-]|\s\d)|(?<![\p{L}])(?:(?:texted|sent|messaged|emailed|gave)\s+(?:me|us|him|her)\s+(?:(?:the|a|that|this|my)\s+)?|ask(?:ed|ing|s)?\s+(?:me\s+)?for\s+(?:the|my|a|that)\s+)(?:\p{L}+\s+)?code\s*(?:(?:is|was)\s*)?[:=]?\s*["'“‘]?(?<!(?<![\p{L}])(?:in|since|by|from|of|until|before|after|at|to|about|around|every)\s+)(?<![\p{L}\d])(?!(?:19|20)\d\d(?!\d))(\d{4,8}|\d{3}[\s-]\d{3})(?![\p{L}\d-]|\s\d)|(?<![\p{L}])code\s+(?:that\s+)?(?:they|he|she|someone|it|you|the\s+bank)\s+(?:just\s+)?(?:texted|sent|messaged|emailed|gave)(?:\s+(?:to\s+)?(?:me|us|him|her|you))?\s*(?:(?:is|was)\s*)?[:=,]?\s*["'“‘]?(?<![\p{L}\d])(?!(?:19|20)\d\d(?!\d))(\d{4,8}|\d{3}[\s-]\d{3})(?![\p{L}\d-]|\s\d)`,
     "giu",
   );
   // Spanish: "el código de verificación es 482913", "me mandaron un código por SMS: 552019", "me pidieron el código 739201".
@@ -1526,7 +1527,7 @@
     for (const m of text.matchAll(LOGIN_PAIR)) add(m[1], true);
     for (const m of text.matchAll(CARD_CODE)) add(m[1], false, 3);
     for (const m of text.matchAll(REMOTE_CODE)) add(m[1], false);
-    for (const m of text.matchAll(LOGIN_CODE)) add(m[1] ?? m[2], false);
+    for (const m of text.matchAll(LOGIN_CODE)) add(m[1] ?? m[2] ?? m[3], false);
     for (const m of text.matchAll(SESSION_COOKIE)) {
       const v = m[2];
       if (/\d/.test(v) && /[A-Za-z]/.test(v)) add(v, true); // random-looking, not "sessionid=0000000000000000"

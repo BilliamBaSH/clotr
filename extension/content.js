@@ -293,6 +293,7 @@
   let largeText = false;
   let replyCheck = true; // Settings → "Check the AI's replies for my details" (D63)
   let bandage; // Bandage on this site (D93): true on, false the user said no, undefined not asked yet
+  let everyday = false; // an email or chat app you switched on (D134): your words go to people, not to an AI
   const sized = (cls) => (largeText ? `${cls} large` : cls);
 
   // Settings come from the background (storage is locked to Clotr's own pages, S20): only what
@@ -308,6 +309,7 @@
         largeText = r.largeText === true;
         replyCheck = r.replyCheck !== false;
         bandage = typeof r.bandage === "boolean" ? r.bandage : undefined;
+        everyday = r.everyday === true;
         if (!replyCheck) closeReplyWindow(); // switched off: a reply already on its way isn't read either
         responses = r.responses || {};
         siteMode = r.siteMode || null;
@@ -807,7 +809,11 @@
 
     const box = el("div", { className: sized("box"), tabIndex: -1 }, [
       el("h2", { textContent: msg("dialogTitle", "⚠️ This looks private") }),
-      el("p", { textContent: msg("dialogLead", "If you send this, the AI service will see:") }),
+      el("p", {
+        textContent: everyday
+          ? msg("dialogLeadHere", "If you send this, the people who read it here will see:")
+          : msg("dialogLead", "If you send this, the AI service will see:"),
+      }),
       ...(bulk ? [el("p", { className: "bulk", textContent: bulk })] : []),
       el("ul", {}, items),
       el("div", {
@@ -1149,11 +1155,18 @@
         "p",
         {},
         bulk
-          ? [bulk, msg("noticeSharedBulk", " If you send it, this AI gets it.")]
+          ? [
+              bulk,
+              everyday
+                ? msg("noticeSharedBulkHere", " If you send it, the people who read it here get it.")
+                : msg("noticeSharedBulk", " If you send it, this AI gets it."),
+            ]
           : [
               msg("noticeContains", "Your message contains "),
               ...what,
-              msg("noticeShared", ". If you send it, this AI gets it."),
+              everyday
+                ? msg("noticeSharedHere", ". If you send it, the people who read it here get it.")
+                : msg("noticeShared", ". If you send it, this AI gets it."),
             ],
       ),
       ...(file
@@ -1626,12 +1639,18 @@
     const items = results.flatMap((r) => r.matches.map((m) => `${r.name} (${mask(m)})`));
     const types = [...new Set(results.map((r) => r.id))];
     showOffer({
-      title: msg("justSentTitle", "⚠️ Just sent to this AI"),
-      text: msg(
-        "justSentText",
-        "Your message had $1 in it. If that was a mistake, delete the message in the chat. Next time, Clotr can ask you first.",
-        items.join(", "),
-      ),
+      title: everyday ? msg("justSentTitleHere", "⚠️ Just sent") : msg("justSentTitle", "⚠️ Just sent to this AI"),
+      text: everyday
+        ? msg(
+            "justSentTextHere",
+            "Your message had $1 in it. If that was a mistake, delete or unsend it if you can. Next time, Clotr can ask you first.",
+            items.join(", "),
+          )
+        : msg(
+            "justSentText",
+            "Your message had $1 in it. If that was a mistake, delete the message in the chat. Next time, Clotr can ask you first.",
+            items.join(", "),
+          ),
       yes: msg("askFirstNextTime", "Ask me first next time"),
       no: msg("ok", "OK"),
       onYes: () => setResponse(types, "block"),

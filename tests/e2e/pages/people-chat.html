@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- Stand-in for a chat app where people talk to people (Discord/Slack-style): a rich-text box, Enter sends, and
+     messages from other people in the channel. -->
+<html lang="en">
+<head><meta charset="utf-8"><title>#general (Clotr test page)</title></head>
+<body>
+  <ol id="messages">
+    <li><b>sam</b>: anyone know a good plumber?</li>
+  </ol>
+  <div id="box" role="textbox" contenteditable="true" aria-label="Message #general"
+       style="border:1px solid #999;min-height:40px;width:480px;padding:6px"></div>
+  <script>
+    window.__sent = [];
+    const box = document.getElementById("box");
+    box.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" || e.shiftKey) return;
+      e.preventDefault();
+      if (!box.innerText.trim()) return;
+      window.__sent.push(box.innerText);
+      const li = document.createElement("li");
+      li.textContent = "me: " + box.innerText;
+      document.getElementById("messages").append(li);
+      box.textContent = "";
+    });
+  </script>
+</body>
+</html>

@@ -20,17 +20,11 @@
 
   <section id="site" class="site" aria-live="polite"></section>
 
-  <nav class="tabs" role="tablist">
-    <button role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-i18n="popup_overview">Overview</button>
-    <button role="tab" id="tab-activity" aria-controls="panel-activity" aria-selected="false" data-i18n="popup_activity">Activity</button>
-    <button role="tab" id="tab-settings" aria-controls="panel-settings" aria-selected="false" data-i18n="popup_settings">Settings</button>
-  </nav>
-
   <!-- Per-site view: filters Overview and Activity -->
   <div id="filter-bar" class="filter-bar">
     <label for="site-filter" data-i18n="popup_showing">Showing</label>
     <select id="site-filter" class="resp"></select>
-    <select id="site-mode" class="resp advanced-only" aria-label="How Clotr responds on this AI tool" data-i18n-aria-label="popup_howClotrRespondsOnThis" hidden>
+    <select id="site-mode" class="resp advanced-only" aria-label="How Clotr responds on this chat" data-i18n-aria-label="popup_howClotrRespondsOnThis" hidden>
       <option value="" data-i18n="popup_sameAsEverywhere">Same as everywhere</option>
       <option value="block" data-i18n="popup_stricterHereAskBeforeSending">Stricter here: ask before sending anything</option>
       <option value="log" data-i18n="popup_quieterHereJustCount">Quieter here: just count</option>
@@ -39,6 +33,14 @@
 
   <!-- Overview: the glanceable dashboard -->
   <main id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+    <!-- First: where your details went (all history, independent of the 7/30-day range) -->
+    <div class="card mini-map-card" id="mini-map-card" hidden>
+      <div class="card-title" data-i18n="popup_whereYourDetailsWent">Where your details went</div>
+      <svg id="mini-map" class="mini-map" viewBox="0 0 352 160" role="group" aria-label="Map of the services your details went to" data-i18n-aria-label="popup_mapOfTheAiServices"></svg>
+      <p id="mini-map-key" class="mini-key"></p>
+      <button id="mini-map-open" class="linkish" type="button" data-i18n="popup_openTheFullMap">Open the full map</button>
+    </div>
+
     <section id="digest" class="digest" aria-label="This week" data-i18n-aria-label="popup_thisWeek" hidden>
       <p id="digest-line"></p>
       <p id="digest-todo" class="digest-todo"></p>
@@ -78,7 +80,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title" data-i18n="popup_byAiTool">By AI tool</div>
+        <div class="card-title" data-i18n="popup_byAiTool">By chat</div>
         <div id="by-site" class="hbars"></div>
       </div>
 
@@ -88,15 +90,8 @@
       </div>
     </div>
 
-    <!-- All history, independent of the 7/30-day range -->
-    <div class="card" id="mini-map-card" hidden>
-      <div class="card-title" data-i18n="popup_whereYourDetailsWent">Where your details went</div>
-      <svg id="mini-map" class="mini-map" viewBox="0 0 352 190" role="group" aria-label="Map of the AI services your details went to" data-i18n-aria-label="popup_mapOfTheAiServices"></svg>
-      <button id="mini-map-open" class="linkish" type="button" data-i18n="popup_openTheFullMap">Open the full map</button>
-    </div>
-
     <div class="card" id="exposure-card" hidden>
-      <div class="card-title" data-i18n="popup_whatEachAiToolHas">What each AI tool has seen</div>
+      <div class="card-title" data-i18n="popup_whatEachAiToolHas">What each chat has seen</div>
       <p class="muted" data-i18n="popup_differentPersonalDetailsYouSent">Different personal details you sent anyway, across your whole history. Clotr counts them without ever saving the details themselves.</p>
       <div id="exposure" class="hbars"></div>
       <p id="exposure-empty" class="empty" data-i18n="popup_noPersonalDetailsSentNothing">No personal details sent, so there's nothing to build a profile from.</p>
@@ -127,12 +122,16 @@
     </section>
 
     <div id="settings-body">
-    <h2 data-i18n="popup_aiToolsYouAdded">AI tools you added</h2>
+    <h2 data-i18n="popup_aiToolsYouAdded">AI chats you added</h2>
     <ul id="user-sites" class="list"></ul>
     <p id="user-sites-empty" class="empty" data-i18n="popup_noneYetWhenAPage">None yet. When a page looks like an AI chat, Clotr's icon gets an amber dot. Open this popup there to add it.</p>
 
+    <h2 data-i18n="popup_everydaySites">Also on your email and chat apps</h2>
+    <p class="muted" data-i18n="popup_everydaySitesWhy">Off until you switch one on. Your browser asks you first, for that one site. There, Clotr warns and hides like on an AI chat, and never reads anyone's replies.</p>
+    <ul id="everyday-sites" class="list everyday"></ul>
+
     <details class="builtin advanced-only">
-      <summary><span data-i18n="popup_builtInTools">Built-in AI tools</span> (<span id="builtin-count">0</span>)</summary>
+      <summary><span data-i18n="popup_builtInTools">Built-in AI chats</span> (<span id="builtin-count">0</span>)</summary>
       <ul id="builtin-sites" class="list compact"></ul>
     </details>
 
@@ -157,7 +156,7 @@
 
     <h2 data-i18n="popup_moreOptions">More options</h2>
     <label class="toggle"><input type="checkbox" id="advanced"> <span data-i18n="popup_showAdvancedOptions">Show advanced options</span></label>
-    <p class="muted" data-i18n="popup_settingsForEachKindOf">Settings for each kind of data, stricter or quieter on one AI tool, and the built-in list of AI tools.</p>
+    <p class="muted" data-i18n="popup_settingsForEachKindOf">Settings for each kind of data, stricter or quieter on one chat, and the built-in list of AI chats.</p>
     <p id="advanced-in-use" class="muted" hidden data-i18n="popup_someAdvancedSettingsAreIn">Some advanced settings are in use.</p>
     <p><button id="tips-again" class="btn" type="button" data-i18n="popup_showFirstTimeTipsAgain">Show first-time tips again</button></p>
 
@@ -190,6 +189,13 @@
   <footer class="app-footer">
     <div id="report-root"></div>
   </footer>
+
+  <!-- The tabs sit at the bottom, always in view -->
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-i18n="popup_overview">Overview</button>
+    <button role="tab" id="tab-activity" aria-controls="panel-activity" aria-selected="false" data-i18n="popup_activity">Activity</button>
+    <button role="tab" id="tab-settings" aria-controls="panel-settings" aria-selected="false" data-i18n="popup_settings">Settings</button>
+  </nav>
 
   <script src="page-i18n.js"></script>
   <script src="patterns.js"></script>

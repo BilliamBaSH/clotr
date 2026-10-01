@@ -3,6 +3,30 @@
 What changed in each version of Clotr, in plain words. Versions were `0.x-alpha` until 1.0.0, the first public release.
 The extension shows the highlights of each series once after an update ("What's new").
 
+## 1.1.1 (2026-09-30)
+- **The toolbar button opens on where your details went**: a small map at its own size, with a key under it, then
+  the week's report; Overview, Activity and Settings sit at the bottom, always in view.
+- **Plain words for every place you type:** the toolbar button says "By chat" and "What each chat has seen", and
+  the full report is "Your exposure report", "By service", "What each service has been told about you", and the card
+  you can share says "My privacy, so far". In Spanish too.
+- **The welcome page's map** shows AI chats, Email, and Discord & Slack.
+- **The website** leads with "Clot your data leaks." Its examples now include picking a restaurant and a birthday
+  invite; anything not working yet says "Planned" (built-in email and chat apps, the small-team pack); How it's made
+  is plainer; the printable guide's "Back to Clotr" link opens the website's first page again.
+
+## 1.1.0 (2026-09-30)
+- **Your email and chat apps too:** Settings → *Also on your email and chat apps* lists Gmail, Outlook, Yahoo Mail,
+  Discord, Slack, WhatsApp, Messenger and Microsoft Teams, each off until you switch it on; on any other site the
+  toolbar button offers *Turn Clotr on here*. Your browser asks you first, for that one site. There, the warning
+  speaks of the people who'll read your message, and Clotr never reads anyone else's messages (cover names and the
+  reply check stay off).
+- **A warmer look** on every Clotr page: lighter paper, cards lit from the top, an orange
+  sheen on the main buttons and the chosen tab, and a softer shadow under the warning in the corner.
+- **Caught now:** "the code they texted me: 482913" and "asking for the code", the words of someone with a scam caller
+  on the line (found while writing the website's examples).
+- **The website, README and store pictures** show ordinary moments at home, at school and at work, on AI chats, email
+  and group chats. Every example sentence on the website is one Clotr catches (a test checks it).
+
 ## 1.0.10 (2026-09-30)
 - **Only Clotr's own pages can loosen your vault:** removing a detail you protect, or marking it OK to share, now
   works only from Clotr's vault page, never from the part of Clotr that runs inside an AI site (found in the release

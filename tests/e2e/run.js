@@ -39,6 +39,7 @@ const SECTIONS = [
   "15-performance", // Performance (M3)
   "18-bandage", // BN. Bandage: cover names while you type (D93)
   "19-report-button", // RB. "Report a problem" on every Clotr page (#178)
+  "20-everyday-sites", // EV. Email and chat apps, one site at a time (D134)
   "16-stress", // Stress (only with --stress: npm run test:stress; slow, run before releases)
   "17-store-screenshots", // Store / README screenshots (only with --store): 1280×800, neutral demo chat, fake data
 ];

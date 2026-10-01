@@ -1,4 +1,4 @@
-// Clotr: "Your AI exposure report", the full-page dashboard.
+// Clotr: "Your exposure report", the full-page dashboard.
 // Reads the stored history (kind, site, time, outcome, fingerprint; never values). Fingerprints
 // are only used to count "different" details and repeats; they're never shown. Nothing leaves
 // the page except an export file the user asks for.
@@ -28,7 +28,7 @@ function svg(tag, attrs = {}) {
   return node;
 }
 const nameOf = (e) => TYPE[e.type]?.name || e.name || e.type; // in the browser's language
-const tools = (n) => (n === 1 ? msg("db_tool1", "1 AI tool") : msg("db_toolN", "$1 AI tools", n));
+const tools = (n) => (n === 1 ? msg("db_tool1", "1 AI tool") : msg("db_toolN", "$1 services", n));
 const fmtDay = new Intl.DateTimeFormat([], { month: "short", day: "numeric" });
 const fmtWhen = new Intl.DateTimeFormat([], { dateStyle: "medium", timeStyle: "short" });
 
@@ -50,7 +50,7 @@ function renderTotals(events) {
   );
   $("since").textContent = events.length
     ? msg("db_since", "Since $1 · $2", fmtDay.format(events[0].t), tools(new Set(events.map((e) => e.site)).size))
-    : msg("db_nothingYet", "Nothing here yet. What Clotr notices shows up here as you use AI chats.");
+    : msg("db_nothingYet", "Nothing here yet. What Clotr notices shows up here as you go.");
 }
 
 function renderExposure(events) {
@@ -90,7 +90,7 @@ function renderExposure(events) {
       : [
           el("p", {
             className: "empty-note",
-            textContent: msg("db_noDetails", "No personal details have been sent to an AI service. 👍"),
+            textContent: msg("db_noDetails", "No personal details have been sent to any service. 👍"),
           }),
         ]),
   );
@@ -175,7 +175,7 @@ async function renderMap() {
   if (chosen) show(chosen);
   else
     $("map-details").textContent = empty
-      ? msg("db_mapEmpty", "Nothing here yet. The map fills in as Clotr notices things in your AI chats.")
+      ? msg("db_mapEmpty", "Nothing here yet. The map fills in as Clotr notices things in your chats and email.")
       : "";
   renderMindMapTable($("map-table").tBodies[0], tree);
   for (const btn of $("map-view").querySelectorAll("button"))
@@ -365,7 +365,7 @@ function renderCard(events) {
     covered,
     sent,
   );
-  $("card").replaceChildren(el("b", { textContent: msg("db_cardTitle", "🛡️ My AI privacy, so far") }), el("br"), text);
+  $("card").replaceChildren(el("b", { textContent: msg("db_cardTitle", "🛡️ My privacy, so far") }), el("br"), text);
   $("copy-card").onclick = async () => {
     try {
       await navigator.clipboard.writeText(text);
